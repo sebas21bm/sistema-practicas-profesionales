@@ -4,10 +4,18 @@
  */
 package sistemapracticasprofesionales.utilidades;
 
+import javafx.fxml.FXMLLoader;
+import sistemapracticasprofesionales.SistemaPracticasProfesionales;
+
 /**
  *
  * @author sebas
  */
 public class Utilidades {
+    
+    public static FXMLLoader cargarFXML(String nombreVista) {
+        return new FXMLLoader(SistemaPracticasProfesionales.class.
+                getResource("vista/" + nombreVista + ".fxml"));
+    }
     
 }

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="818.0" prefWidth="607.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLFormularioProfesorController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="930.0" prefWidth="607.0" spacing="30.0" style="-fx-background-color: white;" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Formulario de Profesor">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+               <padding>
+                  <Insets bottom="30.0" top="30.0" />
+               </padding>
+            </Label>
+            <HBox prefHeight="31.0" prefWidth="560.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="275.0" text="Número de empleado" />
+                  <TextField fx:id="txt_numeroEmpleado" prefHeight="31.0" prefWidth="479.0" promptText="Ingrese el número de empleado" />
+               </children>
+            </HBox>
+            <HBox prefHeight="31.0" prefWidth="560.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="275.0" text="Nombre" />
+                  <TextField fx:id="txt_nombre" prefHeight="31.0" prefWidth="479.0" promptText="Nombre" />
+               </children>
+            </HBox>
+            <HBox prefHeight="31.0" prefWidth="560.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="275.0" text="Apellido paterno" />
+                  <TextField fx:id="txt_apellidoPaterno" prefHeight="31.0" prefWidth="479.0" promptText="Apellido paterno" />
+               </children>
+            </HBox>
+            <HBox prefHeight="31.0" prefWidth="560.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="275.0" text="Apellido materno" />
+                  <TextField fx:id="txt_apellidoMaterno" prefHeight="31.0" prefWidth="479.0" promptText="Apellido materno" />
+               </children>
+            </HBox>
+            <HBox prefHeight="31.0" prefWidth="560.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="275.0" text="Teléfono" />
+                  <TextField fx:id="txt_telefono" prefHeight="31.0" prefWidth="479.0" promptText="Telefono (10 digitos)" />
+               </children>
+            </HBox>
+            <HBox prefHeight="31.0" prefWidth="560.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="275.0" text="Correo" />
+                  <TextField fx:id="txt_correo" prefHeight="31.0" prefWidth="479.0" promptText="Correo electrónico" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="560.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="44.0" prefWidth="150.0" text="Seccion" />
+                  <ComboBox fx:id="cb_seccion" prefHeight="39.0" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="560.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="44.0" prefWidth="150.0" text="Estado" />
+                  <ComboBox fx:id="cb_estado" prefHeight="39.0" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <Separator prefWidth="200.0" />
+            <HBox prefHeight="31.0" prefWidth="560.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="275.0" text="Usuario" />
+                  <TextField fx:id="txt_usuario" prefHeight="31.0" prefWidth="479.0" promptText="Usuario" />
+               </children>
+            </HBox>
+            <HBox prefHeight="31.0" prefWidth="560.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="275.0" text="Contraseña" />
+                  <TextField fx:id="txt_contrasenia" prefHeight="31.0" prefWidth="479.0" />
+               </children>
+            </HBox>
+            <Label fx:id="lb_error" textFill="RED" />
+            <HBox alignment="CENTER" prefHeight="39.0" prefWidth="520.0" spacing="30.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#clicGuardar" text="Confirmar" />
+                  <Button mnemonicParsing="false" onAction="#clicCancelar" text="Cancelar" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

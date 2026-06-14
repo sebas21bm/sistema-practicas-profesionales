@@ -8,17 +8,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
  *
  * @author sebas
  */
-public class FXMLInicioSesionController implements Initializable {
+public class FXMLMenuAdministradorController implements Initializable {
 
     @FXML
-    private Button clicIniciarSesion;
+    private Label lb_nombre;
 
     /**
      * Initializes the controller class.

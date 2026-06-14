@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sistemapracticasprofesionales.controlador.FXMLListadoCoordinadoresController">
+   <children>
+      <MenuBar prefHeight="32.0" prefWidth="900.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Coordinadores">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#clicRegistrarCoordinador" text="Registrar" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicListadoCoordinadores" text="Listado" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Profesores">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#clilcRegistrarProfesor" text="Registrar" />
+                  <MenuItem mnemonicParsing="false" onAction="#clilcListadoCoordinadores" text="Listado" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Estudiantes">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#clilcRegistrarEstudiante" text="Registrar" />
+                  <MenuItem mnemonicParsing="false" onAction="#clilcListadoEstudiantes" text="Listado" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Mas">
+              <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicCerrarSesion" text="Cerrar sesión" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <Button layoutX="792.0" layoutY="605.0" mnemonicParsing="false" onAction="#clilcRegresar" text="Regresar" />
+      <TableView fx:id="tv_coordinadores" layoutX="30.0" layoutY="161.0" prefHeight="416.0" prefWidth="840.0">
+        <columns>
+          <TableColumn fx:id="col_nombre" prefWidth="360.0" text="Nombre" />
+          <TableColumn fx:id="col_telefono" prefWidth="226.0" text="Telefono" />
+            <TableColumn fx:id="col_correo" prefWidth="253.0" text="Correo" />
+        </columns>
+      </TableView>
+      <Label layoutX="30.0" layoutY="53.0" text="Listado de coordinadores">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutX="30.0" layoutY="96.0" prefHeight="40.0" prefWidth="840.0" spacing="10.0">
+         <children>
+            <TextField fx:id="txt_nombreBusqueda" promptText="Buscar por nombre" />
+            <Button mnemonicParsing="false" onAction="#clicBuscar" text="Buscar" />
+            <Button mnemonicParsing="false" onAction="#clicVerTodos" text="Ver todos" />
+            <HBox alignment="CENTER_RIGHT" prefHeight="56.0" prefWidth="457.0" spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#clicActualizar" text="Actualizar" />
+                  <Button mnemonicParsing="false" onAction="#clicRegistrar" text="Registrar" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

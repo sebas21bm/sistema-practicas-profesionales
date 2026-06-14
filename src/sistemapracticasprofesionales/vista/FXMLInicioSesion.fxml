@@ -1,11 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLInicioSesionController">
-    
+<AnchorPane id="AnchorPane" prefHeight="644.0" prefWidth="507.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLInicioSesionController">
+   <children>
+      <VBox alignment="CENTER" layoutX="25.0" layoutY="19.0" prefHeight="606.0" prefWidth="432.0" style="-fx-background-color: white; -fx-border-radius: 15; -fx-border-color: F0F0F0;">
+         <children>
+            <ImageView fitHeight="227.0" fitWidth="510.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../recursos/imagenes/img_logo_lis.png" />
+               </image></ImageView>
+            <Label text="Inicio de sesión" textFill="#2b55a0">
+               <font>
+                  <Font size="25.0" />
+               </font></Label>
+            <Separator prefHeight="5.0" prefWidth="620.0">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </Separator>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <Label text="Usuario:" />
+                  <TextField promptText="Ingresa tu usuario" />
+                  <Label text="Contraseña" />
+                  <TextField promptText="Ingresa tu contraseña" />
+               </children>
+            </VBox>
+            <Button fx:id="clicIniciarSesion" mnemonicParsing="false" text="Iniciar sesion" />
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>
