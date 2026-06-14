@@ -12,31 +12,32 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import sistemapracticasprofesionales.modelo.pojo.Coordinador;
 
 /**
  * FXML Controller class
  *
  * @author sebas
  */
-public class FXMLListadoCoordinadoresController implements Initializable {
+public class FXMLListadoEstudiantesController implements Initializable {
 
     @FXML
-    private TableView<Coordinador> tv_coordinadores;
+    private TableView<?> tv_coordinadores;
+    @FXML
+    private TableColumn<?, ?> col_matricula;
     @FXML
     private TableColumn<?, ?> col_nombre;
+    @FXML
+    private TableColumn<?, ?> col_apellidoPaterno;
+    @FXML
+    private TableColumn<?, ?> col_apellidoMaterno;
     @FXML
     private TableColumn<?, ?> col_telefono;
     @FXML
     private TableColumn<?, ?> col_correo;
     @FXML
+    private TableColumn<?, ?> col_seccion;
+    @FXML
     private TextField txt_nombreBusqueda;
-    @FXML
-    private TableColumn<?, ?> col_estado;
-    @FXML
-    private TableColumn<?, ?> col_apellidoPaterno;
-    @FXML
-    private TableColumn<?, ?> col_apellidoMaterno;
 
     /**
      * Initializes the controller class.
@@ -57,9 +58,8 @@ public class FXMLListadoCoordinadoresController implements Initializable {
     @FXML
     private void clicActualizar(ActionEvent event) {
     }
-
     
-    //Navegacion
+    //Navegación
 
     @FXML
     private void clicRegistrarCoordinador(ActionEvent event) {

@@ -33,6 +33,10 @@ public class FXMLListadoProfesoresController implements Initializable {
     private TableColumn<?, ?> col_seccion;
     @FXML
     private TextField txt_nombreBusqueda;
+    @FXML
+    private TableColumn<?, ?> col_apellidoPaterno;
+    @FXML
+    private TableColumn<?, ?> col_apellidoMaterno;
 
     /**
      * Initializes the controller class.
@@ -54,9 +58,6 @@ public class FXMLListadoProfesoresController implements Initializable {
     private void clicActualizar(ActionEvent event) {
     }
 
-    @FXML
-    private void clicRegistrar(ActionEvent event) {
-    }
     
     //Navegacion
 

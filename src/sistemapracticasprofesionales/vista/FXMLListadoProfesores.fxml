@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLListadoCoordinadoresController">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLListadoProfesoresController">
    <children>
       <MenuBar prefHeight="32.0" prefWidth="900.0">
         <menus>
@@ -39,10 +39,12 @@
       <Button layoutX="792.0" layoutY="605.0" mnemonicParsing="false" onAction="#clilcRegresar" text="Regresar" />
       <TableView fx:id="tv_coordinadores" layoutX="30.0" layoutY="161.0" prefHeight="416.0" prefWidth="840.0">
         <columns>
-          <TableColumn fx:id="col_nombre" prefWidth="287.0" text="Nombre" />
-          <TableColumn fx:id="col_telefono" prefWidth="265.0" text="Telefono" />
-            <TableColumn fx:id="col_correo" prefWidth="172.0" text="Correo" />
-            <TableColumn fx:id="col_seccion" prefWidth="115.0" text="Seccion" />
+          <TableColumn fx:id="col_nombre" prefWidth="149.0" text="Nombre" />
+            <TableColumn fx:id="col_apellidoPaterno" prefWidth="167.0" text="Apellido paterno" />
+            <TableColumn fx:id="col_apellidoMaterno" prefWidth="147.0" text="Apellido materno" />
+          <TableColumn fx:id="col_telefono" prefWidth="114.0" text="Telefono" />
+            <TableColumn fx:id="col_correo" prefWidth="164.0" text="Correo" />
+            <TableColumn fx:id="col_seccion" prefWidth="98.0" text="Seccion" />
         </columns>
       </TableView>
       <Label layoutX="30.0" layoutY="53.0" text="Listado de profesores">
@@ -58,7 +60,6 @@
             <HBox alignment="CENTER_RIGHT" prefHeight="56.0" prefWidth="457.0" spacing="10.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#clicActualizar" text="Actualizar" />
-                  <Button mnemonicParsing="false" onAction="#clicRegistrar" text="Registrar" />
                </children>
             </HBox>
          </children>

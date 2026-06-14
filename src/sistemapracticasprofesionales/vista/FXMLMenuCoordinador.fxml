@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLMenuAdministradorController">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLMenuCoordinadorController">
    <children>
       <VBox layoutX="34.0" layoutY="14.0" spacing="5.0">
          <children>
@@ -28,17 +28,55 @@
       </VBox>
       <HBox layoutX="34.0" layoutY="105.0" prefHeight="509.0" prefWidth="832.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="509.0" prefWidth="277.0" spacing="15.0">
+            <VBox alignment="TOP_CENTER" prefHeight="509.0" prefWidth="277.0" spacing="15.0">
                <padding>
                   <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
                </padding>
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../recursos/imagenes/img_usuarios.png" />
+                        <Image url="@../recursos/imagenes/img_analiticas.png" />
                      </image>
                   </ImageView>
-                  <Label text="Coordinadores">
+                  <Label prefHeight="66.0" prefWidth="91.0" text="Analíticas">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Separator prefWidth="200.0" />
+                  <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="150.0" text="Generar reporte de indicadores" textAlignment="CENTER" wrapText="true" />
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="509.0" prefWidth="277.0" spacing="15.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../recursos/imagenes/img_proyectos.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="66.0" prefWidth="93.0" text="Proyectos">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Separator prefWidth="200.0" />
+                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" text="Registrar" />
+                  <Button mnemonicParsing="false" prefWidth="150.0" text="Ver listado" />
+                  <Button mnemonicParsing="false" prefWidth="150.0" text="Asignar proyecto" />
+                  <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="150.0" text="Generar oficio de asignacion" textAlignment="CENTER" wrapText="true" />
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="509.0" prefWidth="277.0" spacing="15.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../recursos/imagenes/img_organizaciones_vinculadas.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="66.0" prefWidth="178.0" text="Organizaciones vinculadas" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -47,41 +85,23 @@
                   <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" text="Registrar" />
                   <Button mnemonicParsing="false" prefWidth="150.0" text="Ver listado" />
                </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="509.0" prefWidth="277.0" spacing="15.0">
-               <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../recursos/imagenes/img_usuarios.png" />
-                     </image>
-                  </ImageView>
-                  <Label text="Profesores">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Label>
-                  <Separator prefWidth="200.0" />
-                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" text="Registrar" />
-                  <Button mnemonicParsing="false" prefWidth="150.0" text="Ver listado" />
-               </children>
                <padding>
                   <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
                </padding>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="509.0" prefWidth="277.0" spacing="15.0">
+            <VBox alignment="TOP_CENTER" prefHeight="509.0" prefWidth="277.0" spacing="15.0">
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../recursos/imagenes/img_usuarios.png" />
+                        <Image url="@../recursos/imagenes/img_estudiantes.png" />
                      </image>
                   </ImageView>
-                  <Label text="Estudiantes">
+                  <Label prefHeight="66.0" prefWidth="108.0" text="Estudiantes">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
                   <Separator prefWidth="200.0" />
-                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" text="Registrar" />
                   <Button mnemonicParsing="false" prefWidth="150.0" text="Ver listado" />
                </children>
                <padding>

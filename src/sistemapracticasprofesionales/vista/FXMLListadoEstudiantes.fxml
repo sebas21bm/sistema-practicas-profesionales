@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLListadoCoordinadoresController">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLListadoEstudiantesController">
    <children>
       <MenuBar prefHeight="32.0" prefWidth="900.0">
         <menus>
@@ -39,15 +39,16 @@
       <Button layoutX="792.0" layoutY="605.0" mnemonicParsing="false" onAction="#clilcRegresar" text="Regresar" />
       <TableView fx:id="tv_coordinadores" layoutX="30.0" layoutY="161.0" prefHeight="416.0" prefWidth="840.0">
         <columns>
-          <TableColumn fx:id="col_nombre" prefWidth="145.0" text="Nombre" />
-            <TableColumn fx:id="col_apellidoPaterno" prefWidth="150.0" text="Apellido paterno" />
-            <TableColumn fx:id="col_apellidoMaterno" prefWidth="173.0" text="Apellido materno" />
-          <TableColumn fx:id="col_telefono" prefWidth="103.0" text="Telefono" />
-            <TableColumn fx:id="col_correo" prefWidth="151.0" text="Correo" />
-            <TableColumn fx:id="col_estado" prefWidth="117.0" text="Estado" />
+            <TableColumn fx:id="col_matricula" prefWidth="106.0" text="Matricula" />
+          <TableColumn fx:id="col_nombre" prefWidth="95.0" text="Nombre" />
+            <TableColumn fx:id="col_apellidoPaterno" prefWidth="127.0" text="Apellido paterno" />
+            <TableColumn fx:id="col_apellidoMaterno" prefWidth="149.0" text="Apellido materno" />
+          <TableColumn fx:id="col_telefono" prefWidth="115.0" text="Telefono" />
+            <TableColumn fx:id="col_correo" prefWidth="136.0" text="Correo" />
+            <TableColumn fx:id="col_seccion" prefWidth="111.0" text="Seccion" />
         </columns>
       </TableView>
-      <Label layoutX="30.0" layoutY="53.0" text="Listado de coordinadores">
+      <Label layoutX="30.0" layoutY="53.0" text="Listado de estudiantes">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
