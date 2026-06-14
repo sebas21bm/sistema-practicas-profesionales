@@ -22,7 +22,7 @@ import sistemapracticasprofesionales.modelo.pojo.Profesor;
 public class FXMLListadoProfesoresController implements Initializable {
 
     @FXML
-    private TableView<Profesor> tv_coordinadores;
+    private TableView<Profesor> tv_profesores;
     @FXML
     private TableColumn<?, ?> col_nombre;
     @FXML

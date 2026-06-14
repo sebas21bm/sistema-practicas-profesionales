@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sistemapracticasprofesionales.controlador.FXMLInfoProyectoController">
+   <children>
+      <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="900.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Analiticas">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clilcGenerarReporteIndicadores" text="Generar reporte de indicadores" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Proyectos">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clilcRegistrarProyecto" text="Registrar" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicVerListadoProyecto" text="Ver listado" />
+                  <MenuItem mnemonicParsing="false" onAction="#clilcAsignarProyecto" text="Asignar proyecto" />
+                  <MenuItem mnemonicParsing="false" onAction="#clilcGenerarOficioDeAsignacion" text="Generar oficio de asignación" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Organizaciones vinculadas">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clilcRegistrarOrganizacionVinculada" text="Registrar organizacion vinculada" />
+                  <MenuItem mnemonicParsing="false" onAction="#clilcVerListadoOrganizacionesVinculadas" text="Ver listado" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Estudiantes">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clilcVerListadoEstudiantes" text="Ver listado" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Mas">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicCerrarSesion" text="Cerrar sesión" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Label layoutX="40.0" layoutY="63.0" text="Información del proyecto">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Separator layoutX="49.0" layoutY="105.0" prefHeight="0.0" prefWidth="837.0" />
+      <HBox layoutX="49.0" layoutY="125.0" prefHeight="464.0" prefWidth="830.0" spacing="10.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-border-color: F0F0F0; -fx-border-radius: 15;" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="lb_nombreProyecto" prefHeight="30.0" prefWidth="388.0" text="Nombre del proyecto" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <HBox prefHeight="25.0" prefWidth="380.0" spacing="10.0">
+                     <children>
+                        <Label text="Encargado:" />
+                        <Label fx:id="lb_nombreEncargado" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="25.0" prefWidth="380.0" spacing="10.0">
+                     <children>
+                        <Label text="Teléfono de encargado" />
+                        <Label fx:id="lb_telefonoEncargado" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="25.0" prefWidth="380.0" spacing="10.0">
+                     <children>
+                        <Label text="Cupos restantes:" />
+                        <Label fx:id="lb_cuposRestantes" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="25.0" prefWidth="380.0" spacing="10.0">
+                     <children>
+                        <Label text="Fecha de finalización:" />
+                        <Label fx:id="lb_fechaFinalizacion" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="133.0" prefWidth="380.0" spacing="10.0">
+                     <children>
+                        <Label text="Descripcion:" />
+                        <Label fx:id="lb_descripcionProyecto" prefHeight="131.0" prefWidth="290.0" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-border-color: F0F0F0; -fx-border-radius: 15;" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-border-color: F0F0F0; -fx-border-radius: 15;">
+                     <children>
+                        <Label fx:id="lb_nombreOrganizacionVinculada" prefHeight="30.0" prefWidth="388.0" text="Nombre de la Organizacion" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="25.0" prefWidth="380.0" spacing="10.0">
+                           <children>
+                              <Label text="Ubicación:" />
+                              <Label fx:id="lb_ubicacion" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="25.0" prefWidth="380.0" spacing="10.0">
+                           <children>
+                              <Label text="Tipo:" />
+                              <Label fx:id="lb_tipoOrganizacion" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="25.0" prefWidth="380.0" spacing="10.0">
+                           <children>
+                              <Label text="Teléfono:" />
+                              <Label fx:id="lb_telefonoOrganizacion" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-border-color: F0F0F0; -fx-border-radius: 15;">
+                     <children>
+                        <Label fx:id="lb_nombreOrganizacionVinculada1" prefHeight="30.0" prefWidth="388.0" text="Estudiantes asignados" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="tv_estudiantesAsignados" prefHeight="200.0" prefWidth="200.0">
+                          <columns>
+                            <TableColumn fx:id="col_nombreCompletoEstudiante" prefWidth="355.0" text="Nombre completo" />
+                          </columns>
+                        </TableView>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" layoutX="474.0" layoutY="598.0" prefHeight="38.0" prefWidth="405.0" spacing="10.0">
+         <children>
+            <Button mnemonicParsing="false" text="Actualizar" />
+            <Button mnemonicParsing="false" text="Eliminar" />
+            <Button mnemonicParsing="false" text="Regresar" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

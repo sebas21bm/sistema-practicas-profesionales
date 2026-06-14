@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sistemapracticasprofesionales.controlador.FXMLRegistroProyectoController">
+   <children>
+      <MenuBar layoutY="6.0" prefHeight="32.0" prefWidth="900.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Analiticas">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#clilcGenerarReporteIndicadores" text="Generar reporte de indicadores" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Proyectos">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#clilcRegistrarProyecto" text="Registrar" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicVerListadoProyecto" text="Ver listado" />
+                  <MenuItem mnemonicParsing="false" onAction="#clilcAsignarProyecto" text="Asignar proyecto" />
+                  <MenuItem mnemonicParsing="false" onAction="#clilcGenerarOficioDeAsignacion" text="Generar oficio de asignación" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Organizaciones vinculadas">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#clilcRegistrarOrganizacionVinculada" text="Registrar organizacion vinculada" />
+                  <MenuItem mnemonicParsing="false" onAction="#clilcVerListadoOrganizacionesVinculadas" text="Ver listado" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Estudiantes">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#clilcVerListadoEstudiantes" text="Ver listado" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Mas">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#clicCerrarSesion" text="Cerrar sesión" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <Label layoutX="40.0" layoutY="63.0" text="Registro de proyecto">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Separator layoutX="39.0" layoutY="112.0" prefHeight="0.0" prefWidth="837.0" />
+      <HBox layoutX="39.0" layoutY="136.0" prefHeight="424.0" prefWidth="837.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
+               </padding>
+               <children>
+                  <Label text="Datos del proyecto">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="405.0">
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="122.0" text="Nombre:" />
+                        <TextField fx:id="txt_nombreProyecto" prefHeight="67.0" prefWidth="273.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="405.0">
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="122.0" text="Descripción:" />
+                        <TextField fx:id="txt_descripcion" prefHeight="67.0" prefWidth="272.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="397.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="42.0" prefWidth="112.0" text="Fecha de finalizacion" wrapText="true" />
+                        <DatePicker fx:id="dp_fechaFinalizacion" prefHeight="31.0" prefWidth="146.0" />
+                        <Label prefHeight="21.0" prefWidth="51.0" text="Cupo" />
+                        <TextField fx:id="txt_cupo" prefHeight="31.0" prefWidth="54.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="366.0" spacing="10.0">
+                     <children>
+                        <Label text="Organizacion vinculada" />
+                        <ComboBox fx:id="cb_organizacionVinculada" prefHeight="31.0" prefWidth="229.0" />
+                     </children>
+                  </HBox>
+                  <Button mnemonicParsing="false" text="Nueva organizacion vinculada" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
+               </padding>
+               <children>
+                  <Label text="Datos del responsable">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="364.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="122.0" text="Nombre:" />
+                        <TextField fx:id="txt_nombre" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="364.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="122.0" text="Apellido paterno:" />
+                        <TextField fx:id="txt_apellidoPaterno" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="364.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="122.0" text="Apellido materno:" />
+                        <TextField fx:id="txt_apellidoMaterno" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="364.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="122.0" text="Teléfono:" />
+                        <TextField fx:id="txt_telefono" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="364.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="122.0" text="Correo:" />
+                        <TextField fx:id="txt_correo" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="364.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="122.0" text="Puesto:" />
+                        <TextField fx:id="txt_puesto" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="35.0" prefWidth="364.0" spacing="10.0">
+                     <children>
+                        <RadioButton fx:id="rbtn_nuevoResponsable" mnemonicParsing="false" text="Nuevo responsable">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="tg_seleccionResponsable" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rbtn_responsableExistente" mnemonicParsing="false" text="Responsable existente" toggleGroup="$tg_seleccionResponsable" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Button layoutX="811.0" layoutY="591.0" mnemonicParsing="false" onAction="#clicRegresar" text="Regresar" />
+      <Button layoutX="722.0" layoutY="591.0" mnemonicParsing="false" onAction="#clicRegistrar" text="Registrar" />
+   </children>
+</AnchorPane>

@@ -37,7 +37,7 @@
         </menus>
       </MenuBar>
       <Button layoutX="792.0" layoutY="605.0" mnemonicParsing="false" onAction="#clilcRegresar" text="Regresar" />
-      <TableView fx:id="tv_coordinadores" layoutX="30.0" layoutY="161.0" prefHeight="416.0" prefWidth="840.0">
+      <TableView fx:id="tv_estudiantes" layoutX="30.0" layoutY="161.0" prefHeight="416.0" prefWidth="840.0">
         <columns>
             <TableColumn fx:id="col_matricula" prefWidth="106.0" text="Matricula" />
           <TableColumn fx:id="col_nombre" prefWidth="95.0" text="Nombre" />

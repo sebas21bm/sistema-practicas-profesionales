@@ -12,31 +12,25 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import sistemapracticasprofesionales.modelo.pojo.Estudiante;
+import sistemapracticasprofesionales.modelo.pojo.ProyectoPracticas;
 
 /**
  * FXML Controller class
  *
  * @author sebas
  */
-public class FXMLListadoEstudiantesController implements Initializable {
+public class FXMLListadoProyectosController implements Initializable {
 
     @FXML
-    private TableView<Estudiante> tv_estudiantes;
-    @FXML
-    private TableColumn<?, ?> col_matricula;
+    private TableView<ProyectoPracticas> tv_proyectos;
     @FXML
     private TableColumn<?, ?> col_nombre;
     @FXML
-    private TableColumn<?, ?> col_apellidoPaterno;
+    private TableColumn<?, ?> col_estudiante;
     @FXML
-    private TableColumn<?, ?> col_apellidoMaterno;
+    private TableColumn<?, ?> col_organizacionVinculada;
     @FXML
-    private TableColumn<?, ?> col_telefono;
-    @FXML
-    private TableColumn<?, ?> col_correo;
-    @FXML
-    private TableColumn<?, ?> col_seccion;
+    private TableColumn<?, ?> col_fechaFinalizacion;
     @FXML
     private TextField txt_nombreBusqueda;
 
@@ -47,7 +41,11 @@ public class FXMLListadoEstudiantesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
+
+    @FXML
+    private void clilcRegresar(ActionEvent event) {
+    }
+
     @FXML
     private void clicBuscar(ActionEvent event) {
     }
@@ -57,33 +55,35 @@ public class FXMLListadoEstudiantesController implements Initializable {
     }
 
     @FXML
-    private void clicActualizar(ActionEvent event) {
-    }
-    
-    //Navegación
-
-    @FXML
-    private void clicRegistrarCoordinador(ActionEvent event) {
+    private void clilcGenerarReporteIndicadores(ActionEvent event) {
     }
 
     @FXML
-    private void clicListadoCoordinadores(ActionEvent event) {
+    private void clilcRegistrarProyecto(ActionEvent event) {
     }
 
     @FXML
-    private void clilcRegistrarProfesor(ActionEvent event) {
+    private void clicVerListadoProyecto(ActionEvent event) {
     }
 
     @FXML
-    private void clilcListadoCoordinadores(ActionEvent event) {
+    private void clilcAsignarProyecto(ActionEvent event) {
     }
 
     @FXML
-    private void clilcRegistrarEstudiante(ActionEvent event) {
+    private void clilcGenerarOficioDeAsignacion(ActionEvent event) {
     }
 
     @FXML
-    private void clilcListadoEstudiantes(ActionEvent event) {
+    private void clilcRegistrarOrganizacionVinculada(ActionEvent event) {
+    }
+
+    @FXML
+    private void clilcVerListadoOrganizacionesVinculadas(ActionEvent event) {
+    }
+
+    @FXML
+    private void clilcVerListadoEstudiantes(ActionEvent event) {
     }
 
     @FXML
@@ -91,7 +91,7 @@ public class FXMLListadoEstudiantesController implements Initializable {
     }
 
     @FXML
-    private void clilcRegresar(ActionEvent event) {
+    private void clicVerDetalles(ActionEvent event) {
     }
     
 }
