@@ -58,14 +58,12 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="560.0" spacing="10.0">
                <children>
-                  <Label prefHeight="44.0" prefWidth="150.0" text="Seccion" />
-                  <ComboBox fx:id="cb_seccion" prefHeight="39.0" prefWidth="150.0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="560.0" spacing="10.0">
-               <children>
-                  <Label prefHeight="44.0" prefWidth="150.0" text="Estado" />
-                  <ComboBox fx:id="cb_estado" prefHeight="39.0" prefWidth="150.0" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="560.0" spacing="10.0">
+                     <children>
+                        <Label fx:id="lbl_estado" prefHeight="31.0" prefWidth="158.0" text="Estado" />
+                        <ComboBox fx:id="cb_estado" prefHeight="39.0" prefWidth="150.0" />
+                     </children>
+                  </HBox>
                </children>
             </HBox>
             <Separator prefWidth="200.0" />

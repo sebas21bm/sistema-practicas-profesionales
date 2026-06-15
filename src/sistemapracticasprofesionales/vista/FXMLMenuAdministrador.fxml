@@ -44,8 +44,8 @@
                      </font>
                   </Label>
                   <Separator prefWidth="200.0" />
-                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" text="Registrar" />
-                  <Button mnemonicParsing="false" prefWidth="150.0" text="Ver listado" />
+                  <Button mnemonicParsing="false" onAction="#clicRegistrarCoordinador" prefHeight="31.0" prefWidth="150.0" text="Registrar" />
+                  <Button mnemonicParsing="false" onAction="#clicVerListadoCoordinadores" prefWidth="150.0" text="Ver listado" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="509.0" prefWidth="277.0" spacing="15.0">
@@ -61,8 +61,8 @@
                      </font>
                   </Label>
                   <Separator prefWidth="200.0" />
-                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" text="Registrar" />
-                  <Button mnemonicParsing="false" prefWidth="150.0" text="Ver listado" />
+                  <Button mnemonicParsing="false" onAction="#clicRegistrarProfesor" prefHeight="31.0" prefWidth="150.0" text="Registrar" />
+                  <Button mnemonicParsing="false" onAction="#clicVerListadoProfesores" prefWidth="150.0" text="Ver listado" />
                </children>
                <padding>
                   <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
@@ -81,8 +81,8 @@
                      </font>
                   </Label>
                   <Separator prefWidth="200.0" />
-                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" text="Registrar" />
-                  <Button mnemonicParsing="false" prefWidth="150.0" text="Ver listado" />
+                  <Button mnemonicParsing="false" onAction="#clicRegistrarEstudiante" prefHeight="31.0" prefWidth="150.0" text="Registrar" />
+                  <Button mnemonicParsing="false" onAction="#clicVerListadoEstudiantes" prefWidth="150.0" text="Ver listado" />
                </children>
                <padding>
                   <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
@@ -91,6 +91,6 @@
          </children>
       </HBox>
       <Separator layoutX="8.0" layoutY="79.0" prefHeight="16.0" prefWidth="884.0" />
-      <Button layoutX="752.0" layoutY="30.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: red; -fx-border-radius: 5; -fx-text-fill: red; -fx-font-weight: bold;" text="Cerrar sesión" />
+      <Button layoutX="752.0" layoutY="30.0" mnemonicParsing="false" onAction="#clicCerrarSesión" style="-fx-background-color: white; -fx-border-color: red; -fx-border-radius: 5; -fx-text-fill: red; -fx-font-weight: bold;" text="Cerrar sesión" />
    </children>
 </AnchorPane>

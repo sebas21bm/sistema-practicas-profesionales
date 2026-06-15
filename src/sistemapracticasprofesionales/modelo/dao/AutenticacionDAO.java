@@ -17,6 +17,7 @@ import sistemapracticasprofesionales.modelo.pojo.Rol;
 import sistemapracticasprofesionales.modelo.pojo.Usuario;
 import sistemapracticasprofesionales.modelo.ConexionBD;
 import sistemapracticasprofesionales.utilidades.Constantes;
+import sistemapracticasprofesionales.utilidades.Utilidades;
 
 
 /**
@@ -35,7 +36,7 @@ public class AutenticacionDAO {
                 throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
             }
             
-            byte[] contraseniaCifrada = cifrarContrasenia(contrasenia);
+            byte[] contraseniaCifrada = Utilidades.cifrarContrasenia(contrasenia);
             
             String consulta = "SELECT id_usuario, contrasenia, id_rol FROM cuenta "
                     + "WHERE id_usuario = ? AND contrasenia = ?;";
@@ -74,10 +75,4 @@ public class AutenticacionDAO {
             return usuarioLogin;
         }
     }
-    
-     private static byte[] cifrarContrasenia(String contrasenia) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        return md.digest(contrasenia.getBytes(StandardCharsets.UTF_8));
-    }
-    
 }

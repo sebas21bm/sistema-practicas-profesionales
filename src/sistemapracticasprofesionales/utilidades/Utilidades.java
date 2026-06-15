@@ -4,6 +4,9 @@
  */
 package sistemapracticasprofesionales.utilidades;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
@@ -37,4 +40,9 @@ public class Utilidades {
         return (respuesta.get() == ButtonType.OK);
     }
     
+        
+     public static byte[] cifrarContrasenia(String contrasenia) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        return md.digest(contrasenia.getBytes(StandardCharsets.UTF_8));
+    }
 }

@@ -6,6 +6,7 @@ package sistemapracticasprofesionales.controlador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -27,5 +28,33 @@ public class FXMLMenuAdministradorController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void clicRegistrarCoordinador(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicVerListadoCoordinadores(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicRegistrarProfesor(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicVerListadoProfesores(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicRegistrarEstudiante(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicVerListadoEstudiantes(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicCerrarSesión(ActionEvent event) {
+    }
     
 }
