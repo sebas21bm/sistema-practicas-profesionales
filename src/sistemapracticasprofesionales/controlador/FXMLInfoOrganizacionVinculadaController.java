@@ -8,63 +8,45 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import sistemapracticasprofesionales.modelo.pojo.Estudiante;
-import sistemapracticasprofesionales.modelo.pojo.ProyectoPracticas;
-import sistemapracticasprofesionales.modelo.pojo.OrganizacionVinculada;
 
 /**
  * Autor: Sebastián Barrera Mora
- * Fecha de creación: 14/06/2026
- * Descripción: Controlador para la ventana de informacion del proyecto.
+ * Fecha de creación: 15/06/2026
+ * Descripción: Controlador para la ventana de informacion de la organización
+ * vinculada.
  */
-public class FXMLInfoProyectoController implements Initializable {
+public class FXMLInfoOrganizacionVinculadaController implements Initializable {
 
     @FXML
-    private Label lb_nombreProyecto;
+    private Label lb_nombreOrganización;
     @FXML
-    private Label lb_nombreEncargado;
-    @FXML
-    private Label lb_telefonoEncargado;
-    @FXML
-    private Label lb_cuposRestantes;
-    @FXML
-    private Label lb_fechaFinalizacion;
-    @FXML
-    private Label lb_descripcionProyecto;
-    @FXML
-    private Label lb_nombreOrganizacionVinculada;
+    private Label lb_estado;
     @FXML
     private Label lb_ubicacion;
     @FXML
-    private Label lb_tipoOrganizacion;
+    private Label lb_telefono;
     @FXML
-    private Label lb_telefonoOrganizacion;
+    private Label lb_correo;
     @FXML
-    private Label lb_nombreOrganizacionVinculada1;
+    private Label lb_tipo;
     @FXML
-    private TableView<Estudiante> tv_estudiantesAsignados;
+    private TableView<?> tv_proyectos;
+    @FXML
+    private TableColumn<?, ?> col_nombreProyecto;
+    @FXML
+    private TableView<?> tv_responsablesProyecto;
     @FXML
     private TableColumn<?, ?> col_nombreCompletoEstudiante;
+    @FXML
+    private TableColumn<?, ?> col_correo;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }   
-    
-    @FXML
-    private void clicActualizar(ActionEvent event) {
-    }
+    }    
 
     @FXML
-    private void clicEliminar(ActionEvent event) {
-    }
-
-    @FXML
-    private void clicRegresar(ActionEvent event) {
-    }
-
-    @FXML
-    private void clilcGenerarReporteIndicadores(ActionEvent event) {
+    private void clicGenerarReporteIndicadores(ActionEvent event) {
     }
 
     @FXML
@@ -97,6 +79,18 @@ public class FXMLInfoProyectoController implements Initializable {
 
     @FXML
     private void clicCerrarSesion(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicVerDetallesProyecto(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicActualizar(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicRegresar(ActionEvent event) {
     }
     
 }

@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="599.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLFormularioProfesorController">
+<AnchorPane id="AnchorPane" prefHeight="599.0" prefWidth="621.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLFormularioProfesorController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="3.0" prefHeight="450.0" prefWidth="588.0" spacing="15.0" style="-fx-background-color: white;" AnchorPane.topAnchor="3.0">
          <children>

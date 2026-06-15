@@ -39,10 +39,6 @@ public class FXMLInicioSesionController implements Initializable {
     @FXML
     private Label lb_errorContrasenia;
 
-
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

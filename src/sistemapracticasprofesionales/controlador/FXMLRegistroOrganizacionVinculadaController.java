@@ -6,46 +6,30 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 
 /**
  * Autor: Sebastián Barrera Mora
- * Fecha de creación: 14/06/2026
- * Descripción: Clase controladora para la vista del registro de proyecto.
+ * Fecha de creación: 15/06/2026
+ * Descripción: Clase controladora para la vista del registro de
+ * organizaciones vinculadas
  */
-public class FXMLRegistroProyectoController implements Initializable {
+public class FXMLRegistroOrganizacionVinculadaController implements Initializable {
 
     @FXML
-    private TextField txt_nombreProyecto;
+    private TextField txt_nombreOrganizacionVinculada;
     @FXML
-    private TextField txt_descripcion;
+    private TextField txt_correoElectronico;
     @FXML
-    private DatePicker dp_fechaFinalizacion;
+    private ComboBox<?> cb_tipoOrganizacion;
     @FXML
-    private TextField txt_cupo;
+    private TextField txt_calle;
     @FXML
-    private ComboBox<?> cb_organizacionVinculada;
+    private TextField txt_colonia;
     @FXML
-    private TextField txt_nombre;
-    @FXML
-    private TextField txt_apellidoPaterno;
-    @FXML
-    private TextField txt_apellidoMaterno;
+    private TextField txt_codigoPostal;
     @FXML
     private TextField txt_telefono;
-    @FXML
-    private TextField txt_correo;
-    @FXML
-    private TextField txt_puesto;
-    @FXML
-    private RadioButton rbtn_nuevoResponsable;
-    @FXML
-    private ToggleGroup tg_seleccionResponsable;
-    @FXML
-    private RadioButton rbtn_responsableExistente;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -56,18 +40,8 @@ public class FXMLRegistroProyectoController implements Initializable {
     private void clicRegresar(ActionEvent event) {
     }
 
-    @FXML
-    private void clicRegistrar(ActionEvent event) {
-    }
-
-
-    @FXML
-    private void clicVerListadoProyecto(ActionEvent event) {
-    }
     
-    @FXML
-    private void clicCerrarSesion(ActionEvent event) {
-    }
+    //Navegación
 
     @FXML
     private void clicGenerarReporteIndicadores(ActionEvent event) {
@@ -75,6 +49,10 @@ public class FXMLRegistroProyectoController implements Initializable {
 
     @FXML
     private void clicRegistrarProyecto(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicVerListadoProyecto(ActionEvent event) {
     }
 
     @FXML
@@ -97,5 +75,12 @@ public class FXMLRegistroProyectoController implements Initializable {
     private void clicVerListadoEstudiantes(ActionEvent event) {
     }
 
+    @FXML
+    private void clicCerrarSesion(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicRegistrar(ActionEvent event) {
+    }
     
 }

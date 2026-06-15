@@ -8,34 +8,34 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import sistemapracticasprofesionales.modelo.pojo.ProyectoPracticas;
+import sistemapracticasprofesionales.modelo.pojo.OrganizacionVinculada;
 
 /**
  * Autor: Sebastián Barrera Mora
- * Fecha de creación: 14/06/2026
- * Descripción: Clase controladora para la vista del listado de proyectos.
+ * Fecha de creación: 15/06/2026
+ * Descripción: Clase controladora para la vista del listado de
+ * organizaciones vinculadas
  */
-public class FXMLListadoProyectosController implements Initializable {
+public class FXMLListadoOrganizacionesVinculadasController implements Initializable {
 
     @FXML
-    private TableView<ProyectoPracticas> tv_proyectos;
-    @FXML
-    private TableColumn<?, ?> col_nombre;
-    @FXML
-    private TableColumn<?, ?> col_estudiante;
-    @FXML
-    private TableColumn<?, ?> col_organizacionVinculada;
-    @FXML
-    private TableColumn<?, ?> col_fechaFinalizacion;
-    @FXML
     private TextField txt_nombreBusqueda;
+    @FXML
+    private TableView<OrganizacionVinculada> tv_organizacionesVinculadas;
+    @FXML
+    private TableColumn<?, ?> col_nombreOrganizacion;
+    @FXML
+    private TableColumn<?, ?> col_telefono;
+    @FXML
+    private TableColumn<?, ?> col_correo;
+    @FXML
+    private TableColumn<?, ?> col_tipo;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-
-
+    }  
+    
     @FXML
     private void clicBuscar(ActionEvent event) {
     }
@@ -44,19 +44,11 @@ public class FXMLListadoProyectosController implements Initializable {
     private void clicVerTodos(ActionEvent event) {
     }
 
-
-    @FXML
-    private void clicVerListadoProyecto(ActionEvent event) {
-    }
-
-
-    @FXML
-    private void clicCerrarSesion(ActionEvent event) {
-    }
-
     @FXML
     private void clicVerDetalles(ActionEvent event) {
     }
+    
+    //Navegación
 
     @FXML
     private void clicGenerarReporteIndicadores(ActionEvent event) {
@@ -64,6 +56,10 @@ public class FXMLListadoProyectosController implements Initializable {
 
     @FXML
     private void clicRegistrarProyecto(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicVerListadoProyecto(ActionEvent event) {
     }
 
     @FXML
@@ -86,6 +82,10 @@ public class FXMLListadoProyectosController implements Initializable {
     private void clicVerListadoEstudiantes(ActionEvent event) {
     }
 
+    @FXML
+    private void clicCerrarSesion(ActionEvent event) {
+    }
+    
     @FXML
     private void clicRegresar(ActionEvent event) {
     }

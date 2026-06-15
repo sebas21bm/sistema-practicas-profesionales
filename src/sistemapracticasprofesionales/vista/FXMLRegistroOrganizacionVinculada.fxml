@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLRegistroOrganizacionVinculadaController">
+   <children>
+      <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="900.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Analiticas">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicGenerarReporteIndicadores" text="Generar reporte de indicadores" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Proyectos">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicRegistrarProyecto" text="Registrar" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicVerListadoProyecto" text="Ver listado" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicAsignarProyecto" text="Asignar proyecto" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicGenerarOficioDeAsignacion" text="Generar oficio de asignación" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Organizaciones vinculadas">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicRegistrarOrganizacionVinculada" text="Registrar organizacion vinculada" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicVerListadoOrganizacionesVinculadas" text="Ver listado" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Estudiantes">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicVerListadoEstudiantes" text="Ver listado" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Mas">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicCerrarSesion" text="Cerrar sesión" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Label layoutX="40.0" layoutY="60.0" text="Registro de organización vinculada">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Separator layoutX="40.0" layoutY="106.0" prefHeight="0.0" prefWidth="837.0" />
+      <HBox layoutX="40.0" layoutY="137.0" prefHeight="448.0" prefWidth="837.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
+               </padding>
+               <children>
+                  <Label text="Datos de la organización">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="388.0">
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="122.0" text="Nombre:" />
+                        <TextField fx:id="txt_nombreOrganizacionVinculada" prefHeight="28.0" prefWidth="270.0" promptText="Nombre de la organización" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="388.0">
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="122.0" text="Correo:" />
+                        <TextField fx:id="txt_correoElectronico" prefHeight="28.0" prefWidth="270.0" promptText="Correo de la organización" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="388.0">
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="122.0" text="Teléfono:" />
+                        <TextField fx:id="txt_telefono" prefHeight="28.0" prefWidth="270.0" promptText="Telefono (10 dígitos)" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="366.0">
+                     <children>
+                        <Label prefWidth="122.0" text="Tipo:" />
+                        <ComboBox fx:id="cb_tipoOrganizacion" prefHeight="31.0" prefWidth="267.0" promptText="Tipo" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
+               </padding>
+               <children>
+                  <Label text="Ubicación">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="388.0">
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="122.0" text="Calle:" />
+                        <TextField fx:id="txt_calle" prefHeight="28.0" prefWidth="270.0" promptText="Calle" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="388.0">
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="122.0" text="Colonia:" />
+                        <TextField fx:id="txt_colonia" prefHeight="28.0" prefWidth="270.0" promptText="Colonia" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="388.0">
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="122.0" text="Código postal:" />
+                        <TextField fx:id="txt_codigoPostal" prefHeight="28.0" prefWidth="270.0" promptText="Código postal" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Button layoutX="799.0" layoutY="596.0" mnemonicParsing="false" onAction="#clicRegresar" text="Regresar" />
+      <Button layoutX="706.0" layoutY="596.0" mnemonicParsing="false" onAction="#clicRegistrar" text="Registrar" />
+   </children>
+</AnchorPane>

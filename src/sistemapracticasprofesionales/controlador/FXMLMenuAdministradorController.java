@@ -24,9 +24,6 @@ public class FXMLMenuAdministradorController implements Initializable {
     @FXML
     private Label lb_nombre;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
