@@ -8,7 +8,7 @@ package sistemapracticasprofesionales.modelo.pojo;
 public class Profesor {
 
     private int idPersonalAcademico;
-    private int numeroEmpleado;
+    private String numeroEmpleado;
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
@@ -18,7 +18,8 @@ public class Profesor {
     private String idUsuario;
     private String contrasenia;
 
-    public Profesor() {}
+    public Profesor() {
+    }
 
     public int getIdPersonalAcademico() {
         return idPersonalAcademico;
@@ -28,11 +29,11 @@ public class Profesor {
         this.idPersonalAcademico = idPersonalAcademico;
     }
 
-    public int getNumeroEmpleado() {
+    public String getNumeroEmpleado() {
         return numeroEmpleado;
     }
 
-    public void setNumeroEmpleado(int numeroEmpleado) {
+    public void setNumeroEmpleado(String numeroEmpleado) {
         this.numeroEmpleado = numeroEmpleado;
     }
 

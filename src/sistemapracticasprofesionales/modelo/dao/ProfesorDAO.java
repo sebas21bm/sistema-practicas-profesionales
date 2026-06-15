@@ -20,66 +20,167 @@ import sistemapracticasprofesionales.utilidades.Constantes;
 public class ProfesorDAO {
 
     public static RespuestaOperacion registrarProfesor(Profesor profesor)
-            throws SQLException {
+            throws SQLException, NullPointerException {
         RespuestaOperacion respuesta = new RespuestaOperacion();
 
-        try (Connection conexionBD = 
-                ConexionBD.crearParaRol(Rol.Administrador)){
-            if (conexionBD == null) {
-                throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+        try (Connection conexionBD =
+                ConexionBD.crearParaRol(Rol.Administrador)) {
+            if (conexionBD != null) {
+                String consulta =
+                        "{CALL registrar_profesor(?, ?, ?, ?, ?, ?, ?, ?)}";
+                CallableStatement sentencia =
+                        conexionBD.prepareCall(consulta);
+
+                sentencia.setString(1, profesor.getNumeroEmpleado());
+                sentencia.setString(2, profesor.getNombre());
+                sentencia.setString(3, profesor.getApellidoPaterno());
+                sentencia.setString(4, profesor.getApellidoMaterno());
+                sentencia.setString(5, profesor.getTelefono());
+                sentencia.setString(6, profesor.getCorreo());
+                sentencia.setString(7, profesor.getIdUsuario());
+                sentencia.setString(8, profesor.getContrasenia());
+                sentencia.execute();
+
+                respuesta.setError(false);
+                respuesta.setMensaje(
+                        "El profesor se ha registrado correctamente.");
+                return respuesta;
             }
-
-            String consulta = 
-                    "{CALL registrar_profesor(?, ?, ?, ?, ?, ?, ?, ?)}";
-            CallableStatement sentencia = conexionBD.prepareCall(consulta);
-            sentencia.setInt(1, profesor.getNumeroEmpleado());
-            sentencia.setString(2, profesor.getNombre());
-            sentencia.setString(3, profesor.getApellidoPaterno());
-            sentencia.setString(4, profesor.getApellidoMaterno());
-            sentencia.setString(5, profesor.getTelefono());
-            sentencia.setString(6, profesor.getCorreo());
-            sentencia.setString(7, profesor.getIdUsuario());
-            sentencia.setString(8, profesor.getContrasenia());
-            sentencia.execute();
-
-            respuesta.setError(false);
-            respuesta.setMensaje("El profesor se ha registrado correctamente.");
         }
 
-        return respuesta;
+        throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
     }
 
-    public static ArrayList<Profesor> obtenerProfesores() throws SQLException {
+    public static ArrayList<Profesor> obtenerProfesores()
+            throws SQLException, NullPointerException {
         ArrayList<Profesor> profesores = new ArrayList<>();
 
-        try (Connection conexionBD = 
+        try (Connection conexionBD =
                 ConexionBD.crearParaRol(Rol.Administrador)) {
-            if (conexionBD == null) {
-                throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
-            }
+            if (conexionBD != null) {
+                String consulta =
+                        "SELECT id_personal_academico, num_empleado, "
+                        + "nombre, paterno, materno, telefono, correo, "
+                        + "activo FROM vista_profesores;";
+                PreparedStatement sentencia =
+                        conexionBD.prepareStatement(consulta);
+                ResultSet resultado = sentencia.executeQuery();
 
-            String consulta = "SELECT id_personal_academico, num_empleado, "
-                    + "nombre, paterno, materno, telefono, correo, activo "
-                    + "FROM vista_profesores;";
-            PreparedStatement sentencia = conexionBD.prepareStatement(consulta);
-            ResultSet resultado = sentencia.executeQuery();
+                while (resultado.next()) {
+                    Profesor profesor = serializarProfesor(resultado);
+                    profesores.add(profesor);
+                }
 
-            while (resultado.next()) {
-                profesores.add(serializarProfesor(resultado));
+                return profesores;
             }
         }
 
-        return profesores;
+        throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+    }
+
+    public static boolean verificarNumeroEmpleadoExistente(
+            String numeroEmpleado) throws SQLException, NullPointerException {
+        int encontrados = 0;
+
+        try (Connection conexionBD =
+                ConexionBD.crearParaRol(Rol.Administrador)) {
+            if (conexionBD != null) {
+                String consulta =
+                        "SELECT COUNT(*) FROM personal_academico pa "
+                        + "JOIN personal_academico_has_puesto php "
+                        + "ON pa.id_personal_academico = "
+                        + "php.id_personal_academico "
+                        + "JOIN puesto p ON php.id_puesto = p.id_puesto "
+                        + "WHERE pa.num_empleado = ? "
+                        + "AND p.puesto = 'Profesor';";
+                PreparedStatement sentencia =
+                        conexionBD.prepareStatement(consulta);
+
+                sentencia.setString(1, numeroEmpleado);
+                ResultSet resultado = sentencia.executeQuery();
+
+                if (resultado.next()) {
+                    encontrados = resultado.getInt(1);
+                }
+
+                return encontrados > 0;
+            }
+        }
+
+        throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+    }
+
+    public static boolean verificarCorreoProfesorExistente(String correo)
+            throws SQLException, NullPointerException {
+        int encontrados = 0;
+
+        try (Connection conexionBD =
+                ConexionBD.crearParaRol(Rol.Administrador)) {
+            if (conexionBD != null) {
+                String consulta =
+                        "SELECT COUNT(*) FROM personal_academico pa "
+                        + "JOIN personal_academico_has_puesto php "
+                        + "ON pa.id_personal_academico = "
+                        + "php.id_personal_academico "
+                        + "JOIN puesto p ON php.id_puesto = p.id_puesto "
+                        + "WHERE LOWER(pa.correo) = LOWER(?) "
+                        + "AND p.puesto = 'Profesor';";
+                PreparedStatement sentencia =
+                        conexionBD.prepareStatement(consulta);
+
+                sentencia.setString(1, correo);
+                ResultSet resultado = sentencia.executeQuery();
+
+                if (resultado.next()) {
+                    encontrados = resultado.getInt(1);
+                }
+
+                return encontrados > 0;
+            }
+        }
+
+        throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+    }
+
+    public static boolean verificarUsuarioExistente(String idUsuario)
+            throws SQLException, NullPointerException {
+        int encontrados = 0;
+
+        try (Connection conexionBD =
+                ConexionBD.crearParaRol(Rol.Administrador)) {
+            if (conexionBD != null) {
+                String consulta =
+                        "SELECT COUNT(*) FROM cuenta "
+                        + "WHERE id_usuario = ?;";
+                PreparedStatement sentencia =
+                        conexionBD.prepareStatement(consulta);
+
+                sentencia.setString(1, idUsuario);
+                ResultSet resultado = sentencia.executeQuery();
+
+                if (resultado.next()) {
+                    encontrados = resultado.getInt(1);
+                }
+
+                return encontrados > 0;
+            }
+        }
+
+        throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
     }
 
     private static Profesor serializarProfesor(ResultSet resultado)
-            throws SQLException {
+            throws SQLException, NullPointerException {
         Profesor profesor = new Profesor();
-        profesor.setIdPersonalAcademico(resultado.getInt("id_personal_academico"));
-        profesor.setNumeroEmpleado(resultado.getInt("num_empleado"));
+
+        profesor.setIdPersonalAcademico(
+                resultado.getInt("id_personal_academico"));
+        profesor.setNumeroEmpleado(resultado.getString("num_empleado"));
         profesor.setNombre(resultado.getString("nombre"));
         profesor.setApellidoPaterno(resultado.getString("paterno"));
-        profesor.setApellidoMaterno(resultado.getString("materno"));
+        profesor.setApellidoMaterno(
+                resultado.getString("materno") != null
+                ? resultado.getString("materno") : "");
         profesor.setTelefono(resultado.getString("telefono"));
         profesor.setCorreo(resultado.getString("correo"));
         profesor.setActivo(resultado.getBoolean("activo"));
