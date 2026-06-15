@@ -176,4 +176,63 @@ public class EstudianteDAO {
 
         return estudiante;
     }
+    
+    public static ArrayList<Estudiante> buscarEstudiantesPorMatricula(
+            String matricula) throws SQLException, NullPointerException {
+        ArrayList<Estudiante> estudiantes = new ArrayList<>();
+
+        try (Connection conexionBD =
+                ConexionBD.crearParaRol(Rol.Administrador)) {
+            if (conexionBD != null) {
+                String consulta =
+                        "SELECT id_estudiante, matricula, nombre, paterno, "
+                        + "materno, correo, telefono, activo "
+                        + "FROM vista_estudiantes "
+                        + "WHERE matricula LIKE ?;";
+                PreparedStatement sentencia =
+                        conexionBD.prepareStatement(consulta);
+
+                sentencia.setString(1, "%" + matricula + "%");
+                ResultSet resultado = sentencia.executeQuery();
+
+                while (resultado.next()) {
+                    estudiantes.add(serializarEstudiante(resultado));
+                }
+
+                return estudiantes;
+            }
+        }
+
+        throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+    }
+
+    public static ArrayList<Estudiante> buscarEstudiantesPorNombre(String nombre)
+            throws SQLException, NullPointerException {
+        ArrayList<Estudiante> estudiantes = new ArrayList<>();
+
+        try (Connection conexionBD =
+                ConexionBD.crearParaRol(Rol.Administrador)) {
+            if (conexionBD != null) {
+                String consulta =
+                        "SELECT id_estudiante, matricula, nombre, paterno, "
+                        + "materno, correo, telefono, activo "
+                        + "FROM vista_estudiantes "
+                        + "WHERE LOWER(CONCAT(nombre, ' ', paterno, ' ', "
+                        + "IFNULL(materno, ''))) LIKE LOWER(?);";
+                PreparedStatement sentencia =
+                        conexionBD.prepareStatement(consulta);
+
+                sentencia.setString(1, "%" + nombre + "%");
+                ResultSet resultado = sentencia.executeQuery();
+
+                while (resultado.next()) {
+                    estudiantes.add(serializarEstudiante(resultado));
+                }
+
+                return estudiantes;
+            }
+        }
+
+        throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+    }
 }

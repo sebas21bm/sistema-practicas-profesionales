@@ -99,6 +99,10 @@ public class Estudiante {
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
+    
+    public String getEstado() {
+        return activo ? "Activo" : "Inactivo";
+    }
 
     @Override
     public String toString() {

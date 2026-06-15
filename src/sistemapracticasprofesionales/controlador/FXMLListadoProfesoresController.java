@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -59,6 +60,8 @@ public class FXMLListadoProfesoresController implements Initializable {
     private TextField txt_busqueda;
     @FXML
     private ComboBox<String> cb_filtros;
+    @FXML
+    private Button btn_actualizar;
 
     private ObservableList<String> filtros = FXCollections.observableArrayList(
             FILTRO_NUMERO_EMPLEADO,
@@ -67,6 +70,7 @@ public class FXMLListadoProfesoresController implements Initializable {
     );
     private String filtroBusqueda;
     private ObservableList<Profesor> profesores;
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -76,6 +80,7 @@ public class FXMLListadoProfesoresController implements Initializable {
         configurarTabla();
         configurarSeleccionFiltro();
         cargarInformacionProfesores();
+        btn_actualizar.setDisable(true);
     }
 
     private void configurarTabla() {

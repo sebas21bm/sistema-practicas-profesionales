@@ -66,7 +66,7 @@
 
       <HBox alignment="CENTER_RIGHT" layoutX="399.0" layoutY="588.0" prefHeight="40.0" prefWidth="457.0" spacing="50.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#clicActualizar" prefHeight="25.0" prefWidth="113.0" text="Actualizar" />
+            <Button fx:id="btn_actualizar" mnemonicParsing="false" onAction="#clicActualizar" prefHeight="25.0" prefWidth="113.0" text="Actualizar" />
             <Button mnemonicParsing="false" onAction="#clicRegresar" prefHeight="25.0" prefWidth="104.0" text="Regresar" />
          </children>
       </HBox>

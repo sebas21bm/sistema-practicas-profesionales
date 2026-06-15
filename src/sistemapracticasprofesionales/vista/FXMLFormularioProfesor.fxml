@@ -77,8 +77,6 @@
                </children>
             </HBox>
 
-            <Label fx:id="lbl_error" prefHeight="17.0" prefWidth="0.0" textFill="RED" />
-
             <HBox alignment="CENTER" prefHeight="39.0" prefWidth="520.0" spacing="30.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#clicRegistrar" text="Registrar" />

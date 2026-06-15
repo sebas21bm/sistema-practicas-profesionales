@@ -36,6 +36,16 @@ public class EstudianteServicio {
             throws SQLException, NullPointerException {
         return EstudianteDAO.obtenerEstudiantes();
     }
+    
+    public static ArrayList<Estudiante> buscarEstudiantesPorMatricula(
+        String matricula) throws SQLException, NullPointerException {
+        return EstudianteDAO.buscarEstudiantesPorMatricula(matricula);
+    }
+
+    public static ArrayList<Estudiante> buscarEstudiantesPorNombre(String nombre)
+            throws SQLException, NullPointerException {
+        return EstudianteDAO.buscarEstudiantesPorNombre(nombre);
+    }
 
     private static RespuestaOperacion validarEstudiante(
             Estudiante estudiante) throws SQLException, NullPointerException {

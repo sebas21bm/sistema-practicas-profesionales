@@ -76,8 +76,22 @@ public class FXMLMenuAdministradorController implements Initializable {
 
     @FXML
     private void clicRegistrarEstudiante(ActionEvent event) {
-        cambiarVentana("FXMLFormularioEstudiante",
-                "Registro de estudiante");
+        try {
+            FXMLLoader cargador =
+                    Utilidades.cargarFXML("FXMLFormularioEstudiante");
+            Parent vista = cargador.load();
+            Scene escena = new Scene(vista);
+
+            Stage stageFormulario = new Stage();
+            stageFormulario.setScene(escena);
+            stageFormulario.setTitle("Registro de estudiante");
+            stageFormulario.setResizable(false);
+            stageFormulario.centerOnScreen();
+            stageFormulario.initModality(Modality.APPLICATION_MODAL);
+            stageFormulario.showAndWait();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML

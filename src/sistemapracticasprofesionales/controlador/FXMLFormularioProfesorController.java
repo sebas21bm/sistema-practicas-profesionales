@@ -41,13 +41,9 @@ public class FXMLFormularioProfesorController implements Initializable {
     private TextField txt_usuario;
     @FXML
     private PasswordField pf_contrasenia;
-    @FXML
-    private Label lbl_error;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        lbl_error.setText("");
-    }
+    public void initialize(URL url, ResourceBundle rb) {}
 
     @FXML
     private void clicRegistrar(ActionEvent event) {
@@ -121,7 +117,6 @@ public class FXMLFormularioProfesorController implements Initializable {
                         Alert.AlertType.INFORMATION);
                 cerrarVentana();
             } else {
-                lbl_error.setText(respuesta.getMensaje());
                 Utilidades.mostrarAlertaSimple(
                         "Datos inválidos",
                         respuesta.getMensaje(),
@@ -162,7 +157,6 @@ public class FXMLFormularioProfesorController implements Initializable {
                 + "obligatorios vacíos. Ingrese los datos faltantes para "
                 + "poder continuar.";
 
-        lbl_error.setText(mensaje);
         Utilidades.mostrarAlertaSimple(
                 "Campos obligatorios",
                 mensaje,
@@ -178,7 +172,6 @@ public class FXMLFormularioProfesorController implements Initializable {
         txt_correo.clear();
         txt_usuario.clear();
         pf_contrasenia.clear();
-        lbl_error.setText("");
     }
 
     private void cerrarVentana() {
