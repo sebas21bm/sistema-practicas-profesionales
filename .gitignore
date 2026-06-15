@@ -6,3 +6,4 @@ dist/
 out/
 *.class
 src/sistemapracticasprofesionales/recursos/properties/*.properties
+/lib/*.jar
