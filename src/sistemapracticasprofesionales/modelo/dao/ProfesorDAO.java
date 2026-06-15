@@ -168,6 +168,65 @@ public class ProfesorDAO {
 
         throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
     }
+    
+    public static ArrayList<Profesor> buscarProfesoresPorNumeroEmpleado(
+        String numeroEmpleado) throws SQLException, NullPointerException {
+    ArrayList<Profesor> profesores = new ArrayList<>();
+
+    try (Connection conexionBD =
+            ConexionBD.crearParaRol(Rol.Administrador)) {
+        if (conexionBD != null) {
+            String consulta =
+                    "SELECT id_personal_academico, num_empleado, nombre, "
+                    + "paterno, materno, telefono, correo, activo "
+                    + "FROM vista_profesores "
+                    + "WHERE num_empleado LIKE ?;";
+            PreparedStatement sentencia =
+                    conexionBD.prepareStatement(consulta);
+
+            sentencia.setString(1, numeroEmpleado);
+            ResultSet resultado = sentencia.executeQuery();
+
+            while (resultado.next()) {
+                profesores.add(serializarProfesor(resultado));
+            }
+
+            return profesores;
+        }
+    }
+
+    throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+}
+
+public static ArrayList<Profesor> buscarProfesoresPorNombre(String nombre)
+        throws SQLException, NullPointerException {
+    ArrayList<Profesor> profesores = new ArrayList<>();
+
+    try (Connection conexionBD =
+            ConexionBD.crearParaRol(Rol.Administrador)) {
+        if (conexionBD != null) {
+            String consulta =
+                    "SELECT id_personal_academico, num_empleado, nombre, "
+                    + "paterno, materno, telefono, correo, activo "
+                    + "FROM vista_profesores "
+                    + "WHERE LOWER(CONCAT(nombre, ' ', paterno, ' ', "
+                    + "IFNULL(materno, ''))) LIKE LOWER(?);";
+            PreparedStatement sentencia =
+                    conexionBD.prepareStatement(consulta);
+
+            sentencia.setString(1, "%" + nombre + "%");
+            ResultSet resultado = sentencia.executeQuery();
+
+            while (resultado.next()) {
+                profesores.add(serializarProfesor(resultado));
+            }
+
+            return profesores;
+        }
+    }
+
+    throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+}
 
     private static Profesor serializarProfesor(ResultSet resultado)
             throws SQLException, NullPointerException {

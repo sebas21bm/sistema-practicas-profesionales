@@ -36,6 +36,16 @@ public class ProfesorServicio {
         return ProfesorDAO.obtenerProfesores();
     }
 
+    public static ArrayList<Profesor> buscarProfesoresPorNumeroEmpleado(
+        String numeroEmpleado) throws SQLException, NullPointerException {
+        return ProfesorDAO.buscarProfesoresPorNumeroEmpleado(numeroEmpleado);
+    }
+
+    public static ArrayList<Profesor> buscarProfesoresPorNombre(String nombre)
+            throws SQLException, NullPointerException {
+        return ProfesorDAO.buscarProfesoresPorNombre(nombre);
+    }
+    
     private static RespuestaOperacion validarProfesor(Profesor profesor)
             throws SQLException, NullPointerException {
         RespuestaOperacion respuesta = new RespuestaOperacion();

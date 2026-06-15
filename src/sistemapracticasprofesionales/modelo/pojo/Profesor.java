@@ -101,6 +101,10 @@ public class Profesor {
         this.contrasenia = contrasenia;
     }
 
+    public String getEstado() {
+        return activo ? "Activo" : "Inactivo";
+    }
+    
     @Override
     public String toString() {
         return nombre + " " + apellidoPaterno + " " + apellidoMaterno;

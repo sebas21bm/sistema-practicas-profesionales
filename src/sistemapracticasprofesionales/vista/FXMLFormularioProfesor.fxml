@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="818.0" prefWidth="607.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLFormularioProfesorController">
+<AnchorPane id="AnchorPane" prefHeight="599.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLFormularioProfesorController">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="930.0" prefWidth="607.0" spacing="30.0" style="-fx-background-color: white;" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="3.0" prefHeight="450.0" prefWidth="588.0" spacing="15.0" style="-fx-background-color: white;" AnchorPane.topAnchor="3.0">
          <children>
-            <Label text="Formulario de Profesor">
+            <Label prefHeight="50.0" prefWidth="327.0" text="Formulario de Profesor">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
@@ -20,70 +18,71 @@
                   <Insets bottom="30.0" top="30.0" />
                </padding>
             </Label>
+
             <HBox prefHeight="31.0" prefWidth="560.0" spacing="10.0">
                <children>
                   <Label prefHeight="31.0" prefWidth="275.0" text="Número de empleado" />
-                  <TextField fx:id="txt_numeroEmpleado" prefHeight="31.0" prefWidth="479.0" promptText="Ingrese el número de empleado" />
+                  <TextField fx:id="txt_numeroEmpleado" prefHeight="31.0" prefWidth="479.0" promptText="Ejemplo: 00001" />
                </children>
             </HBox>
+
             <HBox prefHeight="31.0" prefWidth="560.0" spacing="10.0">
                <children>
                   <Label prefHeight="31.0" prefWidth="275.0" text="Nombre" />
                   <TextField fx:id="txt_nombre" prefHeight="31.0" prefWidth="479.0" promptText="Nombre" />
                </children>
             </HBox>
+
             <HBox prefHeight="31.0" prefWidth="560.0" spacing="10.0">
                <children>
                   <Label prefHeight="31.0" prefWidth="275.0" text="Apellido paterno" />
                   <TextField fx:id="txt_apellidoPaterno" prefHeight="31.0" prefWidth="479.0" promptText="Apellido paterno" />
                </children>
             </HBox>
+
             <HBox prefHeight="31.0" prefWidth="560.0" spacing="10.0">
                <children>
                   <Label prefHeight="31.0" prefWidth="275.0" text="Apellido materno" />
                   <TextField fx:id="txt_apellidoMaterno" prefHeight="31.0" prefWidth="479.0" promptText="Apellido materno" />
                </children>
             </HBox>
+
             <HBox prefHeight="31.0" prefWidth="560.0" spacing="10.0">
                <children>
                   <Label prefHeight="31.0" prefWidth="275.0" text="Teléfono" />
-                  <TextField fx:id="txt_telefono" prefHeight="31.0" prefWidth="479.0" promptText="Telefono (10 digitos)" />
+                  <TextField fx:id="txt_telefono" prefHeight="31.0" prefWidth="479.0" promptText="Teléfono de 10 dígitos" />
                </children>
             </HBox>
+
             <HBox prefHeight="31.0" prefWidth="560.0" spacing="10.0">
                <children>
                   <Label prefHeight="31.0" prefWidth="275.0" text="Correo" />
-                  <TextField fx:id="txt_correo" prefHeight="31.0" prefWidth="479.0" promptText="Correo electrónico" />
+                  <TextField fx:id="txt_correo" prefHeight="31.0" prefWidth="479.0" promptText="Correo institucional @uv.mx" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="560.0" spacing="10.0">
-               <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="560.0" spacing="10.0">
-                     <children>
-                        <Label fx:id="lbl_estado" prefHeight="31.0" prefWidth="158.0" text="Estado" />
-                        <ComboBox fx:id="cb_estado" prefHeight="39.0" prefWidth="150.0" />
-                     </children>
-                  </HBox>
-               </children>
-            </HBox>
+
             <Separator prefWidth="200.0" />
+
             <HBox prefHeight="31.0" prefWidth="560.0" spacing="10.0">
                <children>
                   <Label prefHeight="31.0" prefWidth="275.0" text="Usuario" />
                   <TextField fx:id="txt_usuario" prefHeight="31.0" prefWidth="479.0" promptText="Usuario" />
                </children>
             </HBox>
+
             <HBox prefHeight="31.0" prefWidth="560.0" spacing="10.0">
                <children>
                   <Label prefHeight="31.0" prefWidth="275.0" text="Contraseña" />
-                  <TextField fx:id="txt_contrasenia" prefHeight="31.0" prefWidth="479.0" />
+                  <PasswordField fx:id="pf_contrasenia" prefHeight="31.0" prefWidth="479.0" promptText="Contraseña" />
                </children>
             </HBox>
-            <Label fx:id="lb_error" textFill="RED" />
+
+            <Label fx:id="lbl_error" prefHeight="17.0" prefWidth="0.0" textFill="RED" />
+
             <HBox alignment="CENTER" prefHeight="39.0" prefWidth="520.0" spacing="30.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#clicGuardar" text="Confirmar" />
-                  <Button mnemonicParsing="false" onAction="#clicCancelar" text="Cancelar" />
+                  <Button mnemonicParsing="false" onAction="#clicRegistrar" text="Registrar" />
+                  <Button mnemonicParsing="false" onAction="#clicRegresar" text="Regresar" />
                </children>
             </HBox>
          </children>
