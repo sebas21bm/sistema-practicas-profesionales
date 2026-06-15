@@ -8,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sistemapracticasprofesionales.controlador.FXMLInfoProyectoController">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLInfoProyectoController">
    <children>
       <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="900.0">
          <menus>
@@ -20,21 +19,21 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Proyectos">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#clilcRegistrarProyecto" text="Registrar" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicRegistrarProyecto" text="Registrar" />
                   <MenuItem mnemonicParsing="false" onAction="#clicVerListadoProyecto" text="Ver listado" />
-                  <MenuItem mnemonicParsing="false" onAction="#clilcAsignarProyecto" text="Asignar proyecto" />
-                  <MenuItem mnemonicParsing="false" onAction="#clilcGenerarOficioDeAsignacion" text="Generar oficio de asignación" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicAsignarProyecto" text="Asignar proyecto" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicGenerarOficioDeAsignacion" text="Generar oficio de asignación" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Organizaciones vinculadas">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#clilcRegistrarOrganizacionVinculada" text="Registrar organizacion vinculada" />
-                  <MenuItem mnemonicParsing="false" onAction="#clilcVerListadoOrganizacionesVinculadas" text="Ver listado" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicRegistrarOrganizacionVinculada" text="Registrar organizacion vinculada" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicVerListadoOrganizacionesVinculadas" text="Ver listado" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Estudiantes">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#clilcVerListadoEstudiantes" text="Ver listado" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicVerListadoEstudiantes" text="Ver listado" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Mas">
@@ -61,31 +60,31 @@
                   </Label>
                   <HBox prefHeight="25.0" prefWidth="380.0" spacing="10.0">
                      <children>
-                        <Label text="Encargado:" />
+                        <Label prefWidth="163.0" text="Encargado:" />
                         <Label fx:id="lb_nombreEncargado" />
                      </children>
                   </HBox>
                   <HBox prefHeight="25.0" prefWidth="380.0" spacing="10.0">
                      <children>
-                        <Label text="Teléfono de encargado" />
+                        <Label prefHeight="21.0" prefWidth="163.0" text="Teléfono de encargado:" />
                         <Label fx:id="lb_telefonoEncargado" />
                      </children>
                   </HBox>
                   <HBox prefHeight="25.0" prefWidth="380.0" spacing="10.0">
                      <children>
-                        <Label text="Cupos restantes:" />
+                        <Label prefWidth="163.0" text="Cupos restantes:" />
                         <Label fx:id="lb_cuposRestantes" />
                      </children>
                   </HBox>
                   <HBox prefHeight="25.0" prefWidth="380.0" spacing="10.0">
                      <children>
-                        <Label text="Fecha de finalización:" />
+                        <Label prefWidth="163.0" text="Fecha de finalización:" />
                         <Label fx:id="lb_fechaFinalizacion" />
                      </children>
                   </HBox>
                   <HBox prefHeight="133.0" prefWidth="380.0" spacing="10.0">
                      <children>
-                        <Label text="Descripcion:" />
+                        <Label prefWidth="163.0" text="Descripcion:" />
                         <Label fx:id="lb_descripcionProyecto" prefHeight="131.0" prefWidth="290.0" />
                      </children>
                   </HBox>
@@ -108,19 +107,19 @@
                         </Label>
                         <HBox prefHeight="25.0" prefWidth="380.0" spacing="10.0">
                            <children>
-                              <Label text="Ubicación:" />
+                              <Label prefHeight="21.0" prefWidth="78.0" text="Ubicación:" />
                               <Label fx:id="lb_ubicacion" />
                            </children>
                         </HBox>
                         <HBox prefHeight="25.0" prefWidth="380.0" spacing="10.0">
                            <children>
-                              <Label text="Tipo:" />
+                              <Label prefWidth="78.0" text="Tipo:" />
                               <Label fx:id="lb_tipoOrganizacion" />
                            </children>
                         </HBox>
                         <HBox prefHeight="25.0" prefWidth="380.0" spacing="10.0">
                            <children>
-                              <Label text="Teléfono:" />
+                              <Label prefWidth="78.0" text="Teléfono:" />
                               <Label fx:id="lb_telefonoOrganizacion" />
                            </children>
                         </HBox>
@@ -155,9 +154,9 @@
       </HBox>
       <HBox alignment="CENTER_RIGHT" layoutX="474.0" layoutY="598.0" prefHeight="38.0" prefWidth="405.0" spacing="10.0">
          <children>
-            <Button mnemonicParsing="false" text="Actualizar" />
-            <Button mnemonicParsing="false" text="Eliminar" />
-            <Button mnemonicParsing="false" text="Regresar" />
+            <Button mnemonicParsing="false" onAction="#clicActualizar" text="Actualizar" />
+            <Button mnemonicParsing="false" onAction="#clicEliminar" text="Eliminar" />
+            <Button mnemonicParsing="false" onAction="#clicRegresar" text="Regresar" />
          </children>
       </HBox>
    </children>

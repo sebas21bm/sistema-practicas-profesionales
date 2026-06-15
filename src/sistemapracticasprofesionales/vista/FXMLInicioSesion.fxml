@@ -32,12 +32,14 @@
                </padding>
                <children>
                   <Label text="Usuario:" />
-                  <TextField promptText="Ingresa tu usuario" />
+                  <TextField fx:id="txt_usuario" promptText="Ingresa tu usuario" />
+                  <Label fx:id="lb_errorUsuario" textFill="RED" />
                   <Label text="Contraseña" />
-                  <TextField promptText="Ingresa tu contraseña" />
+                  <PasswordField fx:id="psw_contrasenia" promptText="Ingresa tu contraseña" />
+                  <Label fx:id="lb_errorContrasenia" textFill="RED" />
                </children>
             </VBox>
-            <Button fx:id="clicIniciarSesion" mnemonicParsing="false" text="Iniciar sesion" />
+            <Button mnemonicParsing="false" onAction="#clicIniciarSesion" text="Iniciar sesion" />
          </children>
       </VBox>
    </children>

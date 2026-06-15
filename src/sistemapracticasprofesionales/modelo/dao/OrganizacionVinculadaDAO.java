@@ -2,15 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package sistemapracticasprofesionales.utilidades;
+package sistemapracticasprofesionales.modelo.dao;
 
 /**
  *
  * @author sebas
  */
-public class Constantes {
-    
-    public static final String MSJ_SIN_CONEXION_BD = "No hay conexion con el "
-            + "almacenamiento de informacion";
+public class OrganizacionVinculadaDAO {
     
 }
