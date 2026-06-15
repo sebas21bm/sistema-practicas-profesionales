@@ -5,8 +5,10 @@
 package sistemapracticasprofesionales.modelo.dao;
 
 /**
- *
- * @author sebas
+ * Autor: Sebastián Barrera Mora
+ * Fecha de creación: 14/06/2026
+ * Descripción: DAO encargado de acceder a los datos de 
+ * las Organizaciones vinculadas.
  */
 public class OrganizacionVinculadaDAO {
     

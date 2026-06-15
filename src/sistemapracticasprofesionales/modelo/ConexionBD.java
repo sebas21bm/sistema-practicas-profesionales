@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package sistemapracticasprofesionales.modelo;
 
 import java.io.IOException;
@@ -13,8 +9,10 @@ import java.util.Properties;
 import sistemapracticasprofesionales.modelo.pojo.Rol;
 
 /**
- *
- * @author sebas
+ * Autor: Sebastián Barrera Mora
+ * Fecha de creación: 14/06/2026
+ * Descripción: Clase para manejar las conexiones con la base de datos de acuerdo
+ * a los roles del usuario y manejar los archivos de properties.
  */
 public class ConexionBD {
     
@@ -38,9 +36,16 @@ public class ConexionBD {
 
     private static Properties propiedadesBD;
 
-    private ConexionBD() {
-    }
-
+    /**
+     * Método para acceder a la base de datos con las credenciales del usuario
+     * de autenticación. Esto es asi porque es necesario proteger los registros
+     * de la base de datos, se hace uso de un usuario que unicamente tiene permisos
+     * sobre las tablas necesarias para validar la sesión.
+     * 
+     * @return conexion con la base de datos para el usuario de autenticacion.
+     * @throws SQLException si ocurre un error al cargar las credenciales, 
+     *                          cargar el driver o al establecer la conexion.
+     */
     public static Connection crearParaAutenticacion() throws SQLException {
         Properties credenciales = cargarProperties(RUTA_AUTENTICACION);
 
@@ -52,6 +57,19 @@ public class ConexionBD {
         return DriverManager.getConnection(getUrl(), usuario, password);
     }
 
+    /**
+     * Método para acceder a la base de datos con las credenciales de alguno
+     * de los usuarios creados para la conexion. Esto es asi porque es necesario 
+     * proteger los registros de la base de datos, y restringir ciertas operaciones
+     * de otros usuarios, para esto se hace uso distintos usuarios con distintos
+     * permisos sobre las tablas que le correspondan.
+     * 
+     * @param rol rol del usuario actual que se obtiene del atributo de la
+     *              clase Sesión. Será utilizado para saber que properties leer.
+     * @return conexion a la base de datos para el usuario que corresponda.
+     * @throws SQLException si ocurre un error al cargar las credenciales, 
+     *                          cargar el driver o al establecer la conexion.
+     */
     public static Connection crearParaRol(Rol rol) throws SQLException {
         String rutaProperties = determinarRutaProperties(rol);
 

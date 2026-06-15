@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package sistemapracticasprofesionales.controlador;
 
 import java.net.URL;
@@ -17,9 +13,9 @@ import sistemapracticasprofesionales.modelo.pojo.ProyectoPracticas;
 import sistemapracticasprofesionales.modelo.pojo.OrganizacionVinculada;
 
 /**
- * FXML Controller class
- *
- * @author sebas
+ * Autor: Sebastián Barrera Mora
+ * Fecha de creación: 14/06/2026
+ * Descripción: Controlador para la ventana de informacion del proyecto.
  */
 public class FXMLInfoProyectoController implements Initializable {
 

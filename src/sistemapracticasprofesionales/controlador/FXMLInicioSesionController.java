@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package sistemapracticasprofesionales.controlador;
 
 import java.io.IOException;
@@ -9,8 +5,6 @@ import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,9 +24,9 @@ import sistemapracticasprofesionales.modelo.pojo.Usuario;
 import sistemapracticasprofesionales.utilidades.Utilidades;
 
 /**
- * FXML Controller class
- *
- * @author sebas
+ * Autor: Sebastián Barrera Mora
+ * Fecha de creación: 14/06/2026
+ * Descripción: Controlador para la vista del inicio de sesión.
  */
 public class FXMLInicioSesionController implements Initializable {
 
@@ -105,7 +99,7 @@ public class FXMLInicioSesionController implements Initializable {
         }
     }
     
-    public void irPantallaPrincipal() throws IOException{
+    private void irPantallaPrincipal() throws IOException{
         String rutaMenu = cargarEscenaSegunRol(Sesion.
                 getUsuarioActual().getRolUsuario());
         FXMLLoader cargador = Utilidades.cargarFXML(rutaMenu);

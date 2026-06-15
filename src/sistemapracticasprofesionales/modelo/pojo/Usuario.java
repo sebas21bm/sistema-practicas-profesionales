@@ -1,8 +1,10 @@
 package sistemapracticasprofesionales.modelo.pojo;
 
 /**
- *
- * @author sebas
+ * Autor: Sebastián Barrera Mora
+ * Fecha de creación: 14/06/2026
+ * Descripción: POJO que representa la información de las cuentas y los usuarios
+ * del SPP.
  */
 public class Usuario {
     

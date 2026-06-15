@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package sistemapracticasprofesionales.modelo.pojo;
 
 /**
- *
- * @author sebas
+ * Autor: Sebastián Barrera Mora
+ * Fecha de creación: 15/06/2026
+ * Descripción: POJO que representa la información de una 
+ * organización vinculada del SPP.
  */
 public class OrganizacionVinculada {
     

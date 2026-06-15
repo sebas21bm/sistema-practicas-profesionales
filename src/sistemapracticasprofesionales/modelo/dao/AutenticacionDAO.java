@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package sistemapracticasprofesionales.modelo.dao;
 
 import java.nio.charset.StandardCharsets;
@@ -21,8 +17,9 @@ import sistemapracticasprofesionales.utilidades.Utilidades;
 
 
 /**
- *
- * @author sebas
+ * Autor: Sebastián Barrera Mora
+ * Fecha de creación: 14/06/2026
+ * Descripción: Clase creada para la autenticación del usuario dentro del sistema
  */
 public class AutenticacionDAO {
     

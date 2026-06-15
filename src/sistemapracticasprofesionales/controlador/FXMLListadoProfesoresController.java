@@ -223,13 +223,13 @@ public class FXMLListadoProfesoresController implements Initializable {
             Parent vista = cargador.load();
             Scene escena = new Scene(vista);
 
-            Stage stageFormulario = new Stage();
-            stageFormulario.setScene(escena);
-            stageFormulario.setTitle("Registro de profesor");
-            stageFormulario.setResizable(false);
-            stageFormulario.centerOnScreen();
-            stageFormulario.initModality(Modality.APPLICATION_MODAL);
-            stageFormulario.showAndWait();
+            Stage escenarioFormulario = new Stage();
+            escenarioFormulario.setScene(escena);
+            escenarioFormulario.setTitle("Registro de profesor");
+            escenarioFormulario.setResizable(false);
+            escenarioFormulario.centerOnScreen();
+            escenarioFormulario.initModality(Modality.APPLICATION_MODAL);
+            escenarioFormulario.showAndWait();
 
             actualizarInformacion();
         } catch (IOException ex) {

@@ -1,12 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package sistemapracticasprofesionales.modelo.pojo;
 
 /**
- *
- * @author sebas
+ * Autor: Sebastián Barrera Mora
+ * Fecha de creación: 14/06/2026
+ * Descripción: Clase para almacenar al usuario que ha iniciado sesión como
+ * variable global para poder ser reutilizado para las conexiones con la BD
+ * y datos acerca del usuario.
  */
 public class Sesion {
     

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package sistemapracticasprofesionales.controlador;
 
 import java.io.IOException;
@@ -19,9 +15,9 @@ import javafx.stage.Stage;
 import sistemapracticasprofesionales.utilidades.Utilidades;
 
 /**
- * FXML Controller class
- *
- * @author sebas
+ * Autor: Sebastián Barrera Mora
+ * Fecha de creación: 14/06/2026
+ * Descripción: Clase controladora para la vista del menu del administrador.
  */
 public class FXMLMenuAdministradorController implements Initializable {
 
@@ -56,13 +52,13 @@ public class FXMLMenuAdministradorController implements Initializable {
             Parent vista = cargador.load();
             Scene escena = new Scene(vista);
 
-            Stage stageFormulario = new Stage();
-            stageFormulario.setScene(escena);
-            stageFormulario.setTitle("Registro de profesor");
-            stageFormulario.setResizable(false);
-            stageFormulario.centerOnScreen();
-            stageFormulario.initModality(Modality.APPLICATION_MODAL);
-            stageFormulario.showAndWait();
+            Stage escenarioFormulario = new Stage();
+            escenarioFormulario.setScene(escena);
+            escenarioFormulario.setTitle("Registro de profesor");
+            escenarioFormulario.setResizable(false);
+            escenarioFormulario.centerOnScreen();
+            escenarioFormulario.initModality(Modality.APPLICATION_MODAL);
+            escenarioFormulario.showAndWait();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -82,13 +78,13 @@ public class FXMLMenuAdministradorController implements Initializable {
             Parent vista = cargador.load();
             Scene escena = new Scene(vista);
 
-            Stage stageFormulario = new Stage();
-            stageFormulario.setScene(escena);
-            stageFormulario.setTitle("Registro de estudiante");
-            stageFormulario.setResizable(false);
-            stageFormulario.centerOnScreen();
-            stageFormulario.initModality(Modality.APPLICATION_MODAL);
-            stageFormulario.showAndWait();
+            Stage escenarioFormulario = new Stage();
+            escenarioFormulario.setScene(escena);
+            escenarioFormulario.setTitle("Registro de estudiante");
+            escenarioFormulario.setResizable(false);
+            escenarioFormulario.centerOnScreen();
+            escenarioFormulario.initModality(Modality.APPLICATION_MODAL);
+            escenarioFormulario.showAndWait();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
