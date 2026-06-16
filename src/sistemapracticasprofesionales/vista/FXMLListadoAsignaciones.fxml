@@ -7,31 +7,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLListadoProyectosController">
+
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sistemapracticasprofesionales.controlador.FXMLListadoAsignacionesController">
    <children>
-      <Button layoutX="792.0" layoutY="605.0" mnemonicParsing="false" onAction="#clicRegresar" text="Regresar" />
-      <TableView fx:id="tv_proyectos" layoutX="30.0" layoutY="161.0" prefHeight="416.0" prefWidth="840.0">
-        <columns>
-          <TableColumn fx:id="col_nombre" prefWidth="149.0" text="Nombre" />
-            <TableColumn fx:id="col_estudiante" prefWidth="309.0" text="Nombre estudiante" />
-            <TableColumn fx:id="col_organizacionVinculada" prefWidth="223.0" text="Organización vinculada" />
-            <TableColumn fx:id="col_fechaFinalizacion" prefWidth="158.0" text="Fecha finalización" />
-        </columns>
-      </TableView>
-      <Label layoutX="30.0" layoutY="53.0" text="Listado de proyectos">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="96.0" prefHeight="40.0" prefWidth="840.0" spacing="10.0">
-         <children>
-            <TextField fx:id="txt_nombreBusqueda" promptText="Buscar por nombre" />
-            <Button mnemonicParsing="false" onAction="#clicBuscar" text="Buscar" />
-            <Button mnemonicParsing="false" onAction="#clicVerTodos" text="Ver todos" />
-            <ComboBox fx:id="cb_periodoEscolar" prefHeight="31.0" prefWidth="189.0" promptText="Periodo escolar" />
-         </children>
-      </HBox>
-      <Button layoutX="681.0" layoutY="605.0" mnemonicParsing="false" onAction="#clicVerDetalles" text="Ver detalles" />
       <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="900.0">
          <menus>
             <Menu mnemonicParsing="false" text="Analiticas">
@@ -65,5 +43,28 @@
             </Menu>
          </menus>
       </MenuBar>
+      <Label layoutX="37.0" layoutY="51.0" text="Listado de asignaciones">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER_LEFT" layoutX="37.0" layoutY="92.0" prefHeight="40.0" prefWidth="840.0" spacing="10.0">
+         <children>
+            <TextField fx:id="txt_nombreBusqueda" prefHeight="31.0" prefWidth="257.0" promptText="Buscar por nombre de proyecto" />
+            <Button mnemonicParsing="false" onAction="#clicBuscar" text="Buscar" />
+            <Button mnemonicParsing="false" onAction="#clicVerTodos" text="Ver todos" />
+            <ComboBox fx:id="cb_periodoEscolar" prefHeight="31.0" prefWidth="189.0" promptText="Periodo escolar" />
+         </children>
+      </HBox>
+      <Button layoutX="799.0" layoutY="605.0" mnemonicParsing="false" onAction="#clicRegresar" text="Regresar" />
+      <Button layoutX="668.0" layoutY="605.0" mnemonicParsing="false" onAction="#clicGenerarOficio" text="Generar oficio" />
+      <Button layoutX="501.0" layoutY="605.0" mnemonicParsing="false" onAction="#clicCancelarAsignacion" text="Cancelar asignación" />
+      <Button layoutX="388.0" layoutY="605.0" mnemonicParsing="false" onAction="#clicVerDetalles" text="Ver detalles" />
+      <TableView fx:id="tv_asignaciones" layoutX="37.0" layoutY="151.0" prefHeight="440.0" prefWidth="840.0">
+        <columns>
+          <TableColumn fx:id="col_estudiante" prefWidth="376.0" text="Estudiante" />
+          <TableColumn fx:id="col_proyecto" prefWidth="463.0" text="Proyecto" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

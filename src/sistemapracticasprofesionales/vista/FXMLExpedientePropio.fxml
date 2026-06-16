@@ -102,25 +102,9 @@
                         <TableView fx:id="tv_documentosIniciales" focusTraversable="false" layoutX="0.0" layoutY="42.0" prefHeight="260.0" prefWidth="792.0">
 
                             <columns>
-                                <TableColumn fx:id="col_documentoInicial" prefWidth="396.0">
-                                    <graphic>
-                                        <Label text="Documento" textFill="black">
-                                            <font>
-                                                <Font name="System Bold" size="13.0" />
-                                            </font>
-                                        </Label>
-                                    </graphic>
-                                </TableColumn>
+                                <TableColumn fx:id="col_documentoInicial" prefWidth="396.0" text="Documento" />
 
-                                <TableColumn fx:id="col_estadoDocumentoInicial" prefWidth="396.0">
-                                    <graphic>
-                                        <Label text="Estado" textFill="black">
-                                            <font>
-                                                <Font name="System Bold" size="13.0" />
-                                            </font>
-                                        </Label>
-                                    </graphic>
-                                </TableColumn>
+                                <TableColumn fx:id="col_estadoDocumentoInicial" prefWidth="396.0" text="Estado" />
                             </columns>
                         </TableView>
 
@@ -133,45 +117,13 @@
                         <TableView fx:id="tv_reportesEvaluaciones" focusTraversable="false" layoutX="0.0" layoutY="380.0" prefHeight="430.0" prefWidth="792.0">
 
                             <columns>
-                                <TableColumn fx:id="col_documento" prefWidth="240.0">
-                                    <graphic>
-                                        <Label text="Documento" textFill="black">
-                                            <font>
-                                                <Font name="System Bold" size="13.0" />
-                                            </font>
-                                        </Label>
-                                    </graphic>
-                                </TableColumn>
+                                <TableColumn fx:id="col_documento" prefWidth="240.0" text="Documento" />
 
-                                <TableColumn fx:id="col_estado" prefWidth="190.0">
-                                    <graphic>
-                                        <Label text="Estado" textFill="black">
-                                            <font>
-                                                <Font name="System Bold" size="13.0" />
-                                            </font>
-                                        </Label>
-                                    </graphic>
-                                </TableColumn>
+                                <TableColumn fx:id="col_estado" prefWidth="190.0" text="Estado" />
 
-                                <TableColumn fx:id="col_valor" prefWidth="170.0">
-                                    <graphic>
-                                        <Label text="Valor" textFill="black">
-                                            <font>
-                                                <Font name="System Bold" size="13.0" />
-                                            </font>
-                                        </Label>
-                                    </graphic>
-                                </TableColumn>
+                                <TableColumn fx:id="col_valor" prefWidth="170.0" text="Valor" />
 
-                                <TableColumn fx:id="col_porcentajeObtenido" prefWidth="192.0">
-                                    <graphic>
-                                        <Label text="Porcentaje obtenido" textFill="black">
-                                            <font>
-                                                <Font name="System Bold" size="13.0" />
-                                            </font>
-                                        </Label>
-                                    </graphic>
-                                </TableColumn>
+                                <TableColumn fx:id="col_porcentajeObtenido" prefWidth="192.0" text="Porcentaje obtenido" />
                             </columns>
                         </TableView>
 

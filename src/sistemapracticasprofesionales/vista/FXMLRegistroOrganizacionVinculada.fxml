@@ -14,7 +14,7 @@
          <menus>
             <Menu mnemonicParsing="false" text="Analiticas">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#clicGenerarReporteIndicadores" text="Generar reporte de indicadores" />
+                  <MenuItem mnemonicParsing="false" text="Generar reporte de indicadores" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Proyectos">
@@ -22,18 +22,18 @@
                   <MenuItem mnemonicParsing="false" onAction="#clicRegistrarProyecto" text="Registrar" />
                   <MenuItem mnemonicParsing="false" onAction="#clicVerListadoProyecto" text="Ver listado" />
                   <MenuItem mnemonicParsing="false" onAction="#clicAsignarProyecto" text="Asignar proyecto" />
-                  <MenuItem mnemonicParsing="false" onAction="#clicGenerarOficioDeAsignacion" text="Generar oficio de asignación" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicVerAsignaciones" text="Ver asignaciones" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Organizaciones vinculadas">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#clicRegistrarOrganizacionVinculada" text="Registrar organizacion vinculada" />
+                  <MenuItem mnemonicParsing="false" text="Registrar organizacion vinculada" />
                   <MenuItem mnemonicParsing="false" onAction="#clicVerListadoOrganizacionesVinculadas" text="Ver listado" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Estudiantes">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#clicVerListadoEstudiantes" text="Ver listado" />
+                  <MenuItem mnemonicParsing="false" text="Ver listado" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Mas">

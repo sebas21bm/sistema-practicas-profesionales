@@ -12,7 +12,7 @@ import javafx.scene.control.Label;
  * Fecha de creación: 14/06/2026
  * Descripción: Clase controladora para la vista del menu del estudiante.
  */
-public class FXMLMenuEstudianteController implements Initializable {
+public class FXMLInicioEstudianteController implements Initializable {
 
     @FXML
     private Label lb_nombre;

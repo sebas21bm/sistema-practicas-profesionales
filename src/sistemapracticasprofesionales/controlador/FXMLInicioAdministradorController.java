@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import sistemapracticasprofesionales.modelo.pojo.Sesion;
 import sistemapracticasprofesionales.utilidades.Utilidades;
 
 /**
@@ -19,7 +20,7 @@ import sistemapracticasprofesionales.utilidades.Utilidades;
  * Fecha de creación: 14/06/2026
  * Descripción: Clase controladora para la vista del menu del administrador.
  */
-public class FXMLMenuAdministradorController implements Initializable {
+public class FXMLInicioAdministradorController implements Initializable {
 
     @FXML
     private Label lb_nombre;
@@ -95,6 +96,7 @@ public class FXMLMenuAdministradorController implements Initializable {
 
     @FXML
     private void clicCerrarSesión(ActionEvent event) {
+        Sesion.cerrarSesion();
         cambiarVentana("FXMLInicioSesion", "Inicio de sesión");
     }
     

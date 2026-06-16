@@ -5,41 +5,33 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 /**
  * Autor: Sebastián Barrera Mora
- * Fecha de creación: 15/06/2026
- * Descripción: Clase controladora para la vista del la asignación de proyectos.
+ * Fecha de creación: 16/06/2026
+ * Descripción: Clase controladora para la vista del listado de asignaciones.
  */
-public class FXMLAsignacionProyectoController implements Initializable {
+public class FXMLListadoAsignacionesController implements Initializable {
 
     @FXML
-    private TableView<?> tv_estudiantesSinAsignacion;
+    private TextField txt_nombreBusqueda;
     @FXML
-    private TableColumn<?, ?> col_matricula;
+    private ComboBox<?> cb_periodoEscolar;
     @FXML
-    private TableColumn<?, ?> col_nombre;
+    private TableView<?> tv_asignaciones;
     @FXML
-    private TableColumn<?, ?> col_paterno;
-    @FXML
-    private TableColumn<?, ?> col_materno;
-    @FXML
-    private TableView<?> tv_proyectosDisponibles;
+    private TableColumn<?, ?> col_estudiante;
     @FXML
     private TableColumn<?, ?> col_proyecto;
-    @FXML
-    private TableColumn<?, ?> col_cupos;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }  
-    
-    @FXML
-    private void clicAsignar(ActionEvent event) {
-    }
+    }    
 
     @FXML
     private void clicGenerarReporteIndicadores(ActionEvent event) {
@@ -78,7 +70,27 @@ public class FXMLAsignacionProyectoController implements Initializable {
     }
 
     @FXML
+    private void clicBuscar(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicVerTodos(ActionEvent event) {
+    }
+
+    @FXML
     private void clicRegresar(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicGenerarOficio(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicCancelarAsignacion(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicVerDetalles(ActionEvent event) {
     }
     
 }

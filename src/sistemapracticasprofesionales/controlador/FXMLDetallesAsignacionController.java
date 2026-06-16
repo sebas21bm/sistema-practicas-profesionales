@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 
 /**
  * Autor: Sebastián Barrera Mora
- * Fecha de creación: 14/06/2026
+ * Fecha de creación: 15/06/2026
  * Descripción: Clase controladora para la vista de los detalles de una 
  * asignación.
  */
@@ -34,9 +34,6 @@ public class FXMLDetallesAsignacionController implements Initializable {
     @FXML
     private Label lb_fechaFinalizacion;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -44,6 +41,10 @@ public class FXMLDetallesAsignacionController implements Initializable {
 
     @FXML
     private void clicCerrar(ActionEvent event) {
+    }
+
+    @FXML
+    private void clicGenerarOficio(ActionEvent event) {
     }
     
 }

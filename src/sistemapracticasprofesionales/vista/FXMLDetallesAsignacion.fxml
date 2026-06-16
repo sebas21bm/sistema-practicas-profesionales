@@ -8,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sistemapracticasprofesionales.controlador.FXMLDetallesAsignacionController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLDetallesAsignacionController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="14.0" prefHeight="676.0" prefWidth="577.0" spacing="20.0">
          <padding>
@@ -78,7 +77,12 @@
                   <Label fx:id="lb_fechaFinalizacion" prefHeight="31.0" prefWidth="312.0" wrapText="true" />
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#clicCerrar" text="Cerrar" />
+            <HBox alignment="CENTER" prefHeight="61.0" prefWidth="497.0" spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#clicCerrar" text="Cerrar" />
+                  <Button mnemonicParsing="false" onAction="#clicGenerarOficio" text="Generar oficio de asignación" />
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>

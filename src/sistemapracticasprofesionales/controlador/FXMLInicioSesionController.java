@@ -116,13 +116,13 @@ public class FXMLInicioSesionController implements Initializable {
 
         switch (rolUsuario) {
             case Estudiante:
-                return "FXMLMenuEstudiante";
+                return "FXMLInicioEstudiante";
             case Profesor:
-                return "FXMLMenuProfesor";
+                return "FXMLInicioProfesor";
             case Coordinador:
-                return "FXMLMenuCoordinador";
+                return "FXMLInicioCoordinador";
             case Administrador:
-                return "FXMLMenuAdministrador";
+                return "FXMLInicioAdministrador";
             default:
                 return null;
         }
