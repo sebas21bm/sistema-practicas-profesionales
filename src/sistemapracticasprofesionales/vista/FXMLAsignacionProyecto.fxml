@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sistemapracticasprofesionales.controlador.FXMLAsignacionProyectoController">
+   <children>
+      <MenuBar layoutX="1.0" prefHeight="32.0" prefWidth="900.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Analiticas">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicGenerarReporteIndicadores" text="Generar reporte de indicadores" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Proyectos">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicRegistrarProyecto" text="Registrar" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicVerListadoProyecto" text="Ver listado" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicAsignarProyecto" text="Asignar proyecto" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicGenerarOficioDeAsignacion" text="Generar oficio de asignación" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Organizaciones vinculadas">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicRegistrarOrganizacionVinculada" text="Registrar organizacion vinculada" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicVerListadoOrganizacionesVinculadas" text="Ver listado" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Estudiantes">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicVerListadoEstudiantes" text="Ver listado" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Mas">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicCerrarSesion" text="Cerrar sesión" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Label layoutX="40.0" layoutY="50.0" text="Asignar proyectos">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="787.0" layoutY="595.0" mnemonicParsing="false" onAction="#clicRegresar" text="Regresar" />
+      <Button layoutX="668.0" layoutY="595.0" mnemonicParsing="false" onAction="#clicAsignar" text="Ver detalles" />
+      <HBox layoutX="40.0" layoutY="95.0" prefHeight="483.0" prefWidth="825.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
+               </padding>
+               <children>
+                  <Label prefHeight="30.0" prefWidth="388.0" text="Estudiantes sin asignar" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="tv_estudiantesSinAsignacion" prefHeight="413.0" prefWidth="379.0">
+                    <columns>
+                        <TableColumn fx:id="col_matricula" prefWidth="95.0" text="Matricula" />
+                      <TableColumn fx:id="col_nombre" prefWidth="95.0" text="Nombre" />
+                      <TableColumn fx:id="col_paterno" prefWidth="87.0" text="Paterno" />
+                        <TableColumn fx:id="col_materno" prefWidth="101.0" text="Materno" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
+               </padding>
+               <children>
+                  <Label prefHeight="30.0" prefWidth="388.0" text="Proyectos disponibles" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="tv_proyectosDisponibles" prefHeight="413.0" prefWidth="379.0">
+                    <columns>
+                      <TableColumn fx:id="col_proyecto" prefWidth="250.0" text="Proyecto" />
+                      <TableColumn fx:id="col_cupos" prefWidth="128.0" text="Cupos restantes" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

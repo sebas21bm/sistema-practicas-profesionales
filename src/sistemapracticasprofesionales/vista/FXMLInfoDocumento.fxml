@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sistemapracticasprofesionales.controlador.FXMLInfoDocumentoController">
+   <children>
+      <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="900.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Proyecto">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicConsultarExpediente" text="Consultar expediente" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicDescargarFormatos" text="Descargar formatos" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Mas">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicCerrarSesion" text="Cerrar sesión" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Label layoutX="46.0" layoutY="57.0" text="Documento:" textFill="black">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="lb_nombreDocumento" layoutX="179.0" layoutY="57.0" text="Nombre del documento" textFill="black">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="808.0" layoutY="592.0" mnemonicParsing="false" onAction="#clicRegresar" text="Regresar" />
+      <Button layoutX="670.0" layoutY="592.0" mnemonicParsing="false" onAction="#clicVerDocumento" text="Ver documento" />
+      <Button layoutX="520.0" layoutY="592.0" mnemonicParsing="false" onAction="#clicSubirDocumento" text="Subir documento" />
+      <Separator layoutX="33.0" layoutY="102.0" prefHeight="0.0" prefWidth="834.0" />
+      <Label fx:id="lb_estadoTitulo" layoutX="72.0" layoutY="208.0" prefHeight="30.0" prefWidth="105.0" text="Estado:" textFill="black">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="lb_calificacionTitulo" layoutX="72.0" layoutY="142.0" text="Calificación:" textFill="black">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="lb_comentariosTitulo" layoutX="409.0" layoutY="143.0" text="Comentarios:" textFill="black">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="lb_calificacion" layoutX="204.0" layoutY="141.0" prefHeight="32.0" prefWidth="141.0" style="-fx-border-color: #8aa6c8; -fx-border-width: 1;" textFill="black">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="lb_estado" layoutX="204.0" layoutY="207.0" prefHeight="32.0" prefWidth="141.0" style="-fx-border-color: #8aa6c8; -fx-border-width: 1;" textFill="black">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="lb_comentarios" layoutX="556.0" layoutY="141.0" prefHeight="246.0" prefWidth="291.0" style="-fx-border-color: #8aa6c8; -fx-border-width: 1;" textFill="black">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
