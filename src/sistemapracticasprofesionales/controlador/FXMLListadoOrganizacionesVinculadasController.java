@@ -1,14 +1,28 @@
 package sistemapracticasprofesionales.controlador;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import sistemapracticasprofesionales.modelo.pojo.OrganizacionVinculada;
+import sistemapracticasprofesionales.modelo.pojo.Sesion;
+import sistemapracticasprofesionales.servicio.OrganizacionVinculadaServicio;
+import sistemapracticasprofesionales.utilidades.Utilidades;
 
 /**
  * Autor: Sebastián Barrera Mora
@@ -23,18 +37,56 @@ public class FXMLListadoOrganizacionesVinculadasController implements Initializa
     @FXML
     private TableView<OrganizacionVinculada> tv_organizacionesVinculadas;
     @FXML
-    private TableColumn<?, ?> col_nombreOrganizacion;
+    private TableColumn<OrganizacionVinculada, String> col_nombreOrganizacion;
     @FXML
-    private TableColumn<?, ?> col_telefono;
+    private TableColumn<OrganizacionVinculada, String> col_telefono;
     @FXML
-    private TableColumn<?, ?> col_correo;
+    private TableColumn<OrganizacionVinculada, String> col_correo;
     @FXML
-    private TableColumn<?, ?> col_tipo;
+    private TableColumn<OrganizacionVinculada, String> col_tipo;
+    
+    private ObservableList<OrganizacionVinculada> organizaciones;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }  
+        configurarTablaOrganizacionesVinculadas();
+        cargarRegistrosOrganizacionesVinculadas();
+    }
+    
+    private void configurarTablaOrganizacionesVinculadas() {
+        col_nombreOrganizacion.setCellValueFactory(
+            new PropertyValueFactory<>("nombre"));
+        col_telefono.setCellValueFactory(
+            new PropertyValueFactory<>("telefono"));
+        col_correo.setCellValueFactory(
+            new PropertyValueFactory<>("correo"));
+        col_tipo.setCellValueFactory(
+            new PropertyValueFactory<>("tipo"));
+    }
+    
+    private void cargarRegistrosOrganizacionesVinculadas() {
+        try {
+            organizaciones = FXCollections.observableArrayList();
+            List<OrganizacionVinculada> organizacionesBD = 
+                OrganizacionVinculadaServicio.
+                        recuperarListadoOrganizacionesVinculadas();
+            organizaciones.addAll(organizacionesBD);
+            tv_organizacionesVinculadas.setItems(organizaciones);
+            
+        } catch (SQLException ex) {
+            Utilidades.mostrarAlertaSimple(
+                    "Error al consultar",
+                    ex.getMessage(),
+                    Alert.AlertType.ERROR);
+        } catch (NullPointerException ex) {
+            Utilidades.mostrarAlertaSimple(
+                    "Error al cargar organizaciones",
+                    "Lo sentimos, la información de las organizaciones "
+                    + "no puede ser cargada en este momento.",
+                    Alert.AlertType.WARNING);
+        }
+        
+    }
     
     @FXML
     private void clicBuscar(ActionEvent event) {
@@ -42,52 +94,117 @@ public class FXMLListadoOrganizacionesVinculadasController implements Initializa
 
     @FXML
     private void clicVerTodos(ActionEvent event) {
+        cargarRegistrosOrganizacionesVinculadas();
+        
     }
 
     @FXML
     private void clicVerDetalles(ActionEvent event) {
+        
+        OrganizacionVinculada organizacionSeleccionada = 
+                tv_organizacionesVinculadas.getSelectionModel().getSelectedItem();
+        
+        if (organizacionSeleccionada == null) {
+            return;
+        }
+        
+        try {
+            OrganizacionVinculada organizacionCompleta = OrganizacionVinculadaServicio.
+                    recuperarOrganizacionCompleta(
+                    organizacionSeleccionada.
+                                    getNumOrganizacionVinculada());
+            if (organizacionCompleta == null) {
+                Utilidades.mostrarAlertaSimple("Error", 
+                    "No se puede ver la información de la organización. "
+                    + "Error al recuperar el registro de la OrganizacionVinculada. "
+                    + "Intente nuevamente", Alert.AlertType.ERROR);
+            } else {
+                cargarVistaDetalles(organizacionCompleta);
+            }
+        } catch (SQLException | NullPointerException ex) {
+            Utilidades.mostrarAlertaSimple("Error", ex.getMessage(), Alert.AlertType.ERROR);
+        }
     }
     
-    //Navegación
+    private void cargarVistaDetalles(OrganizacionVinculada organizacionVinculada) {
+        try {
+            FXMLLoader cargador = Utilidades.cargarFXML("FXMLInfoOrganizacionVinculada");
+            Parent vista = cargador.load();
+            FXMLInfoOrganizacionVinculadaController controlador = cargador.getController();
+            controlador.inicializarInformacionOrganizacion(organizacionVinculada);
+            Scene escena = new Scene(vista);
 
-    @FXML
-    private void clicGenerarReporteIndicadores(ActionEvent event) {
+            Stage escenario = (Stage) txt_nombreBusqueda.getScene().getWindow();
+            escenario.setScene(escena);
+            escenario.setTitle("Información de organizacion vinculada");
+            escenario.centerOnScreen();
+            escenario.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
-
+    
+    //Navegacion
+    
     @FXML
     private void clicRegistrarProyecto(ActionEvent event) {
+        cambiarVentana("FXMLRegistroProyecto", 
+                "Registro de proyecto");
     }
 
     @FXML
     private void clicVerListadoProyecto(ActionEvent event) {
+        cambiarVentana("FXMLListadoProyectos", 
+                "Listado de proyectos");
     }
 
     @FXML
     private void clicAsignarProyecto(ActionEvent event) {
+        cambiarVentana("FXMLAsignacionProyecto", 
+                "Asignacion de proyectos");
     }
 
-    @FXML
-    private void clicGenerarOficioDeAsignacion(ActionEvent event) {
-    }
 
     @FXML
     private void clicRegistrarOrganizacionVinculada(ActionEvent event) {
+        cambiarVentana("FXMLRegistroOrganizacionVinculada",
+                "Registro de organización vinculada");
     }
 
-    @FXML
-    private void clicVerListadoOrganizacionesVinculadas(ActionEvent event) {
-    }
-
-    @FXML
-    private void clicVerListadoEstudiantes(ActionEvent event) {
-    }
 
     @FXML
     private void clicCerrarSesion(ActionEvent event) {
+        Sesion.cerrarSesion();
+        cambiarVentana("FXMLInicioSesion", "Inicio de sesión");
+
     }
     
     @FXML
     private void clicRegresar(ActionEvent event) {
+        cambiarVentana("FXMLInicioCoordinador",
+                "Menu principal");
+    }
+
+    @FXML
+    private void clicVerAsignaciones(ActionEvent event) {
+        cambiarVentana("FXMLListadoAsignaciones",
+                "Listado de asignaciones");
+    }
+    
+    private void cambiarVentana(String nombreVista, String titulo) {
+        try {
+            FXMLLoader cargador = Utilidades.cargarFXML(nombreVista);
+            Parent vista = cargador.load();
+            Scene escena = new Scene(vista);
+
+            Stage escenario = (Stage) txt_nombreBusqueda.getScene().getWindow();
+            escenario.setScene(escena);
+            escenario.setTitle(titulo);
+            escenario.centerOnScreen();
+            escenario.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     
 }

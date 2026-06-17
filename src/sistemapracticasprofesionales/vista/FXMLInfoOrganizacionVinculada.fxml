@@ -47,7 +47,7 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-border-color: F0F0F0; -fx-border-radius: 15;" HBox.hgrow="ALWAYS">
                <children>
-                  <Label fx:id="lb_nombreOrganización" prefHeight="30.0" prefWidth="388.0" text="Nombre de la organización" wrapText="true">
+                  <Label fx:id="lb_nombreOrganizacion" prefHeight="30.0" prefWidth="388.0" text="Nombre de la organización" wrapText="true">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -58,10 +58,10 @@
                         <Label fx:id="lb_estado" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="25.0" prefWidth="380.0" spacing="10.0">
+                  <HBox prefHeight="106.0" prefWidth="378.0" spacing="10.0">
                      <children>
-                        <Label prefWidth="163.0" text="Ubicación:" />
-                        <Label fx:id="lb_ubicacion" />
+                        <Label minWidth="80.0" prefWidth="80.0" text="Ubicación:" />
+                        <Label fx:id="lb_ubicacion" wrapText="true" />
                      </children>
                   </HBox>
                   <HBox prefHeight="25.0" prefWidth="380.0" spacing="10.0">
@@ -101,7 +101,7 @@
                             <TableColumn fx:id="col_nombreProyecto" prefWidth="355.0" text="Proyecto" />
                           </columns>
                         </TableView>
-                        <Button mnemonicParsing="false" onAction="#clicVerDetallesProyecto" text="Ver detalles proyecto" />
+                        <Button fx:id="btn_detallesProyecto" mnemonicParsing="false" onAction="#clicVerDetallesProyecto" text="Ver detalles proyecto" />
                      </children>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -116,7 +116,7 @@
                         </Label>
                         <TableView fx:id="tv_responsablesProyecto" prefHeight="200.0" prefWidth="200.0">
                            <columns>
-                              <TableColumn fx:id="col_nombreCompletoEstudiante" prefWidth="241.0" text="Nombre completo" />
+                              <TableColumn fx:id="col_nombreCompletoResponsable" prefWidth="241.0" text="Nombre completo" />
                               <TableColumn fx:id="col_correo" prefWidth="114.0" text="Correo" />
                            </columns>
                         </TableView>

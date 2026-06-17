@@ -19,6 +19,7 @@ public class OrganizacionVinculada {
     private String telefono;
     private String correo;
     private String tipo;
+    private boolean estado;
     
     private List<ResponsableProyecto> responsables = new ArrayList<>();
     private List<ProyectoPracticas> proyectos = new ArrayList<>();
@@ -62,6 +63,10 @@ public class OrganizacionVinculada {
     public void setCodigoPostal(String codigoPostal) {
         this.codigoPostal = codigoPostal;
     }
+    
+    public String getUbicacionCompleta() {
+        return calle + ", " + colonia + ", C.P. " + codigoPostal;
+    }
 
     public String getTelefono() {
         return telefono;
@@ -85,6 +90,14 @@ public class OrganizacionVinculada {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
     public List<ResponsableProyecto> getResponsables() {

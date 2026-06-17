@@ -1,6 +1,7 @@
 package sistemapracticasprofesionales.servicio;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import sistemapracticasprofesionales.modelo.dao.OrganizacionVinculadaDAO;
 import sistemapracticasprofesionales.modelo.pojo.OrganizacionVinculada;
 import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
@@ -34,6 +35,16 @@ public class OrganizacionVinculadaServicio {
         
         return OrganizacionVinculadaDAO.registrarOrganizacionVinculada(
                 organizacionVinculada);
+    }
+    
+    public static ArrayList<OrganizacionVinculada> recuperarListadoOrganizacionesVinculadas() 
+           throws SQLException, NullPointerException {
+        return OrganizacionVinculadaDAO.obtenerOrganizaciones();
+    }
+    
+    public static OrganizacionVinculada recuperarOrganizacionCompleta(
+            int numeroOrganizacion) throws SQLException, NullPointerException {
+        return OrganizacionVinculadaDAO.obtenerOrganizacionCompleta(numeroOrganizacion);
     }
     
     private static RespuestaOperacion validarOrganizacionVinculada(
