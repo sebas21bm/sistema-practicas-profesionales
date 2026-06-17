@@ -227,8 +227,6 @@ resultado.getInt("num_organizacion_vinculada"));
         return organizacionVinculada;
     }
         
-        
-        
     private static OrganizacionVinculada serializarOrganizacionVinculadaListado(
             ResultSet resultado) throws SQLException, NullPointerException {
         
@@ -242,6 +240,47 @@ resultado.getInt("num_organizacion_vinculada"));
         organizacionVinculada.setTipo(resultado.getString("tipo"));
         
         return organizacionVinculada;
+    }
+    
+    public static RespuestaOperacion actualizarOrganizacionVinculada(
+            OrganizacionVinculada organizacionVinculada) 
+            throws SQLException, NullPointerException{
+        
+        RespuestaOperacion respuesta = new RespuestaOperacion();
+        
+        try (Connection conexionBD = ConexionBD.crearParaRol(
+                Sesion.getUsuarioActual().getRolUsuario())) {
+            if (conexionBD == null) {
+                throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+            }
+            
+            String consulta = "UPDATE organizacion_vinculada "
+                    + "SET nombre = ?, calle = ?, colonia = ? , "
+                    + "codigo_postal = ?, telefono = ?, correo = ?, "
+                    + "tipo = ?, estado = ? "
+                    + "WHERE num_organizacion_vinculada = ?;";
+            PreparedStatement sentenciaBD = conexionBD.prepareStatement(consulta);
+            sentenciaBD.setString(1, organizacionVinculada.getNombre());
+            sentenciaBD.setString(2, organizacionVinculada.getCalle());
+            sentenciaBD.setString(3, organizacionVinculada.getColonia());
+            sentenciaBD.setString(4, organizacionVinculada.getCodigoPostal());
+            sentenciaBD.setString(5, organizacionVinculada.getTelefono());
+            sentenciaBD.setString(6, organizacionVinculada.getCorreo());
+            sentenciaBD.setString(7, organizacionVinculada.getTipo());
+            sentenciaBD.setBoolean(8, organizacionVinculada.getEstado());
+            sentenciaBD.setInt(9, organizacionVinculada.getNumOrganizacionVinculada());
+            
+            int filasAfectadas = sentenciaBD.executeUpdate();
+
+            if (filasAfectadas == 0) {
+                throw new SQLException("No se encontró la organización vinculada a actualizar.");
+            }
+            
+            respuesta.setError(false);
+            respuesta.setMensaje("Cambios guardados con éxito");
+        }
+        
+        return respuesta;
     }
     
 }

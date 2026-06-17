@@ -139,8 +139,8 @@ public class FXMLRegistroOrganizacionVinculadaController implements Initializabl
             } else {
                 Utilidades.mostrarAlertaSimple("Datos invalidos", 
                     "No es posible continuar con el registro de la "
-                    + "organización. Los sigueintes datos ingresados fueron inválidos: "
-                    + respuesta.getMensaje() + "Intente nuevamente", 
+                    + "organización.\nLos sigueintes datos ingresados fueron inválidos: "
+                    + respuesta.getMensaje() + "\nIntente nuevamente", 
                     Alert.AlertType.WARNING);
             }
             
@@ -233,6 +233,7 @@ public class FXMLRegistroOrganizacionVinculadaController implements Initializabl
                     (Stage) txt_nombreOrganizacionVinculada.getScene().getWindow();
             escenario.setScene(escena);
             escenario.setTitle(titulo);
+            escenario.setResizable(false);
             escenario.centerOnScreen();
             escenario.show();
         } catch (IOException ex) {

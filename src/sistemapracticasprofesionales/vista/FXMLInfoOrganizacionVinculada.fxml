@@ -14,7 +14,7 @@
          <menus>
             <Menu mnemonicParsing="false" text="Analiticas">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#clicGenerarReporteIndicadores" text="Generar reporte de indicadores" />
+                  <MenuItem mnemonicParsing="false" text="Generar reporte de indicadores" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Proyectos">
@@ -22,7 +22,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#clicRegistrarProyecto" text="Registrar" />
                   <MenuItem mnemonicParsing="false" onAction="#clicVerListadoProyecto" text="Ver listado" />
                   <MenuItem mnemonicParsing="false" onAction="#clicAsignarProyecto" text="Asignar proyecto" />
-                  <MenuItem mnemonicParsing="false" onAction="#clicGenerarOficioDeAsignacion" text="Generar oficio de asignación" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicVerAsignaciones" text="Ver asignaciones" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Organizaciones vinculadas">
@@ -33,7 +33,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Estudiantes">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#clicVerListadoEstudiantes" text="Ver listado" />
+                  <MenuItem mnemonicParsing="false" text="Ver listado" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Mas">
@@ -101,7 +101,6 @@
                             <TableColumn fx:id="col_nombreProyecto" prefWidth="355.0" text="Proyecto" />
                           </columns>
                         </TableView>
-                        <Button fx:id="btn_detallesProyecto" mnemonicParsing="false" onAction="#clicVerDetallesProyecto" text="Ver detalles proyecto" />
                      </children>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

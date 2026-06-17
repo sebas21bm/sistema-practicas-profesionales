@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import sistemapracticasprofesionales.modelo.pojo.OrganizacionVinculada;
 import sistemapracticasprofesionales.modelo.pojo.ProyectoPracticas;
 import sistemapracticasprofesionales.modelo.pojo.ResponsableProyecto;
+import sistemapracticasprofesionales.modelo.pojo.Sesion;
 import sistemapracticasprofesionales.utilidades.Utilidades;
 
 /**
@@ -53,8 +54,6 @@ public class FXMLInfoOrganizacionVinculadaController implements Initializable {
     private TableColumn<ResponsableProyecto, String> col_nombreCompletoResponsable;
     
     private OrganizacionVinculada organizacionDetalles;
-    @FXML
-    private Button btn_detallesProyecto;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -94,56 +93,75 @@ public class FXMLInfoOrganizacionVinculadaController implements Initializable {
 
         tv_responsablesProyecto.setItems(FXCollections.observableArrayList(
                 organizacionVinculada.getResponsables()));
-        
-        if (organizacionVinculada.getResponsables().isEmpty()) {
-            btn_detallesProyecto.setVisible(false);
-        }
-    }
-
-    @FXML
-    private void clicGenerarReporteIndicadores(ActionEvent event) {
-    }
-
-    @FXML
-    private void clicRegistrarProyecto(ActionEvent event) {
-    }
-
-    @FXML
-    private void clicVerListadoProyecto(ActionEvent event) {
-    }
-
-    @FXML
-    private void clicAsignarProyecto(ActionEvent event) {
-    }
-
-    @FXML
-    private void clicGenerarOficioDeAsignacion(ActionEvent event) {
-    }
-
-    @FXML
-    private void clicRegistrarOrganizacionVinculada(ActionEvent event) {
-    }
-
-    @FXML
-    private void clicVerListadoOrganizacionesVinculadas(ActionEvent event) {
-    }
-
-    @FXML
-    private void clicVerListadoEstudiantes(ActionEvent event) {
-    }
-
-    @FXML
-    private void clicCerrarSesion(ActionEvent event) {
-    }
-
-    @FXML
-    private void clicVerDetallesProyecto(ActionEvent event) {
     }
 
     @FXML
     private void clicActualizar(ActionEvent event) {
+        cargarVistaActualizacion();
+    }
+    
+    private void cargarVistaActualizacion() {
+        try {
+            FXMLLoader cargador = Utilidades.cargarFXML("FXMLActualizarOrganizacionVinculada");
+            Parent vista = cargador.load();
+            FXMLActualizarOrganizacionVinculadaController controlador = cargador.getController();
+            controlador.inicializarInformacionOrganizacion(organizacionDetalles);
+            Scene escena = new Scene(vista);
+
+            Stage escenario = (Stage) lb_correo.getScene().getWindow();
+            escenario.setScene(escena);
+            escenario.setTitle("Actualizar organizacion vinculada");
+            escenario.setResizable(false);
+            escenario.centerOnScreen();
+            escenario.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
+    @FXML
+    private void clicRegistrarProyecto(ActionEvent event) {
+        cambiarVentana("FXMLRegistroProyecto", 
+                "Registro de proyecto");
+    }
+
+    @FXML
+    private void clicVerListadoProyecto(ActionEvent event) {
+        cambiarVentana("FXMLListadoProyectos", 
+                "Listado de proyectos");
+    }
+
+    @FXML
+    private void clicAsignarProyecto(ActionEvent event) {
+        cambiarVentana("FXMLAsignacionProyecto", 
+                "Asignacion de proyectos");
+    }
+
+    @FXML
+    private void clicVerAsignaciones(ActionEvent event) {
+        cambiarVentana("FXMLListadoAsignaciones",
+                "Listado de asignaciones");
+    }
+
+    @FXML
+    private void clicRegistrarOrganizacionVinculada(ActionEvent event) {
+        cambiarVentana("FXMLRegistroOrganizacionVinculada",
+                "Registro de organización vinculada");
+    }
+
+    @FXML
+    private void clicVerListadoOrganizacionesVinculadas(ActionEvent event) {
+        cambiarVentana("FXMLListadoOrganizacionesVinculadas",
+                "Listado de organizaciones vinculadas");
+    }
+
+
+    @FXML
+    private void clicCerrarSesion(ActionEvent event) {
+        Sesion.cerrarSesion();
+        cambiarVentana("FXMLInicioSesion", "Inicio de sesión");
+    }
+    
     @FXML
     private void clicRegresar(ActionEvent event) {
         cambiarVentana("FXMLListadoOrganizacionesVinculadas", 
@@ -160,10 +178,12 @@ public class FXMLInfoOrganizacionVinculadaController implements Initializable {
             Stage escenario = (Stage) lb_correo.getScene().getWindow();
             escenario.setScene(escena);
             escenario.setTitle(titulo);
+            escenario.setResizable(false);
             escenario.centerOnScreen();
             escenario.show();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
+
 }

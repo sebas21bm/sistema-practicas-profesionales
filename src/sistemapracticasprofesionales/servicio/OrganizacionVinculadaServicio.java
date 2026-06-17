@@ -47,6 +47,22 @@ public class OrganizacionVinculadaServicio {
         return OrganizacionVinculadaDAO.obtenerOrganizacionCompleta(numeroOrganizacion);
     }
     
+    public static RespuestaOperacion actualizarOrganizacionVinculada(
+            OrganizacionVinculada organizacionVinculada) 
+            throws SQLException, NullPointerException{
+        
+        RespuestaOperacion respuesta = validarOrganizacionVinculada(
+                organizacionVinculada);
+        
+        if (respuesta.getError()){
+            return respuesta;
+        }
+        
+        return OrganizacionVinculadaDAO.actualizarOrganizacionVinculada(
+                organizacionVinculada);
+        
+    }
+    
     private static RespuestaOperacion validarOrganizacionVinculada(
             OrganizacionVinculada organizacionVinculada){
         
@@ -116,9 +132,8 @@ public class OrganizacionVinculadaServicio {
         String codigoPostal = organizacionVinculada.getCodigoPostal();
         if (codigoPostal.isEmpty()
                 || !codigoPostal.matches(REGEX_CODIGO_POSTAL)) {
-            agregarError(errores, "El registro del código postal es obligatorio, "
-                    + "no puede exceder de los 5 caracteres y debe cumplir "
-                    + "el formato de solo números.");
+            agregarError(errores, "El registro del código postal es obligatorio "
+                    + "y debe contener exactamente 5 dígitos.");
         }
 
         String telefono = organizacionVinculada.getTelefono();

@@ -76,14 +76,16 @@ public class FXMLListadoOrganizacionesVinculadasController implements Initializa
         } catch (SQLException ex) {
             Utilidades.mostrarAlertaSimple(
                     "Error al consultar",
-                    ex.getMessage(),
+                    "No se pueden mostrar las organizaciones. "
+                    + "Error al recuperar sus registros. "
+                    + "Intente nuevamente",
                     Alert.AlertType.ERROR);
         } catch (NullPointerException ex) {
             Utilidades.mostrarAlertaSimple(
                     "Error al cargar organizaciones",
                     "Lo sentimos, la información de las organizaciones "
                     + "no puede ser cargada en este momento.",
-                    Alert.AlertType.WARNING);
+                    Alert.AlertType.ERROR);
         }
         
     }
@@ -105,6 +107,11 @@ public class FXMLListadoOrganizacionesVinculadasController implements Initializa
                 tv_organizacionesVinculadas.getSelectionModel().getSelectedItem();
         
         if (organizacionSeleccionada == null) {
+            Utilidades.mostrarAlertaSimple(
+                    "Organización no seleccionada",
+                    "Debes seleccionar una organización vinculada para ver sus detalles.",
+                    Alert.AlertType.WARNING
+            );
             return;
         }
         
@@ -122,7 +129,13 @@ public class FXMLListadoOrganizacionesVinculadasController implements Initializa
                 cargarVistaDetalles(organizacionCompleta);
             }
         } catch (SQLException | NullPointerException ex) {
-            Utilidades.mostrarAlertaSimple("Error", ex.getMessage(), Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple(
+                    "Error al recuperar información",
+                    "No se puede ver la información de la organización. "
+                    + "Error al recuperar el registro de la organización vinculada. "
+                    + "Intente nuevamente",
+                    Alert.AlertType.ERROR
+            );
         }
     }
     
@@ -137,6 +150,7 @@ public class FXMLListadoOrganizacionesVinculadasController implements Initializa
             Stage escenario = (Stage) txt_nombreBusqueda.getScene().getWindow();
             escenario.setScene(escena);
             escenario.setTitle("Información de organizacion vinculada");
+            escenario.setResizable(false);
             escenario.centerOnScreen();
             escenario.show();
         } catch (IOException ex) {
@@ -200,6 +214,7 @@ public class FXMLListadoOrganizacionesVinculadasController implements Initializa
             Stage escenario = (Stage) txt_nombreBusqueda.getScene().getWindow();
             escenario.setScene(escena);
             escenario.setTitle(titulo);
+            escenario.setResizable(false);
             escenario.centerOnScreen();
             escenario.show();
         } catch (IOException ex) {

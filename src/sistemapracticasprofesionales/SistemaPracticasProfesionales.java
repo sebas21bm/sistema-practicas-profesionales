@@ -15,13 +15,14 @@ import sistemapracticasprofesionales.utilidades.Utilidades;
 public class SistemaPracticasProfesionales extends Application {
     
     @Override
-    public void start(Stage primaryStage) throws IOException{
+    public void start(Stage escenarioPrincipal) throws IOException{
         FXMLLoader cargador = Utilidades.cargarFXML("FXMLInicioSesion");
         Parent raiz = cargador.load();
         Scene escena = new Scene(raiz);
-        primaryStage.setScene(escena);
-        primaryStage.setTitle("Inicio de sesión");
-        primaryStage.show();
+        escenarioPrincipal.setScene(escena);
+        escenarioPrincipal.setTitle("Inicio de sesión");
+        escenarioPrincipal.setResizable(false);
+        escenarioPrincipal.show();
     }
     
     public static void main(String[] args) {
