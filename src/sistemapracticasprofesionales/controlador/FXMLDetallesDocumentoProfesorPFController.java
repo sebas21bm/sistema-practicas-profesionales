@@ -11,29 +11,26 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
  *
  * @author macol
  */
-public class FXMLFormatoDocumentoController implements Initializable {
+public class FXMLDetallesDocumentoProfesorPFController implements Initializable {
 
+    @FXML
+    private Label lbl_documento;
+    @FXML
+    private VBox vb_calificacion;
+    @FXML
+    private TextField txt_calificacion;
     @FXML
     private ComboBox<?> cb_documentos;
     @FXML
     private TextField txt_archivo;
-    @FXML
-    private Label lbl_error;
-    @FXML
-    private TableView<?> tv_formatos;
-    @FXML
-    private TableColumn<?, ?> col_tipoDocumento;
-    @FXML
-    private TableColumn<?, ?> col_estadoFormato;
 
     /**
      * Initializes the controller class.
@@ -48,9 +45,8 @@ public class FXMLFormatoDocumentoController implements Initializable {
     }
 
     @FXML
-    private void clicSubirFormato(ActionEvent event) {
+    private void clicGuardarCambios(ActionEvent event) {
     }
-
 
     @FXML
     private void clicRegresar(ActionEvent event) {

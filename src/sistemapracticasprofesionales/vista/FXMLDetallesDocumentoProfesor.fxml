@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="507.0" prefWidth="740.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLDetallesDocumentoProfesorController">
+   <children>
+      <VBox layoutX="50.0" layoutY="72.0" prefHeight="364.0" prefWidth="640.0" spacing="30.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+      
+                  <Label text="Documento:" textFill="#555555">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl_documento" textFill="#555555">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+
+            <Label prefHeight="24.0" prefWidth="640.0" style="-fx-background-color: #c7c7c7;" text="Información">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="4.0" />
+               </padding>
+            </Label>
+
+            <HBox prefHeight="194.0" prefWidth="640.0" spacing="45.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="300.0" spacing="15.0">
+                     <children>
+                        <Label text="Estado" textFill="#555555">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+
+                        <ComboBox fx:id="cb_estado" prefHeight="28.0" prefWidth="220.0" promptText="validado/rechazado" />
+                     </children>
+                  </HBox>
+
+                  <VBox fx:id="vb_calificacion" prefHeight="45.0" prefWidth="280.0">
+                     <children>
+                        <VBox prefHeight="104.0" prefWidth="280.0" spacing="10.0">
+                           <children>
+                              <Label text="Comentarios" textFill="#555555">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+      
+                              <TextArea fx:id="ta_comentarios" prefHeight="65.0" prefWidth="300.0" promptText="comentarios del profesor" wrapText="true" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+
+            <HBox prefHeight="100.0" prefWidth="640.0" spacing="45.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="303.0" spacing="25.0">
+                     <children>
+                        <Label text="Calificación" textFill="#555555">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+
+                        <TextField fx:id="txt_calificacion" prefHeight="43.0" prefWidth="160.0" promptText="calificación" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="640.0" spacing="35.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#clicVerDocumento" prefHeight="25.0" prefWidth="112.0" text="Ver documento" />
+
+                  <Button mnemonicParsing="false" onAction="#clicGuardarCambios" prefHeight="25.0" prefWidth="120.0" text="Guardar cambios" />
+
+                  <Button mnemonicParsing="false" onAction="#clicRegresar" prefHeight="25.0" prefWidth="97.0" text="Regresar" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <MenuBar layoutY="1.0" prefHeight="27.0" prefWidth="740.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Expedientes">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicConsultarExpedientes" text="Consultar expedientes" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Formatos">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicSubirFormatos" text="Subir formatos" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Fechas de Entrega">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicFechasEntrega" text="Fechas de entrega" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>

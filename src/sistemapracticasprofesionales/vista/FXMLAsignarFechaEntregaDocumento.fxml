@@ -41,7 +41,6 @@
             <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="840.0" spacing="25.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#clicAsignarFecha" prefHeight="31.0" prefWidth="140.0" text="Asignar fecha" />
-                  <Button mnemonicParsing="false" onAction="#clicActualizar" prefHeight="31.0" prefWidth="120.0" text="Actualizar" />
                   <Button mnemonicParsing="false" onAction="#clicRegresar" prefHeight="31.0" prefWidth="110.0" text="Regresar" />
                </children>
             </HBox>
@@ -67,5 +66,24 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </VBox>
+      <MenuBar layoutX="-7.0" layoutY="1.0" prefHeight="27.0" prefWidth="909.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Expedientes">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicConsultarExpedientes" text="Consultar expedientes" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Formatos">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicSubirFormatos" text="Subir formatos" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Fechas de Entrega">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicFechasEntrega" text="Fechas de entrega" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
    </children>
 </AnchorPane>

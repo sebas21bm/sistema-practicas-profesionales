@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="507.0" prefWidth="740.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLDetallesDocumentoProfesorPFController">
+   <children>
+      <VBox layoutX="25.0" layoutY="67.0" prefHeight="374.0" prefWidth="655.0" spacing="18.0">
+         <children>
+            <HBox prefHeight="35.0" prefWidth="655.0">
+               <children>
+                  <Label text="Documento:" textFill="#555555">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+
+                  <Label fx:id="lbl_documento" text=" Evaluación del profesor" textFill="#555555">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+
+            <Label prefHeight="24.0" prefWidth="655.0" style="-fx-background-color: #c7c7c7;" text="Información">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="4.0" />
+               </padding>
+            </Label>
+            <Region prefHeight="25.0" prefWidth="655.0" />
+
+            <HBox prefHeight="140.0" prefWidth="655.0" spacing="35.0">
+               <children>
+                  <VBox fx:id="vb_calificacion" alignment="CENTER_LEFT" prefHeight="120.0" prefWidth="270.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="270.0" spacing="25.0">
+                           <children>
+                              <Label text="Calificación" textFill="#555555">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+
+                              <TextField fx:id="txt_calificacion" prefHeight="43.0" prefWidth="135.0" promptText="calificación" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+
+                  <VBox alignment="CENTER_LEFT" prefHeight="120.0" prefWidth="335.0" spacing="20.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="335.0" spacing="15.0">
+                           <children>
+                              <Label prefWidth="65.0" text="Documento:" />
+
+                              <ComboBox fx:id="cb_documentos" prefHeight="28.0" prefWidth="195.0" promptText="Seleccione un documento" />
+                           </children>
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="335.0" spacing="15.0">
+                           <children>
+                              <Label prefWidth="65.0" text="Archivo" />
+
+                              <TextField fx:id="txt_archivo" editable="false" prefHeight="28.0" prefWidth="175.0" promptText="Ningún archivo seleccionado" />
+
+                              <Button mnemonicParsing="false" onAction="#clicSeleccionarArchivo" prefHeight="28.0" prefWidth="85.0" text="Seleccionar" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="655.0" spacing="75.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#clicGuardarCambios" prefHeight="25.0" prefWidth="120.0" text="Guardar cambios" />
+
+                  <Button mnemonicParsing="false" onAction="#clicRegresar" prefHeight="25.0" prefWidth="97.0" text="Regresar" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <MenuBar layoutY="1.0" prefHeight="27.0" prefWidth="741.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Expedientes">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicConsultarExpedientes" text="Consultar expedientes" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Formatos">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicSubirFormatos" text="Subir formatos" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Fechas de Entrega">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicFechasEntrega" text="Fechas de entrega" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
