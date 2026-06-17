@@ -110,6 +110,7 @@ public class FXMLInicioAdministradorController implements Initializable {
                     (Stage) lb_nombre.getScene().getWindow();
             escenario.setScene(escena);
             escenario.setTitle(titulo);
+            escenario.setResizable(false);
             escenario.centerOnScreen();
             escenario.show();
         } catch (IOException ex) {

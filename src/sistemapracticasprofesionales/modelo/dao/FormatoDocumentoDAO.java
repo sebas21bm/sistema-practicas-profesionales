@@ -10,6 +10,7 @@ import sistemapracticasprofesionales.modelo.ConexionBD;
 import sistemapracticasprofesionales.modelo.pojo.FormatoDocumento;
 import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
 import sistemapracticasprofesionales.modelo.pojo.Rol;
+import sistemapracticasprofesionales.modelo.pojo.Sesion;
 import sistemapracticasprofesionales.utilidades.Constantes;
 
 /*
@@ -24,8 +25,8 @@ public class FormatoDocumentoDAO {
             throws SQLException, NullPointerException {
         RespuestaOperacion respuesta = new RespuestaOperacion();
 
-        try (Connection conexionBD =
-                ConexionBD.crearParaRol(Rol.Profesor)) {
+        try (Connection conexionBD = ConexionBD.crearParaRol(
+                Sesion.getUsuarioActual().getRolUsuario())) {
             if (conexionBD != null) {
                 String consulta =
                         "{CALL subir_formato_documento(?, ?, ?)}";
@@ -44,15 +45,16 @@ public class FormatoDocumentoDAO {
             }
         }
 
-        throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+        throw new SQLException("No fue posible guardar "
+                + "el formato en el sistema. Intente nuevamente");
     }
 
     public static ArrayList<FormatoDocumento> obtenerFormatosDocumento()
             throws SQLException, NullPointerException {
         ArrayList<FormatoDocumento> formatosDocumento = new ArrayList<>();
 
-        try (Connection conexionBD =
-                ConexionBD.crearParaRol(Rol.Profesor)) {
+        try (Connection conexionBD = ConexionBD.crearParaRol(
+                Sesion.getUsuarioActual().getRolUsuario())) {
             if (conexionBD != null) {
                 String consulta =
                         "SELECT id_documento, tipo_documento, valor, "
@@ -72,15 +74,16 @@ public class FormatoDocumentoDAO {
             }
         }
 
-        throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+        throw new SQLException("No es posible mostrar los documentos. "
+                + "Error al recuperar la información. Intente de nuevo");
     }
 
     public static FormatoDocumento obtenerFormatoDocumentoPorId(
             int idDocumento) throws SQLException, NullPointerException {
         FormatoDocumento formatoDocumento = null;
 
-        try (Connection conexionBD =
-                ConexionBD.crearParaRol(Rol.Profesor)) {
+        try (Connection conexionBD = ConexionBD.crearParaRol(
+                Sesion.getUsuarioActual().getRolUsuario())) {
             if (conexionBD != null) {
                 String consulta =
                         "SELECT id_documento, tipo_documento, valor, "

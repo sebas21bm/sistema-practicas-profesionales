@@ -1,8 +1,17 @@
 package sistemapracticasprofesionales.controlador;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import sistemapracticasprofesionales.utilidades.Utilidades;
 
 /**
  * Autor: Sebastián Barrera Mora
@@ -11,9 +20,50 @@ import javafx.fxml.Initializable;
  */
 public class FXMLInicioProfesorController implements Initializable {
 
+    @FXML
+    private Label lb_nombre;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+
+    @FXML
+    private void clicSubirFormatos(ActionEvent event) {
+        cambiarVentana("FXMLFormatosProfesor", "Subir formatos");
+        
+    }
+
+    @FXML
+    private void clicFechasEntrega(ActionEvent event) {
+        cambiarVentana("FXMLAsignarFechaEntrega", "Fechas de Entrega");
+    }
+
+    @FXML
+    private void clicCerrarSesion(ActionEvent event) {
+        cambiarVentana("FXMLInicioSesion", "Inicio de sesión");
+    }
     
+    private void cambiarVentana(String nombreVista, String titulo) {
+        try {
+            FXMLLoader cargador = Utilidades.cargarFXML(nombreVista);
+            Parent vista = cargador.load();
+            Scene escena = new Scene(vista);
+
+            Stage escenario =
+                    (Stage) lb_nombre.getScene().getWindow();
+            escenario.setScene(escena);
+            escenario.setTitle(titulo);
+            escenario.setResizable(false);
+            escenario.centerOnScreen();
+            escenario.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void clicConsultarExpedientesEstudiantes(ActionEvent event) {
+    }
 }

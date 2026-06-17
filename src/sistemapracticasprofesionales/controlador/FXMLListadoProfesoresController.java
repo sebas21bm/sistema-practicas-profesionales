@@ -286,10 +286,10 @@ public class FXMLListadoProfesoresController implements Initializable {
             Parent vista = cargador.load();
             Scene escena = new Scene(vista);
 
-            Stage escenario =
-                    (Stage) tv_profesores.getScene().getWindow();
+            Stage escenario = (Stage) tv_profesores.getScene().getWindow();
             escenario.setScene(escena);
             escenario.setTitle(titulo);
+            escenario.setResizable(false);
             escenario.centerOnScreen();
             escenario.show();
         } catch (IOException ex) {
