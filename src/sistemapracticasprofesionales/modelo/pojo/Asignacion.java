@@ -26,6 +26,7 @@ public class Asignacion {
     private String nombreEstudiante;
     private String matricula;
     private String correoEstudiante;
+    private String nombreCoordinador;
 
     public int getNumProyecto() {
         return numProyecto;
@@ -146,4 +147,13 @@ public class Asignacion {
     public void setCorreoEstudiante(String correoEstudiante) {
         this.correoEstudiante = correoEstudiante;
     }
+
+    public String getNombreCoordinador() {
+        return nombreCoordinador;
+    }
+
+    public void setNombreCoordinador(String nombreCoordinador) {
+        this.nombreCoordinador = nombreCoordinador;
+    }
+    
 }

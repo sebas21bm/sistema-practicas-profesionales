@@ -290,7 +290,9 @@ public class FXMLInfoDocumentoController implements Initializable {
         } catch (SQLException ex) {
             Utilidades.mostrarAlertaSimple(
                     "Error al guardar archivo",
-                    ex.getMessage(),
+                    "No se pudo guardar el archivo en el sistema. "
+                    + "Hubo un problema con la subida. "
+                    + "Intente con otro archivo o más tarde.",
                     Alert.AlertType.ERROR);
         } catch (IOException | SecurityException ex) {
             Utilidades.mostrarAlertaSimple(

@@ -119,10 +119,11 @@ public class AsignacionDAO {
             }
             
             String consulta = "SELECT num_proyecto, id_estudiante, "
-                    + "nombre_proyecto, descripcion_proyecto, "
-                    + "fecha_finalizacion, organizacion_vinculada, "
-                    + "nombre_responsable, correo_responsable, "
-                    + "nombre_estudiante, matricula, correo_estudiante "
+                    + "id_personal_academico, nombre_proyecto, "
+                    + "descripcion_proyecto, fecha_finalizacion, "
+                    + "organizacion_vinculada, nombre_responsable, "
+                    + "correo_responsable, nombre_estudiante, matricula, "
+                    + "correo_estudiante, nombre_coordinador "
                     + "FROM vista_detalles_asignacion "
                     + "WHERE num_proyecto = ? AND id_estudiante = ?;";
             PreparedStatement sentenciaBD =
@@ -176,12 +177,14 @@ public class AsignacionDAO {
     }
     
     private static Asignacion serializarDetallesAsignacion(
-            ResultSet resultado) throws SQLException {
-        
+        ResultSet resultado) throws SQLException {
+    
         Asignacion asignacion = new Asignacion();
-        
+
         asignacion.setNumProyecto(resultado.getInt("num_proyecto"));
         asignacion.setIdEstudiante(resultado.getInt("id_estudiante"));
+        asignacion.setIdPersonalAcademico(
+                resultado.getInt("id_personal_academico"));
         asignacion.setNombreProyecto(resultado.getString("nombre_proyecto"));
         asignacion.setDescripcionProyecto(
                 resultado.getString("descripcion_proyecto"));
@@ -198,7 +201,52 @@ public class AsignacionDAO {
         asignacion.setMatricula(resultado.getString("matricula"));
         asignacion.setCorreoEstudiante(
                 resultado.getString("correo_estudiante"));
-        
+        asignacion.setNombreCoordinador(
+                resultado.getString("nombre_coordinador"));
+
         return asignacion;
     }
+    
+    public static ArrayList<Asignacion> obtenerAsignacionesPeriodoActual()
+        throws SQLException, NullPointerException {
+
+        ArrayList<Asignacion> asignaciones = new ArrayList<>();
+
+        try (Connection conexionBD = ConexionBD.crearParaRol(
+                Sesion.getUsuarioActual().getRolUsuario())) {
+
+            if (conexionBD == null) {
+                throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+            }
+
+            String consulta = "SELECT num_proyecto, id_estudiante, estado, "
+                    + "nombre_proyecto, nombre_estudiante "
+                    + "FROM vista_listado_asignaciones_periodo_actual;";
+            PreparedStatement sentenciaBD =
+                    conexionBD.prepareStatement(consulta);
+            ResultSet resultado = sentenciaBD.executeQuery();
+
+            while (resultado.next()) {
+                asignaciones.add(serializarAsignacionListado(resultado));
+            }
+        }
+
+        return asignaciones;
+    }
+    
+    private static Asignacion serializarAsignacionListado(
+        ResultSet resultado) throws SQLException {
+    
+        Asignacion asignacion = new Asignacion();
+
+        asignacion.setNumProyecto(resultado.getInt("num_proyecto"));
+        asignacion.setIdEstudiante(resultado.getInt("id_estudiante"));
+        asignacion.setEstado(resultado.getString("estado"));
+        asignacion.setNombreProyecto(resultado.getString("nombre_proyecto"));
+        asignacion.setNombreEstudiante(
+                resultado.getString("nombre_estudiante"));
+
+        return asignacion;
+    }
+        
 }

@@ -57,10 +57,21 @@ public class AsignacionServicio {
                 estudiante.getIdEstudiante());
     }
     
+    public static ArrayList<Asignacion> recuperarAsignacionesPeriodoActual()
+        throws SQLException, NullPointerException {
+    
+    return AsignacionDAO.obtenerAsignacionesPeriodoActual();
+}
+
     public static Asignacion recuperarDetallesAsignacion(
             int numeroProyecto, int idEstudiante)
             throws SQLException, NullPointerException {
-        
+
+        if (numeroProyecto <= 0 || idEstudiante <= 0) {
+            throw new IllegalArgumentException(
+                    "No se identificó la asignación seleccionada.");
+        }
+
         return AsignacionDAO.obtenerDetallesAsignacion(
                 numeroProyecto, idEstudiante);
     }
