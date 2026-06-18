@@ -37,7 +37,7 @@ public class FXMLInicioProfesorController implements Initializable {
 
     @FXML
     private void clicFechasEntrega(ActionEvent event) {
-        cambiarVentana("FXMLAsignarFechaEntrega", "Fechas de Entrega");
+        cambiarVentana("FXMLAsignarFechaEntregaDocumento", "Fechas de Entrega");
     }
 
     @FXML
