@@ -17,6 +17,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sistemapracticasprofesionales.excepciones.UsuarioNoEncontradoException;
+import sistemapracticasprofesionales.excepciones.UsuarioInactivoException;
 import sistemapracticasprofesionales.modelo.dao.AutenticacionDAO;
 import sistemapracticasprofesionales.modelo.pojo.Rol;
 import sistemapracticasprofesionales.modelo.pojo.Sesion;
@@ -89,9 +90,18 @@ public class FXMLInicioSesionController implements Initializable {
             irPantallaPrincipal();
             
         } catch (SQLException | NoSuchAlgorithmException | IOException ex) {
-            Utilidades.mostrarAlertaSimple("ERROR", ex.getMessage(), Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple("ERROR", 
+                    ex.getMessage(), 
+                    Alert.AlertType.ERROR);
+        } catch (UsuarioInactivoException ex) {
+            Utilidades.mostrarAlertaSimple(
+                "Usuario inactivo",
+                ex.getMessage(),
+                Alert.AlertType.WARNING);
         } catch (UsuarioNoEncontradoException ex) {
-            Utilidades.mostrarAlertaSimple("Error", ex.getMessage(), Alert.AlertType.WARNING);
+            Utilidades.mostrarAlertaSimple("Error", 
+                    ex.getMessage(), 
+                    Alert.AlertType.WARNING);
         }
     }
     

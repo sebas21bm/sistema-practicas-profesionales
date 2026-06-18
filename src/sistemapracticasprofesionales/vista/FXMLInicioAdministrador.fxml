@@ -44,8 +44,8 @@
                      </font>
                   </Label>
                   <Separator prefWidth="200.0" />
-                  <Button mnemonicParsing="false" onAction="#clicRegistrarCoordinador" prefHeight="31.0" prefWidth="150.0" text="Registrar" />
-                  <Button mnemonicParsing="false" onAction="#clicVerListadoCoordinadores" prefWidth="150.0" text="Ver listado" />
+                  <Button fx:id="btnRegistrarCoordinador" mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" text="Registrar" />
+                  <Button fx:id="btnListadoCoordinadores" mnemonicParsing="false" prefWidth="150.0" text="Ver listado" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="509.0" prefWidth="277.0" spacing="15.0">

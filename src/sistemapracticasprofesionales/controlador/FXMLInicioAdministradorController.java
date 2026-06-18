@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -24,9 +25,15 @@ public class FXMLInicioAdministradorController implements Initializable {
 
     @FXML
     private Label lb_nombre;
+    @FXML
+    private Button btnRegistrarCoordinador;
+    @FXML
+    private Button btnListadoCoordinadores;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        btnRegistrarCoordinador.setDisable(true);
+        btnListadoCoordinadores.setDisable(true);
         cargarNombreUsuario();
     }    
     
@@ -40,13 +47,11 @@ public class FXMLInicioAdministradorController implements Initializable {
         }
     }
 
-    @FXML
     private void clicRegistrarCoordinador(ActionEvent event) {
         cambiarVentana("FXMLFormularioCoordinador",
                 "Registro de coordinador");
     }
 
-    @FXML
     private void clicVerListadoCoordinadores(ActionEvent event) {
         cambiarVentana("FXMLListadoCoordinadores",
                 "Listado de coordinadores");

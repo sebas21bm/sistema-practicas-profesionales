@@ -277,7 +277,7 @@ public class FXMLListadoProfesoresController implements Initializable {
 
     @FXML
     private void clicRegresar(ActionEvent event) {
-        cambiarVentana("FXMLMenuAdministrador", "Inicio administrador");
+        cambiarVentana("FXMLInicioAdministrador", "Inicio administrador");
     }
 
     private void cambiarVentana(String nombreVista, String titulo) {
