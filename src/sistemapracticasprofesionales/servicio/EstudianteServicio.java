@@ -53,7 +53,8 @@ public class EstudianteServicio {
     private static RespuestaOperacion validarEstudiante(
             Estudiante estudiante) throws SQLException, NullPointerException {
         RespuestaOperacion respuesta = new RespuestaOperacion();
-        StringBuilder errores = new StringBuilder();
+        StringBuilder errores = new StringBuilder("No es posible "
+                + "continuar con el registro");
 
         if (estudiante == null) {
             respuesta.setError(true);

@@ -177,12 +177,7 @@ public class FXMLDetallesDocumentoProfesorController
             }
 
             guardarArchivoEnEquipo(documentoArchivo);
-        } catch (SQLException ex) {
-            Utilidades.mostrarAlertaSimple(
-                    "Error al consultar archivo",
-                    ex.getMessage(),
-                    Alert.AlertType.ERROR);
-        } catch (IOException | SecurityException ex) {
+        } catch (SQLException |IOException | SecurityException ex) {
             Utilidades.mostrarAlertaSimple(
                     "Error al descargar archivo",
                     "No fue posible descargar el documento seleccionado.",

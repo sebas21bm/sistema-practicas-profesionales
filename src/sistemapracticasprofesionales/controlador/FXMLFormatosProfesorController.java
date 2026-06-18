@@ -257,12 +257,7 @@ public class FXMLFormatosProfesorController implements Initializable {
                         respuesta.getMensaje(),
                         Alert.AlertType.WARNING);
             }
-        } catch (SQLException ex) {
-            Utilidades.mostrarAlertaSimple(
-                    "Error al guardar",
-                    ex.getMessage(),
-                    Alert.AlertType.ERROR);
-        } catch (NullPointerException ex) {
+        } catch (SQLException | NullPointerException ex) {
             Utilidades.mostrarAlertaSimple(
                     "Error al guardar",
                     "No fue posible guardar el formato en el sistema. "

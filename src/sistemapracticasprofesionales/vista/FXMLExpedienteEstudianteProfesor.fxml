@@ -60,18 +60,6 @@
                             </font>
                         </Label>
 
-                        <Label layoutX="350.0" layoutY="0.0" text="Porcentaje obtenido:" textFill="black">
-                            <font>
-                                <Font name="System Bold Italic" size="16.0" />
-                            </font>
-                        </Label>
-
-                        <Label fx:id="lbl_porcentajeDocumentosIniciales" layoutX="540.0" layoutY="0.0" textFill="black">
-                            <font>
-                                <Font name="System Bold Italic" size="16.0" />
-                            </font>
-                        </Label>
-
                         <TableView fx:id="tv_documentosIniciales" focusTraversable="false" layoutX="0.0" layoutY="35.0" prefHeight="210.0" prefWidth="800.0">
                             <columns>
                                 <TableColumn fx:id="col_documentoInicial" prefWidth="400.0" text="Documento" />

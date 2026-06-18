@@ -16,7 +16,8 @@ public class FormatoDocumentoServicio {
 
     private static final String EXTENSION_PDF = ".pdf";
     private static final String EXTENSION_DOCX = ".docx";
-
+    private static final int TAMANIO_MAXIMO_ARCHIVO = 10 * 1024 * 1024;
+    
     public static RespuestaOperacion subirFormatoDocumento(
             FormatoDocumento formatoDocumento)
             throws SQLException, NullPointerException {
@@ -52,7 +53,7 @@ public class FormatoDocumentoServicio {
     private static RespuestaOperacion validarFormatoDocumento(
             FormatoDocumento formatoDocumento) {
         RespuestaOperacion respuesta = new RespuestaOperacion();
-        StringBuilder errores = new StringBuilder();
+        StringBuilder errores = new StringBuilder("");
 
         if (formatoDocumento == null) {
             respuesta.setError(true);
@@ -89,9 +90,14 @@ public class FormatoDocumentoServicio {
         }
 
         if (formatoDocumento.getArchivo() == null
-                || formatoDocumento.getArchivo().length == 0) {
+                || formatoDocumento.getArchivo().length <= 0) {
             agregarError(errores,
                     "El archivo seleccionado no contiene información.");
+        }
+        if (formatoDocumento.getArchivo().length
+                > TAMANIO_MAXIMO_ARCHIVO) {
+            agregarError(errores,
+                    "El archivo superar los 10 MB.");
         }
     }
 

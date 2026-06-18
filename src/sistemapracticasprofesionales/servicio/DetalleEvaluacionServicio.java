@@ -119,7 +119,8 @@ public class DetalleEvaluacionServicio {
     private static RespuestaOperacion validarDatosDocumentoInicial(
             DetalleEvaluacion detalleEvaluacion) {
         RespuestaOperacion respuesta = new RespuestaOperacion();
-        StringBuilder errores = new StringBuilder();
+        StringBuilder errores = new StringBuilder("No es posible "
+                + "guardar la validación.");
 
         if (detalleEvaluacion == null) {
             respuesta.setError(true);
@@ -147,8 +148,8 @@ public class DetalleEvaluacionServicio {
         if (ESTADO_RECHAZADO.equals(detalleEvaluacion.getEstado())
                 && estaVacio(detalleEvaluacion.getObservaciones())) {
             agregarError(errores,
-                    "Debe ingresar comentarios al rechazar "
-                    + "el documento.");
+                    "Los comentarios son obligatorios al seleccionar el estado "
+                            + "“Rechazado”, escríbalos para continuar”");
         }
 
         validarLongitudObservaciones(detalleEvaluacion, errores);

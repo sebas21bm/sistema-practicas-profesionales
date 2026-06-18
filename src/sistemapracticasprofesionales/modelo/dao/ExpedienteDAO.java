@@ -132,7 +132,7 @@ public class ExpedienteDAO {
 
                 respuesta.setError(false);
                 respuesta.setMensaje(
-                        "La calificación final se calculó "
+                        "La calificación final se ha generado "
                         + "correctamente.");
                 return respuesta;
             }

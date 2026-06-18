@@ -245,10 +245,7 @@ public class FXMLExpedienteEstudianteProfesorController
 
             mostrarVista(vista, "Detalles del documento");
         } catch (IOException ex) {
-            Utilidades.mostrarAlertaSimple(
-                    "Error de navegación",
-                    "No fue posible abrir los detalles del documento.",
-                    Alert.AlertType.ERROR);
+            ex.printStackTrace();
         }
     }
 
@@ -268,10 +265,7 @@ public class FXMLExpedienteEstudianteProfesorController
 
             mostrarVista(vista, "Evaluación del profesor");
         } catch (IOException ex) {
-            Utilidades.mostrarAlertaSimple(
-                    "Error de navegación",
-                    "No fue posible abrir la evaluación del profesor.",
-                    Alert.AlertType.ERROR);
+            ex.printStackTrace();
         }
     }
 
