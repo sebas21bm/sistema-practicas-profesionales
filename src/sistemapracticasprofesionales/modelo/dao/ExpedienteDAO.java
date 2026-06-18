@@ -1,5 +1,6 @@
 package sistemapracticasprofesionales.modelo.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,13 +8,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import sistemapracticasprofesionales.modelo.ConexionBD;
 import sistemapracticasprofesionales.modelo.pojo.ExpedienteEstudiante;
+import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
 import sistemapracticasprofesionales.modelo.pojo.Rol;
 import sistemapracticasprofesionales.utilidades.Constantes;
 
 /*
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 17/06/2026
- * Descripción: DAO encargado de consultar expedientes de estudiantes.
+ * Descripción: DAO encargado de consultar y actualizar expedientes de
+ *              estudiantes.
  */
 public class ExpedienteDAO {
 
@@ -73,6 +76,64 @@ public class ExpedienteDAO {
                 }
 
                 return expedientes;
+            }
+        }
+
+        throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+    }
+
+    public static ExpedienteEstudiante obtenerExpedienteEstudianteProfesorPorId(
+            int idExpediente, int idExperienciaEducativa)
+            throws SQLException, NullPointerException {
+        ExpedienteEstudiante expediente = null;
+
+        try (Connection conexionBD =
+                ConexionBD.crearParaRol(Rol.Profesor)) {
+            if (conexionBD != null) {
+                String consulta = obtenerConsultaBase()
+                        + "WHERE e.id_expediente = ? "
+                        + "AND e.id_experiencia_educativa = ?;";
+                PreparedStatement sentencia =
+                        conexionBD.prepareStatement(consulta);
+
+                sentencia.setInt(1, idExpediente);
+                sentencia.setInt(2, idExperienciaEducativa);
+
+                ResultSet resultado = sentencia.executeQuery();
+
+                if (resultado.next()) {
+                    expediente =
+                            serializarExpedienteEstudiante(resultado);
+                }
+
+                return expediente;
+            }
+        }
+
+        throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+    }
+
+    public static RespuestaOperacion calcularCalificacionExpediente(
+            int idExpediente)
+            throws SQLException, NullPointerException {
+        RespuestaOperacion respuesta = new RespuestaOperacion();
+
+        try (Connection conexionBD =
+                ConexionBD.crearParaRol(Rol.Profesor)) {
+            if (conexionBD != null) {
+                String consulta =
+                        "{CALL calcular_calificacion_expediente(?)}";
+                CallableStatement sentencia =
+                        conexionBD.prepareCall(consulta);
+
+                sentencia.setInt(1, idExpediente);
+                sentencia.execute();
+
+                respuesta.setError(false);
+                respuesta.setMensaje(
+                        "La calificación final se calculó "
+                        + "correctamente.");
+                return respuesta;
             }
         }
 

@@ -31,13 +31,14 @@ import sistemapracticasprofesionales.utilidades.Utilidades;
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 17/06/2026
  * Descripción: Controlador de la vista para validar documentos iniciales y
- *              consultar detalles de documentos del expediente.
+ *              evaluar reportes o evaluaciones del expediente.
  */
 public class FXMLDetallesDocumentoProfesorController
         implements Initializable {
 
     private static final String ESTADO_APROBADO = "Aprobado";
     private static final String ESTADO_RECHAZADO = "Rechazado";
+    private static final String CALIFICACION_RETRASO = "0.00";
     private static final int LONGITUD_MAXIMA_NOMBRE_ARCHIVO = 120;
 
     @FXML
@@ -103,11 +104,29 @@ public class FXMLDetallesDocumentoProfesorController
 
     private void configurarVistaPorTipoDocumento() {
         if (detalleEvaluacion.esDocumentoInicial()) {
-            ocultarCalificacion();
+            configurarVistaDocumentoInicial();
         } else {
-            mostrarCalificacion();
-            cb_estado.setDisable(true);
-            ta_comentarios.setEditable(false);
+            configurarVistaEvaluacionDocumento();
+        }
+    }
+
+    private void configurarVistaDocumentoInicial() {
+        ocultarCalificacion();
+        cb_estado.setDisable(false);
+        ta_comentarios.setEditable(true);
+    }
+
+    private void configurarVistaEvaluacionDocumento() {
+        mostrarCalificacion();
+        cb_estado.setDisable(false);
+        ta_comentarios.setEditable(true);
+
+        if (DetalleEvaluacionServicio.fueEntregadoConRetraso(
+                detalleEvaluacion)) {
+            txt_calificacion.setText(CALIFICACION_RETRASO);
+            txt_calificacion.setEditable(false);
+        } else {
+            txt_calificacion.setEditable(true);
         }
     }
 
@@ -174,6 +193,7 @@ public class FXMLDetallesDocumentoProfesorController
     private void guardarArchivoEnEquipo(
             DetalleEvaluacion documentoArchivo) throws IOException {
         FileChooser selectorArchivo = new FileChooser();
+
         selectorArchivo.setTitle("Descargar documento");
         selectorArchivo.setInitialFileName(
                 obtenerNombreArchivoSeguro(
@@ -220,21 +240,16 @@ public class FXMLDetallesDocumentoProfesorController
         if (detalleEvaluacion == null) {
             Utilidades.mostrarAlertaSimple(
                     "Documento no seleccionado",
-                    "No se recibió un documento para validar.",
+                    "No se recibió un documento para guardar.",
                     Alert.AlertType.WARNING);
             return;
         }
 
-        if (!detalleEvaluacion.esDocumentoInicial()) {
-            Utilidades.mostrarAlertaSimple(
-                    "Función pendiente",
-                    "La evaluación de reportes se implementará "
-                    + "en el CU-26.",
-                    Alert.AlertType.INFORMATION);
-            return;
+        if (detalleEvaluacion.esDocumentoInicial()) {
+            guardarValidacionDocumentoInicial();
+        } else {
+            guardarEvaluacionDocumento();
         }
-
-        guardarValidacionDocumentoInicial();
     }
 
     private void guardarValidacionDocumentoInicial() {
@@ -242,10 +257,7 @@ public class FXMLDetallesDocumentoProfesorController
             return;
         }
 
-        detalleEvaluacion.setEstado(
-                cb_estado.getSelectionModel().getSelectedItem());
-        detalleEvaluacion.setObservaciones(
-                ta_comentarios.getText());
+        asignarDatosComunes();
 
         try {
             RespuestaOperacion respuesta =
@@ -278,9 +290,96 @@ public class FXMLDetallesDocumentoProfesorController
         }
     }
 
+    private void guardarEvaluacionDocumento() {
+        if (!confirmarGuardado()) {
+            return;
+        }
+
+        if (!asignarDatosEvaluacionIngresados()) {
+            return;
+        }
+
+        try {
+            RespuestaOperacion respuesta =
+                    DetalleEvaluacionServicio.evaluarDocumentoExpediente(
+                            detalleEvaluacion);
+
+            if (respuesta.getError()) {
+                Utilidades.mostrarAlertaSimple(
+                        "Datos inválidos",
+                        respuesta.getMensaje(),
+                        Alert.AlertType.WARNING);
+                return;
+            }
+
+            Utilidades.mostrarAlertaSimple(
+                    "Evaluación registrada",
+                    respuesta.getMensaje(),
+                    Alert.AlertType.INFORMATION);
+            regresarAExpediente();
+        } catch (SQLException ex) {
+            Utilidades.mostrarAlertaSimple(
+                    "Error al guardar",
+                    ex.getMessage(),
+                    Alert.AlertType.ERROR);
+        } catch (NullPointerException ex) {
+            Utilidades.mostrarAlertaSimple(
+                    "Error al guardar",
+                    "No fue posible guardar la evaluación.",
+                    Alert.AlertType.ERROR);
+        }
+    }
+
+    private boolean asignarDatosEvaluacionIngresados() {
+        asignarDatosComunes();
+
+        if (DetalleEvaluacionServicio.fueEntregadoConRetraso(
+                detalleEvaluacion)) {
+            detalleEvaluacion.setCalificacion(0.0);
+            detalleEvaluacion.setPorcentajeObtenido(0.0);
+            return true;
+        }
+
+        return asignarCalificacionIngresada();
+    }
+
+    private void asignarDatosComunes() {
+        detalleEvaluacion.setEstado(
+                cb_estado.getSelectionModel().getSelectedItem());
+        detalleEvaluacion.setObservaciones(
+                ta_comentarios.getText());
+    }
+
+    private boolean asignarCalificacionIngresada() {
+        String calificacionTexto = txt_calificacion.getText();
+
+        if (calificacionTexto == null
+                || calificacionTexto.trim().isEmpty()) {
+            Utilidades.mostrarAlertaSimple(
+                    "Datos inválidos",
+                    "Debe ingresar una calificación.",
+                    Alert.AlertType.WARNING);
+            return false;
+        }
+
+        try {
+            detalleEvaluacion.setCalificacion(
+                    Double.parseDouble(
+                            calificacionTexto.trim()
+                                    .replace(",", ".")));
+            return true;
+        } catch (NumberFormatException ex) {
+            Utilidades.mostrarAlertaSimple(
+                    "Datos inválidos",
+                    "La calificación debe ser un número válido.",
+                    Alert.AlertType.WARNING);
+            return false;
+        }
+    }
+
     private boolean confirmarGuardado() {
         return Utilidades.mostrarAlertaConfirmacion(
-                "Confirmar validación",
+                "Confirmar registro",
                 "¿Desea guardar los cambios del documento?");
     }
 
@@ -306,7 +405,7 @@ public class FXMLDetallesDocumentoProfesorController
                     cargador.getController();
             controlador.inicializarInformacion(expedienteEstudiante);
 
-            navegarA (vista, "Expediente estudiante");
+            mostrarVista(vista, "Expediente estudiante");
         } catch (IOException ex) {
             Utilidades.mostrarAlertaSimple(
                     "Error de navegación",
@@ -337,7 +436,7 @@ public class FXMLDetallesDocumentoProfesorController
             FXMLLoader cargador = Utilidades.cargarFXML(nombreVista);
             Parent vista = cargador.load();
 
-            navegarA(vista, titulo);
+            mostrarVista(vista, titulo);
         } catch (IOException ex) {
             Utilidades.mostrarAlertaSimple(
                     "Error de navegación",
@@ -346,7 +445,7 @@ public class FXMLDetallesDocumentoProfesorController
         }
     }
 
-    private void navegarA(Parent vista, String titulo) {
+    private void mostrarVista(Parent vista, String titulo) {
         Scene escena = new Scene(vista);
         Stage escenario =
                 (Stage) lbl_documento.getScene().getWindow();

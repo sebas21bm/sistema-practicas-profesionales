@@ -173,6 +173,79 @@ public class DetalleEvaluacionDAO {
         throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
     }
 
+    public static RespuestaOperacion evaluarDocumentoExpediente(
+            DetalleEvaluacion detalleEvaluacion)
+            throws SQLException, NullPointerException {
+        RespuestaOperacion respuesta = new RespuestaOperacion();
+
+        try (Connection conexionBD =
+                ConexionBD.crearParaRol(Rol.Profesor)) {
+            if (conexionBD != null) {
+                String consulta =
+                        "{CALL evaluar_documento_expediente(?, ?, ?, ?, ?)}";
+                CallableStatement sentencia =
+                        conexionBD.prepareCall(consulta);
+
+                sentencia.setInt(1,
+                        detalleEvaluacion.getIdDetallesEvaluacion());
+                sentencia.setString(2,
+                        detalleEvaluacion.getEstado());
+                sentencia.setDouble(3,
+                        detalleEvaluacion.getCalificacion());
+                sentencia.setDouble(4,
+                        detalleEvaluacion.getPorcentajeObtenido());
+                sentencia.setString(5,
+                        detalleEvaluacion.getObservaciones());
+                sentencia.execute();
+
+                respuesta.setError(false);
+                respuesta.setMensaje(
+                        "La evaluación se ha registrado correctamente.");
+                return respuesta;
+            }
+        }
+
+        throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+    }
+    
+    public static RespuestaOperacion subirEvaluacionProfesor(
+        DetalleEvaluacion detalleEvaluacion)
+        throws SQLException, NullPointerException {
+    RespuestaOperacion respuesta = new RespuestaOperacion();
+
+    try (Connection conexionBD =
+            ConexionBD.crearParaRol(Rol.Profesor)) {
+        if (conexionBD != null) {
+            String consulta =
+                    "{CALL subir_evaluacion_profesor(?, ?, ?, ?, ?, ?)}";
+            CallableStatement sentencia =
+                    conexionBD.prepareCall(consulta);
+
+            sentencia.setInt(1,
+                    detalleEvaluacion.getIdDetallesEvaluacion());
+            sentencia.setString(2,
+                    detalleEvaluacion.getNombreOriginal());
+            sentencia.setBytes(3,
+                    detalleEvaluacion.getArchivo());
+            sentencia.setDouble(4,
+                    detalleEvaluacion.getCalificacion());
+            sentencia.setDouble(5,
+                    detalleEvaluacion.getPorcentajeObtenido());
+            sentencia.setString(6,
+                    detalleEvaluacion.getObservaciones());
+            sentencia.execute();
+
+            respuesta.setError(false);
+            respuesta.setMensaje(
+                    "La evaluación del profesor se ha guardado "
+                    + "correctamente.");
+            return respuesta;
+        }
+    }
+
+    throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+}
+    
     private static String obtenerConsultaBase() {
         return "SELECT id_detalles_evaluacion, id_expediente, "
                 + "id_entrega_documento, id_experiencia_educativa, "

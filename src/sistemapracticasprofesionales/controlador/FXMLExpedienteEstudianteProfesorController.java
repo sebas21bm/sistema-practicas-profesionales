@@ -21,7 +21,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import sistemapracticasprofesionales.modelo.pojo.DetalleEvaluacion;
 import sistemapracticasprofesionales.modelo.pojo.ExpedienteEstudiante;
+import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
 import sistemapracticasprofesionales.servicio.DetalleEvaluacionServicio;
+import sistemapracticasprofesionales.servicio.ExpedienteServicio;
 import sistemapracticasprofesionales.utilidades.Utilidades;
 
 /*
@@ -275,11 +277,101 @@ public class FXMLExpedienteEstudianteProfesorController
 
     @FXML
     private void clicCalcularCalificacion(ActionEvent event) {
-        Utilidades.mostrarAlertaSimple(
-                "Función pendiente",
-                "El cálculo de calificación se implementará en el CU-29.",
-                Alert.AlertType.INFORMATION);
+        if (expedienteSeleccionado == null
+                || expedienteSeleccionado.getIdExpediente() <= 0) {
+            Utilidades.mostrarAlertaSimple(
+                    "Expediente no seleccionado",
+                    "No se recibió un expediente válido.",
+                    Alert.AlertType.WARNING);
+            return;
+        }
+
+        if (!confirmarCalculoCalificacion()) {
+            return;
+        }
+
+        calcularCalificacionFinal();
     }
+    
+    private boolean confirmarCalculoCalificacion() {
+    return Utilidades.mostrarAlertaConfirmacion(
+            "Confirmar cálculo",
+            "¿Desea calcular la calificación final del expediente?");
+}
+
+private void calcularCalificacionFinal() {
+    try {
+        RespuestaOperacion respuesta =
+                ExpedienteServicio.calcularCalificacionExpediente(
+                        expedienteSeleccionado.getIdExpediente(),
+                        expedienteSeleccionado.getIdExperienciaEducativa());
+
+        if (respuesta.getError()) {
+            Utilidades.mostrarAlertaSimple(
+                    "Expediente incompleto",
+                    respuesta.getMensaje(),
+                    Alert.AlertType.WARNING);
+            return;
+        }
+
+        Utilidades.mostrarAlertaSimple(
+                "Calificación calculada",
+                respuesta.getMensaje(),
+                Alert.AlertType.INFORMATION);
+
+        actualizarExpedienteDesdeBaseDatos();
+    } catch (SQLException ex) {
+        Utilidades.mostrarAlertaSimple(
+                "Error al calcular",
+                ex.getMessage(),
+                Alert.AlertType.ERROR);
+    } catch (NullPointerException ex) {
+        Utilidades.mostrarAlertaSimple(
+                "Error al calcular",
+                "No fue posible calcular la calificación final.",
+                Alert.AlertType.ERROR);
+    } catch (IllegalArgumentException ex) {
+        Utilidades.mostrarAlertaSimple(
+                "Datos inválidos",
+                ex.getMessage(),
+                Alert.AlertType.WARNING);
+    }
+}
+
+    private void actualizarExpedienteDesdeBaseDatos() {
+        try {
+            ExpedienteEstudiante expedienteActualizado =
+                    ExpedienteServicio.obtenerExpedienteEstudianteProfesorPorId(
+                            expedienteSeleccionado.getIdExpediente(),
+                            expedienteSeleccionado
+                                    .getIdExperienciaEducativa());
+
+            if (expedienteActualizado == null) {
+                Utilidades.mostrarAlertaSimple(
+                        "Expediente no encontrado",
+                        "No fue posible actualizar la información "
+                        + "del expediente.",
+                        Alert.AlertType.WARNING);
+                return;
+            }
+
+            expedienteSeleccionado = expedienteActualizado;
+            mostrarInformacionEstudiante();
+            cargarDetallesExpediente();
+        } catch (SQLException ex) {
+            Utilidades.mostrarAlertaSimple(
+                    "Error al actualizar",
+                    ex.getMessage(),
+                    Alert.AlertType.ERROR);
+        } catch (NullPointerException ex) {
+            Utilidades.mostrarAlertaSimple(
+                    "Error al actualizar",
+                    "No fue posible actualizar la información "
+                    + "del expediente.",
+                    Alert.AlertType.ERROR);
+        }
+    }
+    
 
     @FXML
     private void clicConsultarExpedientes(ActionEvent event) {
