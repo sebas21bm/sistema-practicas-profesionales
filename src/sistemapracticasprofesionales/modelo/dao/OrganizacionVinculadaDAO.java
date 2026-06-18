@@ -57,6 +57,48 @@ public class OrganizacionVinculadaDAO {
         return respuesta;
     }
     
+    public static boolean existeOrganizacionVinculadaIgual(
+            OrganizacionVinculada organizacionVinculada)
+            throws SQLException, NullPointerException {
+
+        boolean existe = false;
+
+        try (Connection conexionBD = ConexionBD.crearParaRol(
+                Sesion.getUsuarioActual().getRolUsuario())) {
+
+            if (conexionBD == null) {
+                throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+            }
+
+            String consulta = "SELECT COUNT(*) AS total "
+                    + "FROM organizacion_vinculada "
+                    + "WHERE LOWER(TRIM(nombre)) = LOWER(TRIM(?)) "
+                    + "AND LOWER(TRIM(calle)) = LOWER(TRIM(?)) "
+                    + "AND LOWER(TRIM(colonia)) = LOWER(TRIM(?)) "
+                    + "AND codigo_postal = ? "
+                    + "AND telefono = ? "
+                    + "AND LOWER(TRIM(correo)) = LOWER(TRIM(?)) "
+                    + "AND tipo = ?;";
+
+            PreparedStatement sentenciaBD = conexionBD.prepareStatement(consulta);
+            sentenciaBD.setString(1, organizacionVinculada.getNombre());
+            sentenciaBD.setString(2, organizacionVinculada.getCalle());
+            sentenciaBD.setString(3, organizacionVinculada.getColonia());
+            sentenciaBD.setString(4, organizacionVinculada.getCodigoPostal());
+            sentenciaBD.setString(5, organizacionVinculada.getTelefono());
+            sentenciaBD.setString(6, organizacionVinculada.getCorreo());
+            sentenciaBD.setString(7, organizacionVinculada.getTipo());
+
+            ResultSet resultado = sentenciaBD.executeQuery();
+
+            if (resultado.next()) {
+                existe = resultado.getInt("total") > 0;
+            }
+        }
+
+        return existe;
+    }
+    
     public static ArrayList<OrganizacionVinculada> obtenerOrganizaciones() 
         throws SQLException, NullPointerException {
         

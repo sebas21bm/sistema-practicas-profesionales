@@ -194,4 +194,128 @@ public class ProyectoPracticasDAO {
 
         return proyectoPracticas;
     }
+    
+    public static boolean existeResponsableIgual(
+            ResponsableProyecto responsableProyecto)
+            throws SQLException, NullPointerException {
+
+        boolean existe = false;
+
+        try (Connection conexionBD = ConexionBD.crearParaRol(
+                Sesion.getUsuarioActual().getRolUsuario())) {
+
+            if (conexionBD == null) {
+                throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+            }
+
+            String consulta = "SELECT COUNT(*) AS total "
+                    + "FROM responsable "
+                    + "WHERE LOWER(TRIM(nombre)) = LOWER(TRIM(?)) "
+                    + "AND LOWER(TRIM(paterno)) = LOWER(TRIM(?)) "
+                    + "AND LOWER(TRIM(IFNULL(materno, ''))) = "
+                    + "LOWER(TRIM(?)) "
+                    + "AND telefono = ? "
+                    + "AND LOWER(TRIM(correo)) = LOWER(TRIM(?)) "
+                    + "AND LOWER(TRIM(puesto)) = LOWER(TRIM(?)) "
+                    + "AND num_organizacion_vinculada = ?;";
+
+            PreparedStatement sentenciaBD = conexionBD.prepareStatement(consulta);
+            sentenciaBD.setString(1, responsableProyecto.getNombre());
+            sentenciaBD.setString(2, responsableProyecto.getPaterno());
+            sentenciaBD.setString(3, responsableProyecto.getMaterno());
+            sentenciaBD.setString(4, responsableProyecto.getTelefono());
+            sentenciaBD.setString(5, responsableProyecto.getCorreo());
+            sentenciaBD.setString(6, responsableProyecto.getPuesto());
+            sentenciaBD.setInt(7,
+                    responsableProyecto.getNumOrganizacionVinculada());
+
+            ResultSet resultado = sentenciaBD.executeQuery();
+
+            if (resultado.next()) {
+                existe = resultado.getInt("total") > 0;
+            }
+        }
+
+        return existe;
+    }
+    
+    public static boolean existeProyectoIgual(
+            ProyectoPracticas proyectoPracticas)
+            throws SQLException, NullPointerException {
+
+        boolean existe = false;
+
+        try (Connection conexionBD = ConexionBD.crearParaRol(
+                Sesion.getUsuarioActual().getRolUsuario())) {
+
+            if (conexionBD == null) {
+                throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+            }
+
+            String consulta = "SELECT COUNT(*) AS total "
+                    + "FROM proyecto_practicas "
+                    + "WHERE LOWER(TRIM(nombre)) = LOWER(TRIM(?)) "
+                    + "AND LOWER(TRIM(descripcion)) = LOWER(TRIM(?)) "
+                    + "AND cupo = ? "
+                    + "AND fecha_finalizacion = ? "
+                    + "AND id_responsable = ?;";
+
+            PreparedStatement sentenciaBD = conexionBD.prepareStatement(consulta);
+            sentenciaBD.setString(1, proyectoPracticas.getNombre());
+            sentenciaBD.setString(2, proyectoPracticas.getDescripcion());
+            sentenciaBD.setInt(3, proyectoPracticas.getCupo());
+            sentenciaBD.setDate(4, new Date(proyectoPracticas
+                    .getFechaFinalizacion().getTime()));
+            sentenciaBD.setInt(5, proyectoPracticas.getIdResponsable());
+
+            ResultSet resultado = sentenciaBD.executeQuery();
+
+            if (resultado.next()) {
+                existe = resultado.getInt("total") > 0;
+            }
+        }
+
+        return existe;
+    }
+    
+    public static boolean existeProyectoIgualEnOrganizacion(
+            ProyectoPracticas proyectoPracticas, int numeroOrganizacionVinculada)
+            throws SQLException, NullPointerException {
+
+        boolean existe = false;
+
+        try (Connection conexionBD = ConexionBD.crearParaRol(
+                Sesion.getUsuarioActual().getRolUsuario())) {
+
+            if (conexionBD == null) {
+                throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+            }
+
+            String consulta = "SELECT COUNT(*) AS total "
+                    + "FROM proyecto_practicas pp "
+                    + "INNER JOIN responsable r "
+                    + "ON pp.id_responsable = r.id_responsable "
+                    + "WHERE LOWER(TRIM(pp.nombre)) = LOWER(TRIM(?)) "
+                    + "AND LOWER(TRIM(pp.descripcion)) = LOWER(TRIM(?)) "
+                    + "AND pp.cupo = ? "
+                    + "AND pp.fecha_finalizacion = ? "
+                    + "AND r.num_organizacion_vinculada = ?;";
+
+            PreparedStatement sentenciaBD = conexionBD.prepareStatement(consulta);
+            sentenciaBD.setString(1, proyectoPracticas.getNombre());
+            sentenciaBD.setString(2, proyectoPracticas.getDescripcion());
+            sentenciaBD.setInt(3, proyectoPracticas.getCupo());
+            sentenciaBD.setDate(4, new Date(proyectoPracticas
+                    .getFechaFinalizacion().getTime()));
+            sentenciaBD.setInt(5, numeroOrganizacionVinculada);
+
+            ResultSet resultado = sentenciaBD.executeQuery();
+
+            if (resultado.next()) {
+                existe = resultado.getInt("total") > 0;
+            }
+        }
+
+        return existe;
+    }
 }

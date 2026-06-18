@@ -33,6 +33,14 @@ public class OrganizacionVinculadaServicio {
             return respuesta;
         }
         
+        if (OrganizacionVinculadaDAO.existeOrganizacionVinculadaIgual(
+                organizacionVinculada)) {
+            respuesta.setError(true);
+            respuesta.setMensaje("- Ya existe una organización vinculada "
+                    + "registrada con exactamente la misma información.");
+            return respuesta;
+        }
+        
         return OrganizacionVinculadaDAO.registrarOrganizacionVinculada(
                 organizacionVinculada);
     }

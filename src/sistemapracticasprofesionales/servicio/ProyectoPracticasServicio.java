@@ -42,6 +42,24 @@ public class ProyectoPracticasServicio {
             return respuesta;
         }
         
+         if (ProyectoPracticasDAO.existeProyectoIgualEnOrganizacion(
+                proyectoPracticas,
+                 responsableProyecto.getNumOrganizacionVinculada())) {
+            respuesta.setError(true);
+            respuesta.setMensaje("- Ya existe un proyecto registrado "
+                    + "con la misma información en esta organización "
+                    + "vinculada.");
+            return respuesta;
+        }
+
+        if (ProyectoPracticasDAO.existeResponsableIgual(
+                responsableProyecto)) {
+            respuesta.setError(true);
+            respuesta.setMensaje("- Ya existe un responsable registrado "
+                    + "con exactamente la misma información.");
+            return respuesta;
+        }
+        
         return ProyectoPracticasDAO.registrarProyectoConResponsableNuevo(
                 proyectoPracticas, responsableProyecto);
     }
@@ -59,6 +77,13 @@ public class ProyectoPracticasServicio {
         if (proyectoPracticas.getIdResponsable() <= 0) {
             respuesta.setError(true);
             respuesta.setMensaje("- Debes seleccionar un responsable existente.");
+            return respuesta;
+        }
+        
+        if (ProyectoPracticasDAO.existeProyectoIgual(proyectoPracticas)) {
+            respuesta.setError(true);
+            respuesta.setMensaje("- Ya existe un proyecto registrado "
+                    + "con exactamente la misma información.");
             return respuesta;
         }
         
