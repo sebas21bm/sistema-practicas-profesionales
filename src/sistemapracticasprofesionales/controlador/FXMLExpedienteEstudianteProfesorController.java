@@ -311,6 +311,7 @@ private void calcularCalificacionFinal() {
                     "Expediente incompleto",
                     respuesta.getMensaje(),
                     Alert.AlertType.WARNING);
+            lbl_calificacionTotal.setText("");
             return;
         }
 
