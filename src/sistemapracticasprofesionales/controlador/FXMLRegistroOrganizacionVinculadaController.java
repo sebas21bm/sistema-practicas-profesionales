@@ -47,16 +47,24 @@ public class FXMLRegistroOrganizacionVinculadaController implements Initializabl
     
     private final ObservableList<String> tipoOrganizacion = 
             FXCollections.observableArrayList("Pública", "Privada");
+    
+    private String vistaRegreso = "FXMLInicioCoordinador";
+    private String tituloRegreso = "Menu principal";
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cb_tipoOrganizacion.setItems(tipoOrganizacion);
     }    
     
+    public void inicializarInformacionRegreso(String vistaRegreso, 
+            String tituloRegreso) {
+        this.vistaRegreso = vistaRegreso;
+        this.tituloRegreso = tituloRegreso;
+    }
+    
     @FXML
     private void clicRegresar(ActionEvent event) {
-        cambiarVentana("FXMLInicioCoordinador",
-                "Menu principal");
+        cambiarVentana(vistaRegreso, tituloRegreso);
     }
     
     @FXML

@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import sistemapracticasprofesionales.modelo.pojo.Sesion;
 import sistemapracticasprofesionales.utilidades.Utilidades;
 
 /**
@@ -25,8 +26,18 @@ public class FXMLInicioProfesorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        cargarNombreUsuario();
+    } 
+    
+    private void cargarNombreUsuario() {
+        if (Sesion.getUsuarioActual() != null
+                && Sesion.getUsuarioActual().getNombreReal() != null
+                && !Sesion.getUsuarioActual().getNombreReal().trim().isEmpty()) {
+            lb_nombre.setText(Sesion.getUsuarioActual().getNombreReal());
+        } else {
+            lb_nombre.setText("Usuario");
+        }
+    }
     
     @FXML
     private void clicConsultarExpedientesEstudiantes(ActionEvent event) {
@@ -47,6 +58,7 @@ public class FXMLInicioProfesorController implements Initializable {
 
     @FXML
     private void clicCerrarSesion(ActionEvent event) {
+        Sesion.cerrarSesion();
         cambiarVentana("FXMLInicioSesion", "Inicio de sesión");
     }
     

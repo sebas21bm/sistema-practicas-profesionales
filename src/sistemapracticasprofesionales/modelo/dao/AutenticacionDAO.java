@@ -35,8 +35,8 @@ public class AutenticacionDAO {
                     Utilidades.cifrarContrasenia(contrasenia);
 
             String consulta =
-                    "SELECT id_usuario, contrasenia, id_rol "
-                    + "FROM cuenta "
+                    "SELECT id_usuario, contrasenia, id_rol, nombre_real, activo "
+                    + "FROM vista_usuarios_login "
                     + "WHERE id_usuario = ? AND contrasenia = ?;";
             PreparedStatement sentenciaBD =
                     conexionBD.prepareStatement(consulta);
@@ -53,6 +53,8 @@ public class AutenticacionDAO {
 
             usuarioLogin.setNombreUsuario(
                     resultado.getString("id_usuario"));
+            usuarioLogin.setNombreReal(
+                    resultado.getString("nombre_real"));
 
             asignarRolUsuario(usuarioLogin, resultado.getInt("id_rol"));
 

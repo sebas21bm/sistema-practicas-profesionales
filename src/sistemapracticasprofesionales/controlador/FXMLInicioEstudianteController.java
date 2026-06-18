@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import sistemapracticasprofesionales.modelo.pojo.Sesion;
 
 /**
  * Autor: Sebastián Barrera Mora
@@ -19,8 +20,18 @@ public class FXMLInicioEstudianteController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        cargarNombreUsuario();
     }    
+    
+    private void cargarNombreUsuario() {
+        if (Sesion.getUsuarioActual() != null
+                && Sesion.getUsuarioActual().getNombreReal() != null
+                && !Sesion.getUsuarioActual().getNombreReal().trim().isEmpty()) {
+            lb_nombre.setText(Sesion.getUsuarioActual().getNombreReal());
+        } else {
+            lb_nombre.setText("Usuario");
+        }
+    }
 
     @FXML
     private void clicCerrarSesion(ActionEvent event) {

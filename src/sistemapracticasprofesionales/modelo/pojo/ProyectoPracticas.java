@@ -24,6 +24,9 @@ public class ProyectoPracticas {
     private ResponsableProyecto responsableProyecto;
     private List<Asignacion> asignaciones = new ArrayList<>();
     
+    private String nombreEstudiante;
+    private String nombreOrganizacionVinculada;
+    
     public int getNumProyecto() {
         return numProyecto;
     }
@@ -110,5 +113,23 @@ public class ProyectoPracticas {
     public String toString() {
         return nombre;
     }
+
+    public String getNombreEstudiante() {
+        return nombreEstudiante;
+    }
+
+    public void setNombreEstudiante(String nombreEstudiante) {
+        this.nombreEstudiante = nombreEstudiante;
+    }
+
+    public String getNombreOrganizacionVinculada() {
+        return nombreOrganizacionVinculada;
+    }
+
+    public void setNombreOrganizacionVinculada(String nombreOrganizacionVinculada) {
+        this.nombreOrganizacionVinculada = nombreOrganizacionVinculada;
+    }
+    
+    
     
 }

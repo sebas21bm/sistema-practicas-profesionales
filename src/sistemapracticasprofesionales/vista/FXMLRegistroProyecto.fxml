@@ -14,15 +14,15 @@
         <menus>
           <Menu mnemonicParsing="false" text="Analiticas">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#clicGenerarReporteIndicadores" text="Generar reporte de indicadores" />
+              <MenuItem mnemonicParsing="false" text="Generar reporte de indicadores" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Proyectos">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#clicRegistrarProyecto" text="Registrar" />
+              <MenuItem mnemonicParsing="false" text="Registrar" />
                   <MenuItem mnemonicParsing="false" onAction="#clicVerListadoProyecto" text="Ver listado" />
                   <MenuItem mnemonicParsing="false" onAction="#clicAsignarProyecto" text="Asignar proyecto" />
-                  <MenuItem mnemonicParsing="false" onAction="#clicGenerarOficioDeAsignacion" text="Generar oficio de asignación" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicVerAsignaciones" text="Generar oficio de asignación" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Organizaciones vinculadas">
@@ -33,7 +33,7 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Estudiantes">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#clicVerListadoEstudiantes" text="Ver listado" />
+                <MenuItem mnemonicParsing="false" text="Ver listado" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Mas">
@@ -87,7 +87,7 @@
                         <ComboBox fx:id="cb_organizacionVinculada" prefHeight="31.0" prefWidth="229.0" promptText="Organizaciones vinculadas" />
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" text="Nueva organizacion vinculada" wrapText="true" />
+                  <Button mnemonicParsing="false" onAction="#clicNuevaOrganizacionVinculada" text="Nueva organizacion vinculada" wrapText="true" />
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" HBox.hgrow="ALWAYS">
@@ -100,6 +100,7 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
+                  <ComboBox fx:id="cb_responsableExistente" prefHeight="36.0" prefWidth="321.0" />
                   <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="364.0" spacing="10.0">
                      <children>
                         <Label prefHeight="21.0" prefWidth="122.0" text="Nombre:" />

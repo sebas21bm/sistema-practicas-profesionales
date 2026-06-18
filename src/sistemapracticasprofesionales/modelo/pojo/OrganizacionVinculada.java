@@ -116,4 +116,9 @@ public class OrganizacionVinculada {
         this.proyectos = proyectos;
     }
     
+    @Override
+    public String toString() {
+        return nombre;
+    }
+    
 }

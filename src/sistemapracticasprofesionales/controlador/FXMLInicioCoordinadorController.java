@@ -26,6 +26,17 @@ public class FXMLInicioCoordinadorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        cargarNombreUsuario();
+    }
+
+    private void cargarNombreUsuario() {
+        if (Sesion.getUsuarioActual() != null
+                && Sesion.getUsuarioActual().getNombreReal() != null
+                && !Sesion.getUsuarioActual().getNombreReal().trim().isEmpty()) {
+            lb_nombre.setText(Sesion.getUsuarioActual().getNombreReal());
+        } else {
+            lb_nombre.setText("Usuario");
+        }
     }    
 
     @FXML
