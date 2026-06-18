@@ -181,9 +181,32 @@ public class FXMLListaEstudianteProfesorController
             return;
         }
 
-        Sesion.setExpedienteSeleccionado(expedienteSeleccionado);
-        cambiarVentana("FXMLExpedienteEstudianteProfesor",
-                "Expediente estudiante");
+        abrirExpedienteEstudiante(expedienteSeleccionado);
+    }
+
+    private void abrirExpedienteEstudiante(
+            ExpedienteEstudiante expedienteSeleccionado) {
+        try {
+            FXMLLoader cargador =
+                    Utilidades.cargarFXML("FXMLExpedienteEstudianteProfesor");
+            Parent vista = cargador.load();
+
+            FXMLExpedienteEstudianteProfesorController controlador =
+                    cargador.getController();
+            controlador.inicializarInformacion(expedienteSeleccionado);
+
+            Scene escena = new Scene(vista);
+            Stage escenario =
+                    (Stage) tv_estudiantes.getScene().getWindow();
+
+            escenario.setScene(escena);
+            escenario.setTitle("Expediente estudiante");
+            escenario.setResizable(false);
+            escenario.centerOnScreen();
+            escenario.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML

@@ -9,18 +9,40 @@ import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
 /*
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 17/06/2026
- * Descripción: Servicio encargado de validar reglas de negocio de los
- *              detalles de evaluación.
+ * Descripción: Servicio encargado de validar reglas de negocio para consultar
+ *              detalles de evaluación de documentos.
  */
 public class DetalleEvaluacionServicio {
 
-    public static ArrayList<DetalleEvaluacion> obtenerDocumentosIniciales(
-            int idExperienciaEducativa)
+    private static final String ESTADO_APROBADO = "Aprobado";
+    private static final String ESTADO_RECHAZADO = "Rechazado";
+    private static final int LONGITUD_MAXIMA_OBSERVACIONES = 255;
+    
+    public static ArrayList<DetalleEvaluacion>
+            obtenerDocumentosInicialesExpediente(int idExpediente)
             throws SQLException, NullPointerException {
-        validarExperienciaEducativa(idExperienciaEducativa);
+        validarExpediente(idExpediente);
 
-        return DetalleEvaluacionDAO.obtenerDocumentosIniciales(
-                idExperienciaEducativa);
+        return DetalleEvaluacionDAO.obtenerDocumentosInicialesExpediente(
+                idExpediente);
+    }
+
+    public static ArrayList<DetalleEvaluacion>
+            obtenerReportesEvaluacionesExpediente(int idExpediente)
+            throws SQLException, NullPointerException {
+        validarExpediente(idExpediente);
+
+        return DetalleEvaluacionDAO.obtenerReportesEvaluacionesExpediente(
+                idExpediente);
+    }
+
+    public static DetalleEvaluacion obtenerDetalleEvaluacionPorId(
+            int idDetallesEvaluacion)
+            throws SQLException, NullPointerException {
+        validarDetalleEvaluacion(idDetallesEvaluacion);
+
+        return DetalleEvaluacionDAO.obtenerDetalleEvaluacionPorId(
+                idDetallesEvaluacion);
     }
 
     public static DetalleEvaluacion obtenerArchivoDocumento(
@@ -32,19 +54,34 @@ public class DetalleEvaluacionServicio {
                 idDetallesEvaluacion);
     }
 
-    public static RespuestaOperacion validarDocumentoInicial(
-            DetalleEvaluacion detalleEvaluacion)
-            throws SQLException, NullPointerException {
-        RespuestaOperacion respuesta =
-                validarDatosDocumentoInicial(detalleEvaluacion);
-
-        if (respuesta.getError()) {
-            return respuesta;
+    private static void validarExpediente(int idExpediente) {
+        if (idExpediente <= 0) {
+            throw new IllegalArgumentException(
+                    "No se identificó el expediente.");
         }
-
-        return DetalleEvaluacionDAO.validarDocumentoInicial(
-                detalleEvaluacion);
     }
+
+    private static void validarDetalleEvaluacion(
+            int idDetallesEvaluacion) {
+        if (idDetallesEvaluacion <= 0) {
+            throw new IllegalArgumentException(
+                    "No se identificó el documento seleccionado.");
+        }
+    }
+    
+    public static RespuestaOperacion validarDocumentoInicial(
+        DetalleEvaluacion detalleEvaluacion)
+        throws SQLException, NullPointerException {
+    RespuestaOperacion respuesta =
+            validarDatosDocumentoInicial(detalleEvaluacion);
+
+    if (respuesta.getError()) {
+        return respuesta;
+    }
+
+    return DetalleEvaluacionDAO.validarDocumentoInicial(
+            detalleEvaluacion);
+}
 
     private static RespuestaOperacion validarDatosDocumentoInicial(
             DetalleEvaluacion detalleEvaluacion) {
@@ -60,52 +97,44 @@ public class DetalleEvaluacionServicio {
 
         if (detalleEvaluacion.getIdDetallesEvaluacion() <= 0) {
             agregarError(errores,
-                    "Debe seleccionar un documento.");
+                    "No se identificó el documento seleccionado.");
+        }
+
+        if (!detalleEvaluacion.esDocumentoInicial()) {
+            agregarError(errores,
+                    "El documento seleccionado no corresponde "
+                    + "a un documento inicial.");
         }
 
         if (estaVacio(detalleEvaluacion.getEstado())) {
             agregarError(errores,
                     "Debe seleccionar un estado.");
-        } else if (!detalleEvaluacion.getEstado().equals("Aprobado")
-                && !detalleEvaluacion.getEstado().equals("Rechazado")) {
+        } else if (!ESTADO_APROBADO.equals(detalleEvaluacion.getEstado())
+                && !ESTADO_RECHAZADO.equals(detalleEvaluacion.getEstado())) {
             agregarError(errores,
                     "El estado solo puede ser Aprobado o Rechazado.");
         }
 
-        if ("Rechazado".equals(detalleEvaluacion.getEstado())
+        detalleEvaluacion.setObservaciones(
+                limpiarTexto(detalleEvaluacion.getObservaciones()));
+
+        if (ESTADO_RECHAZADO.equals(detalleEvaluacion.getEstado())
                 && estaVacio(detalleEvaluacion.getObservaciones())) {
             agregarError(errores,
-                    "Debe ingresar comentarios al rechazar.");
+                    "Debe ingresar comentarios al rechazar "
+                    + "el documento.");
         }
 
-        limpiarDatos(detalleEvaluacion);
+        if (detalleEvaluacion.getObservaciones().length()
+                > LONGITUD_MAXIMA_OBSERVACIONES) {
+            agregarError(errores,
+                    "Los comentarios no pueden superar los 255 caracteres.");
+        }
 
         respuesta.setError(errores.length() > 0);
         respuesta.setMensaje(errores.toString());
 
         return respuesta;
-    }
-
-    private static void limpiarDatos(
-            DetalleEvaluacion detalleEvaluacion) {
-        detalleEvaluacion.setObservaciones(
-                limpiarTexto(detalleEvaluacion.getObservaciones()));
-    }
-
-    private static void validarExperienciaEducativa(
-            int idExperienciaEducativa) {
-        if (idExperienciaEducativa <= 0) {
-            throw new IllegalArgumentException(
-                    "No se identificó la experiencia educativa.");
-        }
-    }
-
-    private static void validarDetalleEvaluacion(
-            int idDetallesEvaluacion) {
-        if (idDetallesEvaluacion <= 0) {
-            throw new IllegalArgumentException(
-                    "No se identificó el documento.");
-        }
     }
 
     private static boolean estaVacio(String texto) {

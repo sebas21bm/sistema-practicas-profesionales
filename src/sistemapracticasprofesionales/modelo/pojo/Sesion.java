@@ -36,15 +36,6 @@ public class Sesion {
                     idExperienciaEducativa);
         }
     }
-    
-    public static ExpedienteEstudiante getExpedienteSeleccionado() {
-        return expedienteSeleccionado;
-    }
-
-    public static void setExpedienteSeleccionado(
-            ExpedienteEstudiante expedienteSeleccionado) {
-        Sesion.expedienteSeleccionado = expedienteSeleccionado;
-    }
 
     public static void cerrarSesion() {
         usuarioActual = null;

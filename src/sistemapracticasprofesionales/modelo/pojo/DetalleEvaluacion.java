@@ -7,14 +7,23 @@ import java.time.format.DateTimeFormatter;
 /*
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 17/06/2026
- * Descripción: POJO que representa un detalle de evaluación de un documento.
+ * Descripción: POJO que representa un detalle de evaluación de un documento
+ *              dentro del expediente de un estudiante.
  */
 public class DetalleEvaluacion {
+
+    private static final String CLASIFICACION_DOCUMENTO_INICIAL =
+            "Documento inicial";
+    private static final String PRIMERA_EVALUACION_PROFESOR =
+            "Primera evaluación del profesor";
+    private static final String SEGUNDA_EVALUACION_PROFESOR =
+            "Segunda evaluación del profesor";
 
     private int idDetallesEvaluacion;
     private int idExpediente;
     private int idEntregaDocumento;
     private int idExperienciaEducativa;
+    private int idDocumento;
     private Integer idArchivo;
     private String matricula;
     private String nombreEstudiante;
@@ -24,6 +33,9 @@ public class DetalleEvaluacion {
     private LocalDate fechaEntrega;
     private LocalDateTime fechaSubida;
     private String estado;
+    private Double calificacion;
+    private double valor;
+    private double porcentajeObtenido;
     private String observaciones;
     private String nombreOriginal;
     private byte[] archivo;
@@ -58,6 +70,14 @@ public class DetalleEvaluacion {
 
     public void setIdExperienciaEducativa(int idExperienciaEducativa) {
         this.idExperienciaEducativa = idExperienciaEducativa;
+    }
+
+    public int getIdDocumento() {
+        return idDocumento;
+    }
+
+    public void setIdDocumento(int idDocumento) {
+        this.idDocumento = idDocumento;
     }
 
     public Integer getIdArchivo() {
@@ -132,6 +152,30 @@ public class DetalleEvaluacion {
         this.estado = estado;
     }
 
+    public Double getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(Double calificacion) {
+        this.calificacion = calificacion;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public double getPorcentajeObtenido() {
+        return porcentajeObtenido;
+    }
+
+    public void setPorcentajeObtenido(double porcentajeObtenido) {
+        this.porcentajeObtenido = porcentajeObtenido;
+    }
+
     public String getObservaciones() {
         return observaciones;
     }
@@ -175,5 +219,32 @@ public class DetalleEvaluacion {
         return fechaSubida == null
                 ? "Sin archivo"
                 : fechaSubida.format(formato);
+    }
+
+    public String getCalificacionTexto() {
+        return calificacion == null
+                ? ""
+                : String.format("%.2f", calificacion);
+    }
+
+    public String getValorTexto() {
+        return String.format("%.2f", valor);
+    }
+
+    public String getPorcentajeObtenidoTexto() {
+        return String.format("%.2f", porcentajeObtenido);
+    }
+
+    public boolean esDocumentoInicial() {
+        return CLASIFICACION_DOCUMENTO_INICIAL.equals(clasificacion);
+    }
+
+    public boolean esEvaluacionProfesor() {
+        return PRIMERA_EVALUACION_PROFESOR.equals(tipoDocumento)
+                || SEGUNDA_EVALUACION_PROFESOR.equals(tipoDocumento);
+    }
+
+    public boolean tieneArchivo() {
+        return idArchivo != null;
     }
 }
