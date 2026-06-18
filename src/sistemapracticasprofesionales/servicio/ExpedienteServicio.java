@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import sistemapracticasprofesionales.modelo.dao.ExpedienteDAO;
 import sistemapracticasprofesionales.modelo.pojo.ExpedienteEstudiante;
 import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
+import sistemapracticasprofesionales.modelo.pojo.Sesion;
 
 /*
  * Autor: Yarazareth Zacnite Ortiz Olmos
@@ -125,5 +126,18 @@ public class ExpedienteServicio {
 
     private static String limpiarTexto(String texto) {
         return texto == null ? "" : texto.trim();
+    }
+    
+    public static ExpedienteEstudiante obtenerExpedientePropio()
+        throws SQLException, NullPointerException {
+
+        if (Sesion.getUsuarioActual() == null
+                || Sesion.getUsuarioActual().getNombreUsuario() == null) {
+            throw new NullPointerException(
+                    "No se encontró el usuario en sesión.");
+        }
+
+        return ExpedienteDAO.obtenerExpedientePropio(
+                Sesion.getUsuarioActual().getNombreUsuario());
     }
 }

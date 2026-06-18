@@ -12,6 +12,7 @@ import sistemapracticasprofesionales.modelo.ConexionBD;
 import sistemapracticasprofesionales.modelo.pojo.DetalleEvaluacion;
 import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
 import sistemapracticasprofesionales.modelo.pojo.Rol;
+import sistemapracticasprofesionales.modelo.pojo.Sesion;
 import sistemapracticasprofesionales.utilidades.Constantes;
 
 /*
@@ -322,5 +323,130 @@ public class DetalleEvaluacionDAO {
         }
 
         return detalleEvaluacion;
+    }
+    
+    public static DetalleEvaluacion obtenerDetalleEvaluacionEstudiantePorId(
+            int idDetallesEvaluacion, String idUsuario)
+            throws SQLException, NullPointerException {
+
+        DetalleEvaluacion detalleEvaluacion = null;
+
+        try (Connection conexionBD = ConexionBD.crearParaRol(
+                Sesion.getUsuarioActual().getRolUsuario())) {
+
+            if (conexionBD == null) {
+                throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+            }
+
+            String consulta = obtenerConsultaBaseEstudiante()
+                    + "WHERE v.id_detalles_evaluacion = ? "
+                    + "AND es.id_usuario = ?;";
+            PreparedStatement sentenciaBD = conexionBD.prepareStatement(consulta);
+
+            sentenciaBD.setInt(1, idDetallesEvaluacion);
+            sentenciaBD.setString(2, idUsuario);
+
+            ResultSet resultado = sentenciaBD.executeQuery();
+
+            if (resultado.next()) {
+                detalleEvaluacion = serializarDetalleEvaluacion(resultado);
+            }
+        }
+
+        return detalleEvaluacion;
+    }
+
+    public static DetalleEvaluacion obtenerArchivoDocumentoEstudiante(
+            int idDetallesEvaluacion, String idUsuario)
+            throws SQLException, NullPointerException {
+
+        DetalleEvaluacion detalleEvaluacion = null;
+
+        try (Connection conexionBD = ConexionBD.crearParaRol(
+                Sesion.getUsuarioActual().getRolUsuario())) {
+
+            if (conexionBD == null) {
+                throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+            }
+
+            String consulta = "SELECT de.id_detalles_evaluacion, "
+                    + "a.idarchivo, a.nombre_original, a.archivo "
+                    + "FROM detalles_evaluacion de "
+                    + "INNER JOIN expediente ex "
+                    + "ON de.id_expediente = ex.id_expediente "
+                    + "INNER JOIN estudiante es "
+                    + "ON ex.id_estudiante = es.id_estudiante "
+                    + "INNER JOIN archivo a "
+                    + "ON de.idarchivo = a.idarchivo "
+                    + "WHERE de.id_detalles_evaluacion = ? "
+                    + "AND es.id_usuario = ?;";
+            PreparedStatement sentenciaBD = conexionBD.prepareStatement(consulta);
+
+            sentenciaBD.setInt(1, idDetallesEvaluacion);
+            sentenciaBD.setString(2, idUsuario);
+
+            ResultSet resultado = sentenciaBD.executeQuery();
+
+            if (resultado.next()) {
+                detalleEvaluacion = new DetalleEvaluacion();
+                detalleEvaluacion.setIdDetallesEvaluacion(
+                        resultado.getInt("id_detalles_evaluacion"));
+                detalleEvaluacion.setIdArchivo(resultado.getInt("idarchivo"));
+                detalleEvaluacion.setNombreOriginal(
+                        resultado.getString("nombre_original"));
+                detalleEvaluacion.setArchivo(resultado.getBytes("archivo"));
+            }
+        }
+
+        return detalleEvaluacion;
+    }
+
+    public static RespuestaOperacion subirDocumentoEstudiante(
+            DetalleEvaluacion detalleEvaluacion)
+            throws SQLException, NullPointerException {
+
+        RespuestaOperacion respuesta = new RespuestaOperacion();
+
+        try (Connection conexionBD = ConexionBD.crearParaRol(
+                Sesion.getUsuarioActual().getRolUsuario())) {
+
+            if (conexionBD == null) {
+                throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+            }
+
+            String consulta = "{CALL subir_documento_expediente(?, ?, ?, ?, ?, ?)}";
+            CallableStatement sentenciaBD = conexionBD.prepareCall(consulta);
+
+            sentenciaBD.setInt(
+                    1, detalleEvaluacion.getIdDetallesEvaluacion());
+            sentenciaBD.setString(
+                    2, detalleEvaluacion.getNombreOriginal());
+            sentenciaBD.setBytes(
+                    3, detalleEvaluacion.getArchivo());
+            sentenciaBD.setString(
+                    4, detalleEvaluacion.getEstado());
+            sentenciaBD.setNull(5, java.sql.Types.DECIMAL);
+            sentenciaBD.setDouble(6, 0.00);
+
+            sentenciaBD.execute();
+
+            respuesta.setError(false);
+            respuesta.setMensaje("El documento ha sido subido con éxito.");
+        }
+
+        return respuesta;
+    }
+
+    private static String obtenerConsultaBaseEstudiante() {
+        return "SELECT v.id_detalles_evaluacion, v.id_expediente, "
+                + "v.id_entrega_documento, v.id_experiencia_educativa, "
+                + "v.id_documento, v.matricula, v.nombre_estudiante, "
+                + "v.tipo_documento, v.clasificacion, v.numero_entrega, "
+                + "v.fecha_entrega, v.fecha_subida, v.estado, "
+                + "v.calificacion, v.valor, v.porcentaje_obtenido, "
+                + "v.observaciones, v.idarchivo, v.nombre_original "
+                + "FROM vista_expediente_estudiante_profesor v "
+                + "INNER JOIN estudiante es "
+                + "ON v.matricula = es.matricula ";
     }
 }

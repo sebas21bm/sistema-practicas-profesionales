@@ -88,15 +88,19 @@ public class AutenticacionDAO {
     }
 
     private static void cargarExperienciaEducativaProfesor(
-            Connection conexionBD, Usuario usuarioLogin)
-            throws SQLException {
+        Connection conexionBD, Usuario usuarioLogin)
+        throws SQLException {
+    
         String consulta =
                 "SELECT ee.id_experiencia_educativa "
                 + "FROM experiencia_educativa ee "
                 + "JOIN personal_academico_has_cuenta pahc "
                 + "ON ee.id_personal_academico = "
                 + "pahc.id_personal_academico "
+                + "JOIN periodo p "
+                + "ON ee.id_periodo = p.id_periodo "
                 + "WHERE pahc.id_usuario = ? "
+                + "AND CURDATE() BETWEEN p.fecha_inicio AND p.fecha_fin "
                 + "LIMIT 1;";
         PreparedStatement sentenciaBD =
                 conexionBD.prepareStatement(consulta);

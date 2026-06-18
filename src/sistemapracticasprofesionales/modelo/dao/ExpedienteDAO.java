@@ -10,6 +10,7 @@ import sistemapracticasprofesionales.modelo.ConexionBD;
 import sistemapracticasprofesionales.modelo.pojo.ExpedienteEstudiante;
 import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
 import sistemapracticasprofesionales.modelo.pojo.Rol;
+import sistemapracticasprofesionales.modelo.pojo.Sesion;
 import sistemapracticasprofesionales.utilidades.Constantes;
 
 /*
@@ -201,5 +202,37 @@ public class ExpedienteDAO {
         }
 
         return expediente;
+    }
+    
+    public static ExpedienteEstudiante obtenerExpedientePropio(
+        String idUsuario) throws SQLException, NullPointerException {
+
+        ExpedienteEstudiante expedienteEstudiante = null;
+
+        try (Connection conexionBD = ConexionBD.crearParaRol(
+                Sesion.getUsuarioActual().getRolUsuario())) {
+
+            if (conexionBD == null) {
+                throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+            }
+
+            String consulta = "SELECT id_expediente, completo, num_proyecto, "
+                    + "id_estudiante, id_experiencia_educativa, matricula, "
+                    + "nombre_estudiante, nombre_proyecto, calificacion "
+                    + "FROM vista_expediente_propio_estudiante "
+                    + "WHERE id_usuario = ?;";
+            PreparedStatement sentenciaBD = conexionBD.prepareStatement(consulta);
+
+            sentenciaBD.setString(1, idUsuario);
+
+            ResultSet resultado = sentenciaBD.executeQuery();
+
+            if (resultado.next()) {
+                expedienteEstudiante =
+                        serializarExpedienteEstudiante(resultado);
+            }
+        }
+
+        return expedienteEstudiante;
     }
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import sistemapracticasprofesionales.modelo.dao.DetalleEvaluacionDAO;
 import sistemapracticasprofesionales.modelo.pojo.DetalleEvaluacion;
 import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
-
+import sistemapracticasprofesionales.modelo.pojo.Sesion;
 /*
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 17/06/2026
@@ -391,4 +391,101 @@ public class DetalleEvaluacionServicio {
 
         errores.append("- ").append(mensaje);
     }
+    
+    public static DetalleEvaluacion obtenerDetalleEvaluacionEstudiantePorId(
+        int idDetallesEvaluacion)
+            throws SQLException, NullPointerException {
+
+        validarDetalleEvaluacion(idDetallesEvaluacion);
+
+        return DetalleEvaluacionDAO.obtenerDetalleEvaluacionEstudiantePorId(
+                idDetallesEvaluacion,
+                Sesion.getUsuarioActual().getNombreUsuario());
+    }
+
+    public static DetalleEvaluacion obtenerArchivoDocumentoEstudiante(
+            int idDetallesEvaluacion)
+            throws SQLException, NullPointerException {
+
+        validarDetalleEvaluacion(idDetallesEvaluacion);
+
+        return DetalleEvaluacionDAO.obtenerArchivoDocumentoEstudiante(
+                idDetallesEvaluacion,
+                Sesion.getUsuarioActual().getNombreUsuario());
+    }
+
+    public static RespuestaOperacion subirDocumentoEstudiante(
+            DetalleEvaluacion detalleEvaluacion)
+            throws SQLException, NullPointerException {
+
+        RespuestaOperacion respuesta =
+                validarDocumentoEstudiante(detalleEvaluacion);
+
+        if (respuesta.getError()) {
+            return respuesta;
+        }
+
+        asignarEstadoEntregaEstudiante(detalleEvaluacion);
+
+        return DetalleEvaluacionDAO.subirDocumentoEstudiante(
+                detalleEvaluacion);
+    }
+    
+    private static RespuestaOperacion validarDocumentoEstudiante(
+        DetalleEvaluacion detalleEvaluacion) {
+
+        RespuestaOperacion respuesta = new RespuestaOperacion();
+        StringBuilder errores = new StringBuilder();
+
+        if (detalleEvaluacion == null) {
+            respuesta.setError(true);
+            respuesta.setMensaje(
+                    "No se recibió la información del documento.");
+            return respuesta;
+        }
+
+        if (detalleEvaluacion.getIdDetallesEvaluacion() <= 0) {
+            agregarError(errores,
+                    "No se identificó el documento seleccionado.");
+        }
+
+        if (estaVacio(detalleEvaluacion.getNombreOriginal())
+                || detalleEvaluacion.getArchivo() == null) {
+            agregarError(errores,
+                    "Debes seleccionar un archivo para subir.");
+        }
+
+        if (!estaVacio(detalleEvaluacion.getNombreOriginal())
+                && !esExtensionPermitida(
+                        detalleEvaluacion.getNombreOriginal())) {
+            agregarError(errores,
+                    "El archivo debe tener formato PDF o DOCX.");
+        }
+
+        if (detalleEvaluacion.getArchivo() != null
+                && (detalleEvaluacion.getArchivo().length <= 0
+                || detalleEvaluacion.getArchivo().length
+                > TAMANIO_MAXIMO_ARCHIVO)) {
+            agregarError(errores,
+                    "El archivo no puede estar vacío ni superar los 10 MB.");
+        }
+
+        respuesta.setError(errores.length() > 0);
+        respuesta.setMensaje(errores.toString());
+
+        return respuesta;
+    }
+
+    private static void asignarEstadoEntregaEstudiante(
+        DetalleEvaluacion detalleEvaluacion) {
+
+        if (detalleEvaluacion.getFechaEntrega() != null
+                && java.time.LocalDate.now().isAfter(
+                        detalleEvaluacion.getFechaEntrega())) {
+            detalleEvaluacion.setEstado("Entregado con retraso");
+        } else {
+            detalleEvaluacion.setEstado("Entregado");
+        }
+    }
+    
 }
