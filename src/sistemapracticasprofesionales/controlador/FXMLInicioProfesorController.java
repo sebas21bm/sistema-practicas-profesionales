@@ -27,7 +27,12 @@ public class FXMLInicioProfesorController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
+    
+    @FXML
+    private void clicConsultarExpedientesEstudiantes(ActionEvent event) {
+        cambiarVentana("FXMLListaEstudianteProfesor", 
+                "Expedientes de estudiantes");
+    }
 
     @FXML
     private void clicSubirFormatos(ActionEvent event) {
@@ -61,9 +66,5 @@ public class FXMLInicioProfesorController implements Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-    }
-
-    @FXML
-    private void clicConsultarExpedientesEstudiantes(ActionEvent event) {
     }
 }

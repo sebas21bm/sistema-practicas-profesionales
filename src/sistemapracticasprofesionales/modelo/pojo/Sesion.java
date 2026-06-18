@@ -10,6 +10,8 @@ package sistemapracticasprofesionales.modelo.pojo;
 public class Sesion {
 
     private static Usuario usuarioActual;
+    private static ExpedienteEstudiante expedienteSeleccionado;
+
 
     public static Usuario getUsuarioActual() {
         return usuarioActual;
@@ -34,9 +36,19 @@ public class Sesion {
                     idExperienciaEducativa);
         }
     }
+    
+    public static ExpedienteEstudiante getExpedienteSeleccionado() {
+        return expedienteSeleccionado;
+    }
+
+    public static void setExpedienteSeleccionado(
+            ExpedienteEstudiante expedienteSeleccionado) {
+        Sesion.expedienteSeleccionado = expedienteSeleccionado;
+    }
 
     public static void cerrarSesion() {
         usuarioActual = null;
+        expedienteSeleccionado = null;
     }
 
 }
