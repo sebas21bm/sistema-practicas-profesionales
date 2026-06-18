@@ -17,9 +17,14 @@ public class ProyectoPracticasServicio {
     
     private static final String REGEX_NOMBRE_PROYECTO = "^.{1,100}$";
     private static final String REGEX_DESCRIPCION = "^.{1,150}$";
-    private static final String REGEX_NOMBRE_RESPONSABLE = "^.{1,30}$";
-    private static final String REGEX_APELLIDO_PATERNO = "^.{1,30}$";
-    private static final String REGEX_APELLIDO_MATERNO = "^.{0,30}$";
+    
+    private static final String REGEX_NOMBRE_RESPONSABLE =
+        "^[A-Za-zÁÉÍÓÚáéíóúÑñÜü]+( [A-Za-zÁÉÍÓÚáéíóúÑñÜü]+)*$";
+    private static final String REGEX_APELLIDO_PATERNO =
+            "^[A-Za-zÁÉÍÓÚáéíóúÑñÜü]+( [A-Za-zÁÉÍÓÚáéíóúÑñÜü]+)*$";
+    private static final String REGEX_APELLIDO_MATERNO =
+            "^$|^[A-Za-zÁÉÍÓÚáéíóúÑñÜü]+( [A-Za-zÁÉÍÓÚáéíóúÑñÜü]+)*$";
+    
     private static final String REGEX_TELEFONO = "^(?!0000000000)\\d{10}$";
     private static final String REGEX_CORREO =
             "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
@@ -204,22 +209,28 @@ public class ProyectoPracticasServicio {
         
         String nombreResponsable = responsableProyecto.getNombre();
         if (nombreResponsable.isEmpty()
+                || nombreResponsable.length() > 30
                 || !nombreResponsable.matches(REGEX_NOMBRE_RESPONSABLE)) {
-            agregarError(errores, "El nombre del responsable es obligatorio "
-                    + "y no puede exceder los 30 caracteres.");
+            agregarError(errores, "El nombre del responsable es obligatorio, "
+                    + "solo puede contener letras y espacios, y no puede "
+                    + "exceder los 30 caracteres.");
         }
         
         String apellidoPaterno = responsableProyecto.getPaterno();
         if (apellidoPaterno.isEmpty()
+                || apellidoPaterno.length() > 30
                 || !apellidoPaterno.matches(REGEX_APELLIDO_PATERNO)) {
             agregarError(errores, "El apellido paterno del responsable es "
-                    + "obligatorio y no puede exceder los 30 caracteres.");
+                    + "obligatorio, solo puede contener letras y espacios, "
+                    + "y no puede exceder los 30 caracteres.");
         }
         
         String apellidoMaterno = responsableProyecto.getMaterno();
-        if (!apellidoMaterno.matches(REGEX_APELLIDO_MATERNO)) {
-            agregarError(errores, "El apellido materno del responsable no "
-                    + "puede exceder los 30 caracteres.");
+        if (apellidoMaterno.length() > 30
+                || !apellidoMaterno.matches(REGEX_APELLIDO_MATERNO)) {
+            agregarError(errores, "El apellido materno del responsable solo "
+                    + "puede contener letras y espacios, y no puede exceder "
+                    + "los 30 caracteres.");
         }
         
         String telefono = responsableProyecto.getTelefono();

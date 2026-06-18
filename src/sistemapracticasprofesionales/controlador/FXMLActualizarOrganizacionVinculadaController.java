@@ -196,14 +196,17 @@ public class FXMLActualizarOrganizacionVinculadaController implements Initializa
             } else {
                 Utilidades.mostrarAlertaSimple("Datos inválidos", 
                     "No es posible continuar con la actualización de la organización.\n"
-                    + "Los siguientes datos ingresados fueron inválidos: "
+                    + "Los datos ingresados son inválidos:\n"
                     + respuesta.getMensaje() + "\nIntente nuevamente", 
                     Alert.AlertType.WARNING);
             }
             
         } catch (SQLException ex) {
            Utilidades.mostrarAlertaSimple(
-                "Error", ex.getMessage(), 
+                "Error", 
+                   "No es posible actualizar los datos de la "
+                    + "organización. Error al acceder al registro. "
+                    + "Intente nuevamente", 
                    Alert.AlertType.ERROR);
         } catch (NullPointerException ex) {
            Utilidades.mostrarAlertaSimple(
@@ -219,7 +222,12 @@ public class FXMLActualizarOrganizacionVinculadaController implements Initializa
             FXMLLoader cargador = Utilidades.cargarFXML("FXMLInfoOrganizacionVinculada");
             Parent vista = cargador.load();
             FXMLInfoOrganizacionVinculadaController controlador = cargador.getController();
-            controlador.inicializarInformacionOrganizacion(organizacionVinculada);
+            
+            OrganizacionVinculada organizacionCompleta = 
+                    OrganizacionVinculadaServicio.recuperarOrganizacionCompleta(
+            organizacionVinculada.getNumOrganizacionVinculada());
+            
+            controlador.inicializarInformacionOrganizacion(organizacionCompleta);
             Scene escena = new Scene(vista);
 
             Stage escenario = (Stage) txt_calle.getScene().getWindow();
@@ -230,6 +238,14 @@ public class FXMLActualizarOrganizacionVinculadaController implements Initializa
             escenario.show();
         } catch (IOException ex) {
             ex.printStackTrace();
+        } catch (SQLException | NullPointerException ex) {
+            Utilidades.mostrarAlertaSimple(
+                    "Error al recuperar información",
+                    "No se puede ver la información de la organización. "
+                    + "Error al recuperar el registro de la organización vinculada. "
+                    + "Intente nuevamente",
+                    Alert.AlertType.ERROR
+            );
         }
     }
     

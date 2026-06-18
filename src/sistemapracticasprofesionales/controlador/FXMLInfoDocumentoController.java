@@ -53,11 +53,25 @@ public class FXMLInfoDocumentoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }
     
-    public void inicializarInformacion(
-            DetalleEvaluacion detalleEvaluacion) {
-        
+    public boolean inicializarInformacion(DetalleEvaluacion detalleEvaluacion) {
+        if (!esDetalleEvaluacionValido(detalleEvaluacion)) {
+            return false;
+        }
+
         this.detalleEvaluacion = detalleEvaluacion;
         cargarInformacionDocumento();
+        return true;
+    }
+    
+    private boolean esDetalleEvaluacionValido(
+        DetalleEvaluacion detalleEvaluacion) {
+
+        return detalleEvaluacion != null
+                && detalleEvaluacion.getIdDetallesEvaluacion() > 0
+                && detalleEvaluacion.getDocumentoEntrega() != null
+                && !detalleEvaluacion.getDocumentoEntrega().trim().isEmpty()
+                && detalleEvaluacion.getEstado() != null
+                && !detalleEvaluacion.getEstado().trim().isEmpty();
     }
     
     private void cargarInformacionDocumento() {

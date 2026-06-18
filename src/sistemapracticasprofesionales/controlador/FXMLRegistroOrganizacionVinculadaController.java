@@ -147,7 +147,7 @@ public class FXMLRegistroOrganizacionVinculadaController implements Initializabl
             } else {
                 Utilidades.mostrarAlertaSimple("Datos invalidos", 
                     "No es posible continuar con el registro de la "
-                    + "organización.\nLos sigueintes datos ingresados fueron inválidos: "
+                    + "organización.\nLos datos ingresados son inválidos:\n"
                     + respuesta.getMensaje() + "\nIntente nuevamente", 
                     Alert.AlertType.WARNING);
             }
