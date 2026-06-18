@@ -20,6 +20,9 @@ public class EstudianteServicio {
             "^[A-Za-z0-9._%+-]+@estudiantes\\.uv\\.mx$";
     private static final String REGEX_CONTRASENIA =
             "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)\\S{8,64}$";
+    private static final String REGEX_NOMBRE_PERSONA =
+        "^[A-Za-zÁÉÍÓÚáéíóúÑñÜü]+"
+        + "( [A-Za-zÁÉÍÓÚáéíóúÑñÜü]+)*$";
 
     public static RespuestaOperacion registrarEstudiante(
             Estudiante estudiante) throws SQLException, NullPointerException {
@@ -120,23 +123,11 @@ public class EstudianteServicio {
                     + "de 3 a 5 años anteriores al año actual.");
         }
 
-        if (!estaVacio(estudiante.getNombre())
-                && !cumpleLongitud(estudiante.getNombre(), 30)) {
-            agregarError(errores,
-                    "El nombre no debe superar 30 caracteres.");
-        }
-
-        if (!estaVacio(estudiante.getApellidoPaterno())
-                && !cumpleLongitud(estudiante.getApellidoPaterno(), 30)) {
-            agregarError(errores,
-                    "El apellido paterno no debe superar 30 caracteres.");
-        }
-
-        if (!estaVacio(estudiante.getApellidoMaterno())
-                && !cumpleLongitud(estudiante.getApellidoMaterno(), 30)) {
-            agregarError(errores,
-                    "El apellido materno no debe superar 30 caracteres.");
-        }
+        validarFormatoNombre(estudiante.getNombre(), "nombre", errores);
+        validarFormatoNombre(estudiante.getApellidoPaterno(),
+                "apellido paterno", errores);
+        validarFormatoNombre(estudiante.getApellidoMaterno(),
+                "apellido materno", errores);
 
         if (!estaVacio(estudiante.getTelefono())
                 && !(estudiante.getTelefono().matches(REGEX_TELEFONO))) {
@@ -217,6 +208,20 @@ public class EstudianteServicio {
         return anioIngreso >= anioActual - 5
                 && anioIngreso <= anioActual - 3;
     }
+    
+    private static void validarFormatoNombre(
+        String texto, String nombreCampo, StringBuilder errores) {
+    if (!estaVacio(texto) && !cumpleLongitud(texto, 30)) {
+        agregarError(errores,
+                "El " + nombreCampo + " no debe superar 30 caracteres.");
+    }
+
+    if (!estaVacio(texto) && !texto.matches(REGEX_NOMBRE_PERSONA)) {
+        agregarError(errores,
+                "El " + nombreCampo
+                + " debe contener solamente letras y espacios.");
+    }
+}
 
     private static boolean estaVacio(String texto) {
         return texto == null || texto.trim().isEmpty();
