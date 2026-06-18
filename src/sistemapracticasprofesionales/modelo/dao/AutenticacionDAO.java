@@ -11,6 +11,7 @@ import sistemapracticasprofesionales.modelo.pojo.Rol;
 import sistemapracticasprofesionales.modelo.pojo.Usuario;
 import sistemapracticasprofesionales.utilidades.Constantes;
 import sistemapracticasprofesionales.utilidades.Utilidades;
+import sistemapracticasprofesionales.excepciones.UsuarioInactivoException;
 
 /*
  * Autor: Sebastián Barrera Mora
@@ -23,7 +24,7 @@ public class AutenticacionDAO {
     public static Usuario validarSesionUsuario(
             String usuario, String contrasenia)
             throws SQLException, NullPointerException,
-            NoSuchAlgorithmException {
+            NoSuchAlgorithmException, UsuarioInactivoException {
         Usuario usuarioLogin = new Usuario();
 
         try (Connection conexionBD = ConexionBD.crearParaAutenticacion()) {
@@ -49,6 +50,12 @@ public class AutenticacionDAO {
                 throw new UsuarioNoEncontradoException(
                         "Usuario no encontrado. El usuario y/o "
                         + "contraseña no coinciden.");
+            }
+            
+            if (!resultado.getBoolean("activo")) {
+                throw new UsuarioInactivoException(
+                        "El usuario se encuentra inactivo. "
+                        + "Contacte al administrador del sistema.");
             }
 
             usuarioLogin.setNombreUsuario(
@@ -111,6 +118,8 @@ public class AutenticacionDAO {
         if (resultado.next()) {
             usuarioLogin.setIdExperienciaEducativa(
                     resultado.getInt("id_experiencia_educativa"));
+        } else {
+            usuarioLogin.setIdExperienciaEducativa(0);
         }
     }
 }
