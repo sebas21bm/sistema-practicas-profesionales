@@ -27,23 +27,7 @@ public class ExpedienteDAO {
         try (Connection conexionBD =
                 ConexionBD.crearParaRol(Rol.Profesor)) {
             if (conexionBD != null) {
-                String consulta =
-                        "SELECT e.id_expediente, e.completo, "
-                        + "e.num_proyecto, e.id_estudiante, "
-                        + "e.id_experiencia_educativa, es.matricula, "
-                        + "CONCAT(es.nombre, ' ', es.paterno, ' ', "
-                        + "IFNULL(es.materno, '')) AS nombre_estudiante, "
-                        + "pp.nombre AS nombre_proyecto, "
-                        + "i.calificacion "
-                        + "FROM expediente e "
-                        + "JOIN estudiante es "
-                        + "ON e.id_estudiante = es.id_estudiante "
-                        + "LEFT JOIN proyecto_practicas pp "
-                        + "ON e.num_proyecto = pp.num_proyecto "
-                        + "LEFT JOIN inscripcion i "
-                        + "ON e.id_estudiante = i.id_estudiante "
-                        + "AND e.id_experiencia_educativa = "
-                        + "i.id_experiencia_educativa "
+                String consulta = obtenerConsultaBase()
                         + "WHERE e.id_experiencia_educativa = ? "
                         + "ORDER BY es.matricula;";
                 PreparedStatement sentencia =
@@ -62,6 +46,73 @@ public class ExpedienteDAO {
         }
 
         throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+    }
+
+    public static ArrayList<ExpedienteEstudiante>
+            buscarExpedientesEstudiantesProfesor(
+            int idExperienciaEducativa, String filtro, String criterio)
+            throws SQLException, NullPointerException {
+        ArrayList<ExpedienteEstudiante> expedientes =
+                new ArrayList<>();
+
+        try (Connection conexionBD =
+                ConexionBD.crearParaRol(Rol.Profesor)) {
+            if (conexionBD != null) {
+                String consulta = obtenerConsultaBusqueda(filtro);
+                PreparedStatement sentencia =
+                        conexionBD.prepareStatement(consulta);
+
+                sentencia.setInt(1, idExperienciaEducativa);
+                sentencia.setString(2, "%" + criterio + "%");
+
+                ResultSet resultado = sentencia.executeQuery();
+
+                while (resultado.next()) {
+                    expedientes.add(
+                            serializarExpedienteEstudiante(resultado));
+                }
+
+                return expedientes;
+            }
+        }
+
+        throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
+    }
+
+    private static String obtenerConsultaBase() {
+        return "SELECT e.id_expediente, e.completo, "
+                + "e.num_proyecto, e.id_estudiante, "
+                + "e.id_experiencia_educativa, es.matricula, "
+                + "CONCAT(es.nombre, ' ', es.paterno, ' ', "
+                + "IFNULL(es.materno, '')) AS nombre_estudiante, "
+                + "pp.nombre AS nombre_proyecto, "
+                + "i.calificacion "
+                + "FROM expediente e "
+                + "JOIN estudiante es "
+                + "ON e.id_estudiante = es.id_estudiante "
+                + "LEFT JOIN proyecto_practicas pp "
+                + "ON e.num_proyecto = pp.num_proyecto "
+                + "LEFT JOIN inscripcion i "
+                + "ON e.id_estudiante = i.id_estudiante "
+                + "AND e.id_experiencia_educativa = "
+                + "i.id_experiencia_educativa ";
+    }
+
+    private static String obtenerConsultaBusqueda(String filtro) {
+        String condicionBusqueda;
+
+        if ("Nombre".equals(filtro)) {
+            condicionBusqueda =
+                    "AND CONCAT(es.nombre, ' ', es.paterno, ' ', "
+                    + "IFNULL(es.materno, '')) LIKE ? ";
+        } else {
+            condicionBusqueda = "AND es.matricula LIKE ? ";
+        }
+
+        return obtenerConsultaBase()
+                + "WHERE e.id_experiencia_educativa = ? "
+                + condicionBusqueda
+                + "ORDER BY es.matricula;";
     }
 
     private static ExpedienteEstudiante serializarExpedienteEstudiante(

@@ -3,7 +3,6 @@ package sistemapracticasprofesionales.controlador;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -55,7 +54,6 @@ public class FXMLListaEstudianteProfesorController
     private TableColumn<ExpedienteEstudiante, String> col_calificacion;
 
     private int idExperienciaEducativa;
-    private List<ExpedienteEstudiante> expedientesCargados;
     private ObservableList<ExpedienteEstudiante> expedientesTabla;
 
     @Override
@@ -99,17 +97,16 @@ public class FXMLListaEstudianteProfesorController
 
     private void cargarExpedientesEstudiantes() {
         if (idExperienciaEducativa <= 0) {
-            expedientesCargados = new ArrayList<>();
-            mostrarExpedientes(expedientesCargados);
+            mostrarExpedientes(FXCollections.observableArrayList());
             return;
         }
 
         try {
-            expedientesCargados =
+            List<ExpedienteEstudiante> expedientes =
                     ExpedienteServicio.
                             obtenerExpedientesEstudiantesProfesor(
                                     idExperienciaEducativa);
-            mostrarExpedientes(expedientesCargados);
+            mostrarExpedientes(expedientes);
         } catch (SQLException ex) {
             Utilidades.mostrarAlertaSimple(
                     "Error al consultar",
@@ -137,45 +134,37 @@ public class FXMLListaEstudianteProfesorController
 
     @FXML
     private void clicBuscar(ActionEvent event) {
-        filtrarExpedientes();
+        buscarExpedientes();
     }
 
-    private void filtrarExpedientes() {
-        List<ExpedienteEstudiante> expedientesFiltrados =
-                new ArrayList<>();
-        String criterio = txt_busqueda.getText();
+    private void buscarExpedientes() {
         String filtro = cb_filtro.getSelectionModel().getSelectedItem();
+        String criterio = txt_busqueda.getText();
 
-        if (criterio == null || criterio.trim().isEmpty()) {
-            mostrarExpedientes(expedientesCargados);
-            return;
+        try {
+            List<ExpedienteEstudiante> expedientes =
+                    ExpedienteServicio.
+                            buscarExpedientesEstudiantesProfesor(
+                                    idExperienciaEducativa,
+                                    filtro,
+                                    criterio);
+            mostrarExpedientes(expedientes);
+        } catch (SQLException ex) {
+            Utilidades.mostrarAlertaSimple(
+                    "Error al buscar",
+                    ex.getMessage(),
+                    Alert.AlertType.ERROR);
+        } catch (NullPointerException ex) {
+            Utilidades.mostrarAlertaSimple(
+                    "Error al buscar",
+                    "No fue posible realizar la búsqueda.",
+                    Alert.AlertType.ERROR);
+        } catch (IllegalArgumentException ex) {
+            Utilidades.mostrarAlertaSimple(
+                    "Datos inválidos",
+                    ex.getMessage(),
+                    Alert.AlertType.WARNING);
         }
-
-        criterio = criterio.trim().toLowerCase();
-
-        for (ExpedienteEstudiante expediente : expedientesCargados) {
-            if (coincideFiltroBusqueda(expediente, filtro, criterio)) {
-                expedientesFiltrados.add(expediente);
-            }
-        }
-
-        mostrarExpedientes(expedientesFiltrados);
-    }
-
-    private boolean coincideFiltroBusqueda(
-            ExpedienteEstudiante expediente,
-            String filtro,
-            String criterio) {
-        if (FILTRO_NOMBRE.equals(filtro)) {
-            return contiene(expediente.getNombreEstudiante(), criterio);
-        }
-
-        return contiene(expediente.getMatricula(), criterio);
-    }
-
-    private boolean contiene(String texto, String criterio) {
-        return texto != null
-                && texto.toLowerCase().contains(criterio);
     }
 
     @FXML

@@ -13,6 +13,9 @@ import sistemapracticasprofesionales.modelo.pojo.ExpedienteEstudiante;
  */
 public class ExpedienteServicio {
 
+    private static final String FILTRO_MATRICULA = "Matrícula";
+    private static final String FILTRO_NOMBRE = "Nombre";
+
     public static ArrayList<ExpedienteEstudiante>
             obtenerExpedientesEstudiantesProfesor(
             int idExperienciaEducativa)
@@ -23,11 +26,38 @@ public class ExpedienteServicio {
                 idExperienciaEducativa);
     }
 
+    public static ArrayList<ExpedienteEstudiante>
+            buscarExpedientesEstudiantesProfesor(
+            int idExperienciaEducativa, String filtro, String criterio)
+            throws SQLException, NullPointerException {
+        validarExperienciaEducativa(idExperienciaEducativa);
+        filtro = limpiarTexto(filtro);
+        criterio = limpiarTexto(criterio);
+
+        if (criterio.isEmpty()) {
+            return obtenerExpedientesEstudiantesProfesor(
+                    idExperienciaEducativa);
+        }
+
+        if (!FILTRO_NOMBRE.equals(filtro)
+                && !FILTRO_MATRICULA.equals(filtro)) {
+            throw new IllegalArgumentException(
+                    "Debe seleccionar un filtro de búsqueda válido.");
+        }
+
+        return ExpedienteDAO.buscarExpedientesEstudiantesProfesor(
+                idExperienciaEducativa, filtro, criterio);
+    }
+
     private static void validarExperienciaEducativa(
             int idExperienciaEducativa) {
         if (idExperienciaEducativa <= 0) {
             throw new IllegalArgumentException(
                     "No se identificó la experiencia educativa.");
         }
+    }
+
+    private static String limpiarTexto(String texto) {
+        return texto == null ? "" : texto.trim();
     }
 }
