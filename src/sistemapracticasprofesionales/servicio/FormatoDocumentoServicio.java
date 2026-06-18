@@ -10,7 +10,7 @@ import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 15/06/2026
  * Descripción: Servicio encargado de validar reglas de negocio de formatos
- *              de documentos.
+ *              de documentos por experiencia educativa.
  */
 public class FormatoDocumentoServicio {
 
@@ -30,14 +30,23 @@ public class FormatoDocumentoServicio {
         return FormatoDocumentoDAO.subirFormatoDocumento(formatoDocumento);
     }
 
-    public static ArrayList<FormatoDocumento> obtenerFormatosDocumento()
+    public static ArrayList<FormatoDocumento> obtenerFormatosDocumento(
+            int idExperienciaEducativa)
             throws SQLException, NullPointerException {
-        return FormatoDocumentoDAO.obtenerFormatosDocumento();
+        validarExperienciaEducativa(idExperienciaEducativa);
+
+        return FormatoDocumentoDAO.obtenerFormatosDocumento(
+                idExperienciaEducativa);
     }
 
     public static FormatoDocumento obtenerFormatoDocumentoPorId(
-            int idDocumento) throws SQLException, NullPointerException {
-        return FormatoDocumentoDAO.obtenerFormatoDocumentoPorId(idDocumento);
+            int idExperienciaEducativa, int idDocumento)
+            throws SQLException, NullPointerException {
+        validarExperienciaEducativa(idExperienciaEducativa);
+        validarDocumento(idDocumento);
+
+        return FormatoDocumentoDAO.obtenerFormatoDocumentoPorId(
+                idExperienciaEducativa, idDocumento);
     }
 
     private static RespuestaOperacion validarFormatoDocumento(
@@ -64,6 +73,11 @@ public class FormatoDocumentoServicio {
 
     private static void validarCamposObligatorios(
             FormatoDocumento formatoDocumento, StringBuilder errores) {
+        if (formatoDocumento.getIdExperienciaEducativa() <= 0) {
+            agregarError(errores,
+                    "No se identificó la experiencia educativa.");
+        }
+
         if (formatoDocumento.getIdDocumento() <= 0) {
             agregarError(errores,
                     "Debe seleccionar un tipo de documento.");
@@ -89,6 +103,21 @@ public class FormatoDocumentoServicio {
                 && !tieneExtensionPermitida(nombreArchivo)) {
             agregarError(errores,
                     "El archivo debe tener extensión .pdf o .docx.");
+        }
+    }
+
+    private static void validarExperienciaEducativa(
+            int idExperienciaEducativa) {
+        if (idExperienciaEducativa <= 0) {
+            throw new IllegalArgumentException(
+                    "No se identificó la experiencia educativa.");
+        }
+    }
+
+    private static void validarDocumento(int idDocumento) {
+        if (idDocumento <= 0) {
+            throw new IllegalArgumentException(
+                    "No se identificó el documento.");
         }
     }
 

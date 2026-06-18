@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLExpedienteEstudianteProfesorController">
+    <children>
+
+        <HBox layoutX="26.0" layoutY="45.0" prefHeight="30.0" prefWidth="760.0" spacing="5.0">
+            <children>
+                <Label text="EXPEDIENTE DE:" textFill="#555555">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Label>
+
+                <Label fx:id="lbl_nombreEstudiante" textFill="#555555">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+
+        <Separator layoutX="26.0" layoutY="88.0" prefHeight="0.0" prefWidth="850.0" />
+
+        <Label layoutX="26.0" layoutY="113.0" text="Calificación total:" textFill="black">
+            <font>
+                <Font name="System Bold Italic" size="16.0" />
+            </font>
+        </Label>
+
+        <Label fx:id="lbl_calificacionTotal" layoutX="169.0" layoutY="111.0" prefHeight="26.0" prefWidth="66.0" style="-fx-border-color: #8aa6c8; -fx-border-width: 1;" textFill="black">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+
+        <Button layoutX="407.0" layoutY="108.0" mnemonicParsing="false" onAction="#clicCalcularCalificacion" prefHeight="31.0" prefWidth="120.0" text="Calcular calificación" />
+
+        <Button layoutX="535.0" layoutY="108.0" mnemonicParsing="false" onAction="#clicVerDetalles" prefHeight="31.0" prefWidth="105.0" text="Ver detalles" />
+
+        <Button layoutX="650.0" layoutY="108.0" mnemonicParsing="false" onAction="#clicRegresar" prefHeight="31.0" prefWidth="105.0" text="Regresar" />
+
+        <ScrollPane fitToWidth="false" hbarPolicy="NEVER" layoutX="26.0" layoutY="160.0" prefHeight="465.0" prefWidth="850.0" style="-fx-background-color: transparent; -fx-background: white;" vbarPolicy="AS_NEEDED">
+            <content>
+                <AnchorPane prefHeight="840.0" prefWidth="820.0" style="-fx-background-color: white;">
+                    <children>
+                        <Label layoutX="0.0" layoutY="0.0" text="Documentos iniciales" textFill="black">
+                            <font>
+                                <Font name="System Bold Italic" size="16.0" />
+                            </font>
+                        </Label>
+
+                        <Label layoutX="195.0" layoutY="0.0" text="Valor: 5%" textFill="black">
+                            <font>
+                                <Font name="System Bold Italic" size="16.0" />
+                            </font>
+                        </Label>
+
+                        <Label layoutX="350.0" layoutY="0.0" text="Porcentaje obtenido:" textFill="black">
+                            <font>
+                                <Font name="System Bold Italic" size="16.0" />
+                            </font>
+                        </Label>
+
+                        <Label fx:id="lbl_porcentajeDocumentosIniciales" layoutX="540.0" layoutY="0.0" textFill="black">
+                            <font>
+                                <Font name="System Bold Italic" size="16.0" />
+                            </font>
+                        </Label>
+
+                        <TableView fx:id="tv_documentosIniciales" focusTraversable="false" layoutX="0.0" layoutY="35.0" prefHeight="210.0" prefWidth="800.0">
+                            <columns>
+                                <TableColumn fx:id="col_documentoInicial" prefWidth="400.0" text="Documento" />
+                                <TableColumn fx:id="col_estadoDocumentoInicial" prefWidth="400.0" text="Estado" />
+                            </columns>
+                        </TableView>
+
+                        <Label layoutX="0.0" layoutY="270.0" text="Reportes y evaluaciones" textFill="black">
+                            <font>
+                                <Font name="System Bold Italic" size="16.0" />
+                            </font>
+                        </Label>
+
+                        <TableView fx:id="tv_reportesEvaluaciones" focusTraversable="false" layoutX="0.0" layoutY="305.0" prefHeight="500.0" prefWidth="800.0">
+                            <columns>
+                                <TableColumn fx:id="col_documento" prefWidth="250.0" text="Documento" />
+                                <TableColumn fx:id="col_estado" prefWidth="190.0" text="Estado" />
+                                <TableColumn fx:id="col_valor" prefWidth="170.0" text="Valor" />
+                                <TableColumn fx:id="col_porcentajeObtenido" prefWidth="190.0" text="Porcentaje obtenido" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+      <MenuBar layoutY="1.0" prefHeight="27.0" prefWidth="900.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Expedientes">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicConsultarExpedientes" text="Consultar expedientes" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Formatos">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicSubirFormatos" text="Subir formatos" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Fechas de Entrega">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clicFechasEntrega" text="Fechas de entrega" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+    </children>
+</AnchorPane>

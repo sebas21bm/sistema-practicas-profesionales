@@ -7,17 +7,32 @@ package sistemapracticasprofesionales.modelo.pojo;
  */
 public class FormatoDocumento {
 
+    private int idFormatoDocumento;
+    private int idExperienciaEducativa;
     private int idDocumento;
     private String tipoDocumento;
-    private double valor;
     private Integer idArchivo;
     private String nombreOriginal;
     private byte[] archivo;
-    private String fechaSubida;
 
-    public FormatoDocumento() {
+    public FormatoDocumento() {}
+
+    public int getIdFormatoDocumento() {
+        return idFormatoDocumento;
     }
 
+    public void setIdFormatoDocumento(int idFormatoDocumento) {
+        this.idFormatoDocumento = idFormatoDocumento;
+    }
+
+    public int getIdExperienciaEducativa() {
+        return idExperienciaEducativa;
+    }
+
+    public void setIdExperienciaEducativa(int idExperienciaEducativa) {
+        this.idExperienciaEducativa = idExperienciaEducativa;
+    }
+    
     public int getIdDocumento() {
         return idDocumento;
     }
@@ -32,14 +47,6 @@ public class FormatoDocumento {
 
     public void setTipoDocumento(String tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
-    }
-
-    public double getValor() {
-        return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
     }
 
     public Integer getIdArchivo() {
@@ -66,20 +73,13 @@ public class FormatoDocumento {
         this.archivo = archivo;
     }
 
-    public String getFechaSubida() {
-        return fechaSubida;
-    }
-
-    public void setFechaSubida(String fechaSubida) {
-        this.fechaSubida = fechaSubida;
-    }
-
     public String getEstadoFormato() {
         return idArchivo != null ? "Cargado" : "Sin formato";
     }
+    
 
     @Override
     public String toString() {
-        return tipoDocumento + " (" + valor + "%)";
+        return tipoDocumento;
     }
 }

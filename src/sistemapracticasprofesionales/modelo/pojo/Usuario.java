@@ -1,17 +1,18 @@
 package sistemapracticasprofesionales.modelo.pojo;
 
-/**
+/*
  * Autor: Sebastián Barrera Mora
  * Fecha de creación: 14/06/2026
- * Descripción: POJO que representa la información de las cuentas y los usuarios
- * del SPP.
+ * Descripción: POJO que representa la información de las cuentas y los
+ *              usuarios del SPP.
  */
 public class Usuario {
-    
+
     private String nombreUsuario;
     private String nombreReal;
     private Rol rolUsuario;
     private boolean estaActivo;
+    private int idExperienciaEducativa;
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -44,5 +45,13 @@ public class Usuario {
     public void setEstaActivo(boolean estaActivo) {
         this.estaActivo = estaActivo;
     }
-    
+
+    public int getIdExperienciaEducativa() {
+        return idExperienciaEducativa;
+    }
+
+    public void setIdExperienciaEducativa(int idExperienciaEducativa) {
+        this.idExperienciaEducativa = idExperienciaEducativa;
+    }
+
 }

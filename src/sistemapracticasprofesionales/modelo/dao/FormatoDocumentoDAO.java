@@ -10,13 +10,13 @@ import sistemapracticasprofesionales.modelo.ConexionBD;
 import sistemapracticasprofesionales.modelo.pojo.FormatoDocumento;
 import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
 import sistemapracticasprofesionales.modelo.pojo.Rol;
-import sistemapracticasprofesionales.modelo.pojo.Sesion;
 import sistemapracticasprofesionales.utilidades.Constantes;
 
 /*
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 15/06/2026
- * Descripción: DAO encargado de acceder a los formatos de documentos.
+ * Descripción: DAO encargado de acceder a los formatos de documentos
+ *              asociados a una experiencia educativa.
  */
 public class FormatoDocumentoDAO {
 
@@ -25,17 +25,22 @@ public class FormatoDocumentoDAO {
             throws SQLException, NullPointerException {
         RespuestaOperacion respuesta = new RespuestaOperacion();
 
-        try (Connection conexionBD = ConexionBD.crearParaRol(
-                Sesion.getUsuarioActual().getRolUsuario())) {
+        try (Connection conexionBD =
+                ConexionBD.crearParaRol(Rol.Profesor)) {
             if (conexionBD != null) {
                 String consulta =
-                        "{CALL subir_formato_documento(?, ?, ?)}";
+                        "{CALL subir_formato_documento(?, ?, ?, ?)}";
                 CallableStatement sentencia =
                         conexionBD.prepareCall(consulta);
 
-                sentencia.setInt(1, formatoDocumento.getIdDocumento());
-                sentencia.setString(2, formatoDocumento.getNombreOriginal());
-                sentencia.setBytes(3, formatoDocumento.getArchivo());
+                sentencia.setInt(
+                        1,
+                        formatoDocumento.getIdExperienciaEducativa());
+                sentencia.setInt(2, formatoDocumento.getIdDocumento());
+                sentencia.setString(
+                        3,
+                        formatoDocumento.getNombreOriginal());
+                sentencia.setBytes(4, formatoDocumento.getArchivo());
                 sentencia.execute();
 
                 respuesta.setError(false);
@@ -45,23 +50,29 @@ public class FormatoDocumentoDAO {
             }
         }
 
-        throw new SQLException("No fue posible guardar "
-                + "el formato en el sistema. Intente nuevamente");
+        throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
     }
 
-    public static ArrayList<FormatoDocumento> obtenerFormatosDocumento()
+    public static ArrayList<FormatoDocumento> obtenerFormatosDocumento(
+            int idExperienciaEducativa)
             throws SQLException, NullPointerException {
         ArrayList<FormatoDocumento> formatosDocumento = new ArrayList<>();
 
-        try (Connection conexionBD = ConexionBD.crearParaRol(
-                Sesion.getUsuarioActual().getRolUsuario())) {
+        try (Connection conexionBD =
+                ConexionBD.crearParaRol(Rol.Profesor)) {
             if (conexionBD != null) {
                 String consulta =
-                        "SELECT id_documento, tipo_documento, valor, "
-                        + "idarchivo, nombre_original, fecha_subida "
-                        + "FROM vista_formatos_documentos;";
+                        "SELECT id_experiencia_educativa, "
+                        + "id_documento, tipo_documento, "
+                        + "id_formato_documento, idarchivo, "
+                        + "nombre_original "
+                        + "FROM vista_formatos_documentos "
+                        + "WHERE id_experiencia_educativa = ? "
+                        + "ORDER BY tipo_documento;";
                 PreparedStatement sentencia =
                         conexionBD.prepareStatement(consulta);
+
+                sentencia.setInt(1, idExperienciaEducativa);
                 ResultSet resultado = sentencia.executeQuery();
 
                 while (resultado.next()) {
@@ -74,26 +85,30 @@ public class FormatoDocumentoDAO {
             }
         }
 
-        throw new SQLException("No es posible mostrar los documentos. "
-                + "Error al recuperar la información. Intente de nuevo");
+        throw new SQLException(Constantes.MSJ_SIN_CONEXION_BD);
     }
 
     public static FormatoDocumento obtenerFormatoDocumentoPorId(
-            int idDocumento) throws SQLException, NullPointerException {
+            int idExperienciaEducativa, int idDocumento)
+            throws SQLException, NullPointerException {
         FormatoDocumento formatoDocumento = null;
 
-        try (Connection conexionBD = ConexionBD.crearParaRol(
-                Sesion.getUsuarioActual().getRolUsuario())) {
+        try (Connection conexionBD =
+                ConexionBD.crearParaRol(Rol.Profesor)) {
             if (conexionBD != null) {
                 String consulta =
-                        "SELECT id_documento, tipo_documento, valor, "
-                        + "idarchivo, nombre_original, fecha_subida "
+                        "SELECT id_experiencia_educativa, "
+                        + "id_documento, tipo_documento, "
+                        + "id_formato_documento, idarchivo, "
+                        + "nombre_original "
                         + "FROM vista_formatos_documentos "
-                        + "WHERE id_documento = ?;";
+                        + "WHERE id_experiencia_educativa = ? "
+                        + "AND id_documento = ?;";
                 PreparedStatement sentencia =
                         conexionBD.prepareStatement(consulta);
 
-                sentencia.setInt(1, idDocumento);
+                sentencia.setInt(1, idExperienciaEducativa);
+                sentencia.setInt(2, idDocumento);
                 ResultSet resultado = sentencia.executeQuery();
 
                 if (resultado.next()) {
@@ -111,12 +126,20 @@ public class FormatoDocumentoDAO {
     private static FormatoDocumento serializarFormatoDocumento(
             ResultSet resultado) throws SQLException, NullPointerException {
         FormatoDocumento formatoDocumento = new FormatoDocumento();
+        int idFormatoDocumento;
         int idArchivo;
 
+        formatoDocumento.setIdExperienciaEducativa(
+                resultado.getInt("id_experiencia_educativa"));
         formatoDocumento.setIdDocumento(resultado.getInt("id_documento"));
         formatoDocumento.setTipoDocumento(
                 resultado.getString("tipo_documento"));
-        formatoDocumento.setValor(resultado.getDouble("valor"));
+
+        idFormatoDocumento =
+                resultado.getInt("id_formato_documento");
+        if (!resultado.wasNull()) {
+            formatoDocumento.setIdFormatoDocumento(idFormatoDocumento);
+        }
 
         idArchivo = resultado.getInt("idarchivo");
         if (resultado.wasNull()) {
@@ -127,7 +150,6 @@ public class FormatoDocumentoDAO {
 
         formatoDocumento.setNombreOriginal(
                 resultado.getString("nombre_original"));
-        formatoDocumento.setFechaSubida(resultado.getString("fecha_subida"));
 
         return formatoDocumento;
     }

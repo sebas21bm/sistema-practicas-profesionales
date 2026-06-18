@@ -26,6 +26,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sistemapracticasprofesionales.modelo.pojo.FormatoDocumento;
 import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
+import sistemapracticasprofesionales.modelo.pojo.Sesion;
 import sistemapracticasprofesionales.servicio.FormatoDocumentoServicio;
 import sistemapracticasprofesionales.utilidades.Utilidades;
 
@@ -52,6 +53,7 @@ public class FXMLFormatosProfesorController implements Initializable {
     @FXML
     private TableColumn<FormatoDocumento, String> col_estadoFormato;
 
+    private int idExperienciaEducativa;
     private File archivoSeleccionado;
     private byte[] archivoBytes;
     private ObservableList<FormatoDocumento> formatosDocumento;
@@ -59,6 +61,7 @@ public class FXMLFormatosProfesorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
+        cargarExperienciaEducativaSesion();
         cargarFormatosDocumento();
     }
 
@@ -69,11 +72,30 @@ public class FXMLFormatosProfesorController implements Initializable {
                 new PropertyValueFactory<>("estadoFormato"));
     }
 
+    private void cargarExperienciaEducativaSesion() {
+        idExperienciaEducativa = Sesion.getIdExperienciaEducativa();
+
+        if (idExperienciaEducativa <= 0) {
+            lbl_error.setText(
+                    "Sin experiencia educativa asociada al profesor.");
+        } else {
+            lbl_error.setText("");
+        }
+    }
+
     private void cargarFormatosDocumento() {
+        if (idExperienciaEducativa <= 0) {
+            formatosDocumento = FXCollections.observableArrayList();
+            tv_formatos.setItems(formatosDocumento);
+            cb_documentos.setItems(formatosDocumento);
+            return;
+        }
+
         try {
             formatosDocumento = FXCollections.observableArrayList();
             List<FormatoDocumento> formatosBD =
-                    FormatoDocumentoServicio.obtenerFormatosDocumento();
+                    FormatoDocumentoServicio.obtenerFormatosDocumento(
+                            idExperienciaEducativa);
 
             formatosDocumento.addAll(formatosBD);
             tv_formatos.setItems(formatosDocumento);
@@ -89,6 +111,11 @@ public class FXMLFormatosProfesorController implements Initializable {
                     "No es posible mostrar los documentos. "
                     + "Error al recuperar la información. Intente de nuevo.",
                     Alert.AlertType.ERROR);
+        } catch (IllegalArgumentException ex) {
+            Utilidades.mostrarAlertaSimple(
+                    "Datos inválidos",
+                    ex.getMessage(),
+                    Alert.AlertType.WARNING);
         }
     }
 
@@ -96,6 +123,15 @@ public class FXMLFormatosProfesorController implements Initializable {
     private void clicSeleccionarArchivo(ActionEvent event) {
         FormatoDocumento formatoDocumento =
                 cb_documentos.getSelectionModel().getSelectedItem();
+
+        if (idExperienciaEducativa <= 0) {
+            Utilidades.mostrarAlertaSimple(
+                    "Experiencia educativa no identificada",
+                    "No es posible subir formatos porque no se identificó "
+                    + "la experiencia educativa del profesor.",
+                    Alert.AlertType.WARNING);
+            return;
+        }
 
         if (formatoDocumento == null) {
             Utilidades.mostrarAlertaSimple(
@@ -180,12 +216,16 @@ public class FXMLFormatosProfesorController implements Initializable {
             FormatoDocumento formatoSeleccionado) {
         FormatoDocumento formatoDocumento = new FormatoDocumento();
 
+        formatoDocumento.setIdExperienciaEducativa(
+                idExperienciaEducativa);
+
         if (formatoSeleccionado != null) {
+            formatoDocumento.setIdFormatoDocumento(
+                    formatoSeleccionado.getIdFormatoDocumento());
             formatoDocumento.setIdDocumento(
                     formatoSeleccionado.getIdDocumento());
             formatoDocumento.setTipoDocumento(
                     formatoSeleccionado.getTipoDocumento());
-            formatoDocumento.setValor(formatoSeleccionado.getValor());
         }
 
         if (archivoSeleccionado != null) {
@@ -228,6 +268,11 @@ public class FXMLFormatosProfesorController implements Initializable {
                     "No fue posible guardar el formato en el sistema. "
                     + "Intente nuevamente.",
                     Alert.AlertType.ERROR);
+        } catch (IllegalArgumentException ex) {
+            Utilidades.mostrarAlertaSimple(
+                    "Datos inválidos",
+                    ex.getMessage(),
+                    Alert.AlertType.WARNING);
         }
     }
 
@@ -252,6 +297,7 @@ public class FXMLFormatosProfesorController implements Initializable {
 
     @FXML
     private void clicSubirFormatos(ActionEvent event) {
+        cargarExperienciaEducativaSesion();
         cargarFormatosDocumento();
     }
 
@@ -272,14 +318,18 @@ public class FXMLFormatosProfesorController implements Initializable {
             Parent vista = cargador.load();
             Scene escena = new Scene(vista);
 
-            Stage escenario = (Stage) tv_formatos.getScene().getWindow();
+            Stage escenario =
+                    (Stage) tv_formatos.getScene().getWindow();
             escenario.setScene(escena);
             escenario.setTitle(titulo);
             escenario.setResizable(false);
             escenario.centerOnScreen();
             escenario.show();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Utilidades.mostrarAlertaSimple(
+                    "Error de navegación",
+                    "No fue posible abrir la pantalla solicitada.",
+                    Alert.AlertType.ERROR);
         }
     }
 }
