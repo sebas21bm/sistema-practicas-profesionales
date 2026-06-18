@@ -156,7 +156,8 @@ public class FXMLAsignacionProyectoController implements Initializable {
         } catch (SQLException ex) {
             Utilidades.mostrarAlertaSimple(
                     "Error",
-                    ex.getMessage(),
+                    "No se guardó la asignación. Hubo un problema al "
+                    + "registrarla. Intente nuevamente.",
                     Alert.AlertType.ERROR);
         } catch (NullPointerException ex) {
             Utilidades.mostrarAlertaSimple(

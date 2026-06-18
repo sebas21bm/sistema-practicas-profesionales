@@ -48,7 +48,8 @@ public class AsignacionServicio {
         
         if (proyectoPracticas.getCupo() <= 0) {
             respuesta.setError(true);
-            respuesta.setMensaje("El proyecto seleccionado no tiene cupos.");
+            respuesta.setMensaje("No se pudo seleccionar el proyecto. "
+                    + "El proyecto se quedó sin cupos. Seleccione otro proyecto");
             return respuesta;
         }
         

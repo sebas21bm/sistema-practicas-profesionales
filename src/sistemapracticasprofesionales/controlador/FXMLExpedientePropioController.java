@@ -234,7 +234,19 @@ public class FXMLExpedientePropioController implements Initializable {
             
             FXMLInfoDocumentoController controlador =
                     cargador.getController();
+            
+            boolean informacionValida =
             controlador.inicializarInformacion(detalleSeleccionado);
+
+            if (!informacionValida) {
+                Utilidades.mostrarAlertaSimple(
+                        "Error al recuperar documento",
+                        "No se pudo recuperar la información del documento. "
+                        + "Hubo un error con su registro. "
+                        + "Intente más tarde.",
+                        Alert.AlertType.ERROR);
+                return;
+            }
             
             Scene escena = new Scene(vista);
             Stage escenario = (Stage) btn_verDetalles.getScene()
