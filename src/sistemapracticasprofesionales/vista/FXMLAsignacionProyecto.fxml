@@ -8,22 +8,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sistemapracticasprofesionales.controlador.FXMLAsignacionProyectoController">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemapracticasprofesionales.controlador.FXMLAsignacionProyectoController">
    <children>
       <MenuBar layoutX="1.0" prefHeight="32.0" prefWidth="900.0">
          <menus>
             <Menu mnemonicParsing="false" text="Analiticas">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#clicGenerarReporteIndicadores" text="Generar reporte de indicadores" />
+                  <MenuItem mnemonicParsing="false" text="Generar reporte de indicadores" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Proyectos">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#clicRegistrarProyecto" text="Registrar" />
                   <MenuItem mnemonicParsing="false" onAction="#clicVerListadoProyecto" text="Ver listado" />
-                  <MenuItem mnemonicParsing="false" onAction="#clicAsignarProyecto" text="Asignar proyecto" />
-                  <MenuItem mnemonicParsing="false" onAction="#clicGenerarOficioDeAsignacion" text="Generar oficio de asignación" />
+                  <MenuItem mnemonicParsing="false" text="Asignar proyecto" />
+                  <MenuItem mnemonicParsing="false" onAction="#clicGenerarOficioDeAsignacion" text="Ver asignaciones" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Organizaciones vinculadas">
@@ -34,7 +33,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Estudiantes">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#clicVerListadoEstudiantes" text="Ver listado" />
+                  <MenuItem mnemonicParsing="false" text="Ver listado" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Mas">
@@ -50,7 +49,7 @@
          </font>
       </Label>
       <Button layoutX="787.0" layoutY="595.0" mnemonicParsing="false" onAction="#clicRegresar" text="Regresar" />
-      <Button layoutX="668.0" layoutY="595.0" mnemonicParsing="false" onAction="#clicAsignar" text="Ver detalles" />
+      <Button layoutX="690.0" layoutY="595.0" mnemonicParsing="false" onAction="#clicAsignar" text="Asignar" />
       <HBox layoutX="40.0" layoutY="95.0" prefHeight="483.0" prefWidth="825.0">
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" HBox.hgrow="ALWAYS">
