@@ -97,13 +97,15 @@ public class ConexionBD {
         try (InputStream input = ConexionBD.class.getResourceAsStream(ruta)) {
 
             if (input == null) {
-                throw new SQLException("No se encontró el archivo de configuración: " + ruta);
+                throw new SQLException("No se encontró el archivo de "
+                        + "configuración: " + ruta);
             }
 
             properties.load(input);
 
         } catch (IOException ex) {
-            throw new SQLException("Error al cargar el archivo de configuración: " + ruta, ex);
+            throw new SQLException("Error al cargar el archivo de "
+                    + "configuración: " + ruta, ex);
         }
 
         return properties;
@@ -113,11 +115,13 @@ public class ConexionBD {
         try {
             Class.forName(getDriver());
         } catch (ClassNotFoundException ex) {
-            throw new SQLException("No se encontró el driver de MySQL: " + ex.getMessage(), ex);
+            throw new SQLException("No se encontró el driver de MySQL: "
+                    + ex.getMessage(), ex);
         }
     }
 
-    private static String determinarRutaProperties(Rol rolUsuario) throws SQLException {
+    private static String determinarRutaProperties(Rol rolUsuario) 
+            throws SQLException {
 
         if (rolUsuario == null) {
             throw new SQLException("El rol del usuario no puede ser null");

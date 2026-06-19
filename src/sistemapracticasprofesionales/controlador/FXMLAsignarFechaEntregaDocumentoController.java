@@ -29,7 +29,8 @@ import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
 import sistemapracticasprofesionales.modelo.pojo.Sesion;
 import sistemapracticasprofesionales.servicio.EntregaDocumentoServicio;
 import sistemapracticasprofesionales.utilidades.Utilidades;
-/*
+
+/**
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 17/06/2026
  * Descripción: Controlador de la vista para asignar fechas de entrega a

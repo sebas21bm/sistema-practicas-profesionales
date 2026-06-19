@@ -13,7 +13,7 @@ import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
 import sistemapracticasprofesionales.modelo.pojo.Rol;
 import sistemapracticasprofesionales.utilidades.Constantes;
 
-/*
+/**
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 17/06/2026
  * Descripción: DAO encargado de acceder a las entregas programadas de

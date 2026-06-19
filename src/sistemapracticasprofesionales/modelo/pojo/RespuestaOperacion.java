@@ -1,6 +1,6 @@
 package sistemapracticasprofesionales.modelo.pojo;
 
-/*
+/**
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 14/06/2026
  * Descripción: POJO utilizado para regresar el resultado de una operación.

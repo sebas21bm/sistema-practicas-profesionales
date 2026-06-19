@@ -15,7 +15,7 @@ import sistemapracticasprofesionales.modelo.pojo.Rol;
 import sistemapracticasprofesionales.modelo.pojo.Sesion;
 import sistemapracticasprofesionales.utilidades.Constantes;
 
-/*
+/**
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 17/06/2026
  * Descripción: DAO encargado de consultar los detalles de evaluación de
@@ -91,11 +91,13 @@ public class DetalleEvaluacionDAO {
                 if (resultado.next()) {
                     detalleEvaluacion = new DetalleEvaluacion();
                     detalleEvaluacion.setIdDetallesEvaluacion(
-                            resultado.getInt("id_detalles_evaluacion"));
+                            resultado.getInt(
+                                    "id_detalles_evaluacion"));
                     detalleEvaluacion.setIdArchivo(
                             resultado.getInt("idarchivo"));
                     detalleEvaluacion.setNombreOriginal(
-                            resultado.getString("nombre_original"));
+                            resultado.getString(
+                                    "nombre_original"));
                     detalleEvaluacion.setArchivo(
                             resultado.getBytes("archivo"));
                 }
@@ -158,7 +160,8 @@ public class DetalleEvaluacionDAO {
                 sentencia.setInt(
                         1,
                         detalleEvaluacion.getIdDetallesEvaluacion());
-                sentencia.setString(2, detalleEvaluacion.getEstado());
+                sentencia.setString(2, detalleEvaluacion.
+                        getEstado());
                 sentencia.setString(
                         3,
                         detalleEvaluacion.getObservaciones());
@@ -267,19 +270,26 @@ public class DetalleEvaluacionDAO {
         int idArchivo;
 
         detalleEvaluacion.setIdDetallesEvaluacion(
-                resultado.getInt("id_detalles_evaluacion"));
+                resultado.getInt(
+                        "id_detalles_evaluacion"));
         detalleEvaluacion.setIdExpediente(
-                resultado.getInt("id_expediente"));
+                resultado.getInt(
+                        "id_expediente"));
         detalleEvaluacion.setIdEntregaDocumento(
-                resultado.getInt("id_entrega_documento"));
+                resultado.getInt(
+                        "id_entrega_documento"));
         detalleEvaluacion.setIdExperienciaEducativa(
-                resultado.getInt("id_experiencia_educativa"));
+                resultado.getInt(
+                        "id_experiencia_educativa"));
         detalleEvaluacion.setIdDocumento(
-                resultado.getInt("id_documento"));
+                resultado.getInt(
+                        "id_documento"));
         detalleEvaluacion.setMatricula(
-                resultado.getString("matricula"));
+                resultado.getString(
+                        "matricula"));
         detalleEvaluacion.setNombreEstudiante(
-                resultado.getString("nombre_estudiante"));
+                resultado.getString(
+                        "nombre_estudiante"));
         detalleEvaluacion.setTipoDocumento(
                 resultado.getString("tipo_documento"));
         detalleEvaluacion.setClasificacion(
@@ -291,7 +301,8 @@ public class DetalleEvaluacionDAO {
         detalleEvaluacion.setValor(
                 resultado.getDouble("valor"));
         detalleEvaluacion.setPorcentajeObtenido(
-                resultado.getDouble("porcentaje_obtenido"));
+                resultado.getDouble(
+                        "porcentaje_obtenido"));
         detalleEvaluacion.setObservaciones(
                 resultado.getString("observaciones"));
         detalleEvaluacion.setNombreOriginal(
@@ -306,7 +317,8 @@ public class DetalleEvaluacionDAO {
 
         fechaEntrega = resultado.getDate("fecha_entrega");
         if (fechaEntrega != null) {
-            detalleEvaluacion.setFechaEntrega(fechaEntrega.toLocalDate());
+            detalleEvaluacion.setFechaEntrega(
+                    fechaEntrega.toLocalDate());
         }
 
         fechaSubida = resultado.getTimestamp("fecha_subida");
@@ -341,7 +353,8 @@ public class DetalleEvaluacionDAO {
             String consulta = obtenerConsultaBaseEstudiante()
                     + "WHERE v.id_detalles_evaluacion = ? "
                     + "AND es.id_usuario = ?;";
-            PreparedStatement sentenciaBD = conexionBD.prepareStatement(consulta);
+            PreparedStatement sentenciaBD = conexionBD.prepareStatement(
+                    consulta);
 
             sentenciaBD.setInt(1, idDetallesEvaluacion);
             sentenciaBD.setString(2, idUsuario);
@@ -380,7 +393,8 @@ public class DetalleEvaluacionDAO {
                     + "ON de.idarchivo = a.idarchivo "
                     + "WHERE de.id_detalles_evaluacion = ? "
                     + "AND es.id_usuario = ?;";
-            PreparedStatement sentenciaBD = conexionBD.prepareStatement(consulta);
+            PreparedStatement sentenciaBD = conexionBD.prepareStatement(
+                    consulta);
 
             sentenciaBD.setInt(1, idDetallesEvaluacion);
             sentenciaBD.setString(2, idUsuario);
@@ -390,11 +404,15 @@ public class DetalleEvaluacionDAO {
             if (resultado.next()) {
                 detalleEvaluacion = new DetalleEvaluacion();
                 detalleEvaluacion.setIdDetallesEvaluacion(
-                        resultado.getInt("id_detalles_evaluacion"));
-                detalleEvaluacion.setIdArchivo(resultado.getInt("idarchivo"));
+                        resultado.getInt(
+                                "id_detalles_evaluacion"));
+                detalleEvaluacion.setIdArchivo(resultado.getInt(
+                        "idarchivo"));
                 detalleEvaluacion.setNombreOriginal(
-                        resultado.getString("nombre_original"));
-                detalleEvaluacion.setArchivo(resultado.getBytes("archivo"));
+                        resultado.getString(
+                                "nombre_original"));
+                detalleEvaluacion.setArchivo(resultado.getBytes(
+                        "archivo"));
             }
         }
 

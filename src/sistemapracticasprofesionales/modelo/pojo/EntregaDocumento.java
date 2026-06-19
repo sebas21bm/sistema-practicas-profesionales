@@ -2,7 +2,7 @@ package sistemapracticasprofesionales.modelo.pojo;
 
 import java.time.LocalDate;
 
-/*
+/**
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 17/06/2026
  * Descripción: POJO que representa una entrega programada de documento.

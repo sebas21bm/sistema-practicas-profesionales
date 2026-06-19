@@ -7,7 +7,7 @@ import sistemapracticasprofesionales.modelo.pojo.ExpedienteEstudiante;
 import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
 import sistemapracticasprofesionales.modelo.pojo.Sesion;
 
-/*
+/**
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 17/06/2026
  * Descripción: Servicio encargado de validar reglas para consulta y cálculo

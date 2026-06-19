@@ -49,7 +49,8 @@ public class ProyectoPracticasServicio {
         
          if (ProyectoPracticasDAO.existeProyectoIgualEnOrganizacion(
                 proyectoPracticas,
-                 responsableProyecto.getNumOrganizacionVinculada())) {
+                 responsableProyecto.
+                         getNumOrganizacionVinculada())) {
             respuesta.setError(true);
             respuesta.setMensaje("- Ya existe un proyecto registrado "
                     + "con la misma información en esta organización "
@@ -81,7 +82,8 @@ public class ProyectoPracticasServicio {
         
         if (proyectoPracticas.getIdResponsable() <= 0) {
             respuesta.setError(true);
-            respuesta.setMensaje("- Debes seleccionar un responsable existente.");
+            respuesta.setMensaje("- Debes seleccionar un responsable "
+                    + "existente.");
             return respuesta;
         }
         
@@ -112,7 +114,8 @@ public class ProyectoPracticasServicio {
         
         if (proyectoPracticas == null) {
             respuesta.setError(true);
-            respuesta.setMensaje("No se recibió la información del proyecto.");
+            respuesta.setMensaje("No se recibió la información del "
+                    + "proyecto.");
             return respuesta;
         }
         
@@ -133,7 +136,8 @@ public class ProyectoPracticasServicio {
         
         if (responsableProyecto == null) {
             respuesta.setError(true);
-            respuesta.setMensaje("No se recibió la información del responsable.");
+            respuesta.setMensaje("No se recibió la información del "
+                    + "responsable.");
             return respuesta;
         }
         
@@ -149,7 +153,8 @@ public class ProyectoPracticasServicio {
     private static void normalizarProyecto(
             ProyectoPracticas proyectoPracticas) {
         
-        proyectoPracticas.setNombre(limpiar(proyectoPracticas.getNombre()));
+        proyectoPracticas.setNombre(limpiar(proyectoPracticas.
+                getNombre()));
         proyectoPracticas.setDescripcion(
                 limpiar(proyectoPracticas.getDescripcion()));
         proyectoPracticas.setDisponible(true);
@@ -190,17 +195,20 @@ public class ProyectoPracticasServicio {
         }
         
         if (proyectoPracticas.getCupo() < 1) {
-            agregarError(errores, "El cupo es obligatorio y debe ser mínimo 1.");
+            agregarError(errores, "El cupo es obligatorio "
+                    + "y debe ser mínimo 1.");
         }
         
         if (proyectoPracticas.getFechaFinalizacion() == null) {
-            agregarError(errores, "La fecha de finalización es obligatoria.");
+            agregarError(errores, "La fecha de finalización "
+                    + "es obligatoria.");
         }
         
         if (proyectoPracticas.getOrganizacionVinculada() == null
                 || proyectoPracticas.getOrganizacionVinculada()
                         .getNumOrganizacionVinculada() <= 0) {
-            agregarError(errores, "Debes seleccionar una organización vinculada.");
+            agregarError(errores, "Debes seleccionar una "
+                    + "organización vinculada.");
         }
     }
     

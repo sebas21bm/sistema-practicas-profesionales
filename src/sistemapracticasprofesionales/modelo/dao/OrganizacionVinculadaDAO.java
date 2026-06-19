@@ -1,11 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package sistemapracticasprofesionales.modelo.dao;
 
 import sistemapracticasprofesionales.modelo.ConexionBD;
-import sistemapracticasprofesionales.modelo.pojo.*;
+import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
+import sistemapracticasprofesionales.modelo.pojo.Sesion;
+import sistemapracticasprofesionales.modelo.pojo.OrganizacionVinculada;
+import sistemapracticasprofesionales.modelo.pojo.ResponsableProyecto;
+import sistemapracticasprofesionales.modelo.pojo.ProyectoPracticas;
 import sistemapracticasprofesionales.utilidades.Constantes;
 
 import java.sql.Connection;
@@ -38,14 +38,22 @@ public class OrganizacionVinculadaDAO {
             String consulta = "INSERT INTO organizacion_vinculada "
                     + "(nombre, calle, colonia, codigo_postal, telefono,"
                     + "correo, tipo) VALUES (?, ?, ?, ?, ?, ?, ?);";
-            PreparedStatement sentenciaBD = conexionBD.prepareStatement(consulta);
-            sentenciaBD.setString(1, organizacionVinculada.getNombre());
-            sentenciaBD.setString(2, organizacionVinculada.getCalle());
-            sentenciaBD.setString(3, organizacionVinculada.getColonia());
-            sentenciaBD.setString(4, organizacionVinculada.getCodigoPostal());
-            sentenciaBD.setString(5, organizacionVinculada.getTelefono());
-            sentenciaBD.setString(6, organizacionVinculada.getCorreo());
-            sentenciaBD.setString(7, organizacionVinculada.getTipo());
+            PreparedStatement sentenciaBD = conexionBD.prepareStatement(
+                    consulta);
+            sentenciaBD.setString(1, organizacionVinculada.
+                    getNombre());
+            sentenciaBD.setString(2, organizacionVinculada.
+                    getCalle());
+            sentenciaBD.setString(3, organizacionVinculada.
+                    getColonia());
+            sentenciaBD.setString(4, organizacionVinculada.
+                    getCodigoPostal());
+            sentenciaBD.setString(5, organizacionVinculada.
+                    getTelefono());
+            sentenciaBD.setString(6, organizacionVinculada.
+                    getCorreo());
+            sentenciaBD.setString(7, organizacionVinculada.
+                    getTipo());
             
             sentenciaBD.executeUpdate();
             
@@ -80,14 +88,22 @@ public class OrganizacionVinculadaDAO {
                     + "AND LOWER(TRIM(correo)) = LOWER(TRIM(?)) "
                     + "AND tipo = ?;";
 
-            PreparedStatement sentenciaBD = conexionBD.prepareStatement(consulta);
-            sentenciaBD.setString(1, organizacionVinculada.getNombre());
-            sentenciaBD.setString(2, organizacionVinculada.getCalle());
-            sentenciaBD.setString(3, organizacionVinculada.getColonia());
-            sentenciaBD.setString(4, organizacionVinculada.getCodigoPostal());
-            sentenciaBD.setString(5, organizacionVinculada.getTelefono());
-            sentenciaBD.setString(6, organizacionVinculada.getCorreo());
-            sentenciaBD.setString(7, organizacionVinculada.getTipo());
+            PreparedStatement sentenciaBD = conexionBD.prepareStatement(
+                    consulta);
+            sentenciaBD.setString(1, organizacionVinculada.
+                    getNombre());
+            sentenciaBD.setString(2, organizacionVinculada.
+                    getCalle());
+            sentenciaBD.setString(3, organizacionVinculada.
+                    getColonia());
+            sentenciaBD.setString(4, organizacionVinculada.
+                    getCodigoPostal());
+            sentenciaBD.setString(5, organizacionVinculada.
+                    getTelefono());
+            sentenciaBD.setString(6, organizacionVinculada.
+                    getCorreo());
+            sentenciaBD.setString(7, organizacionVinculada.
+                    getTipo());
 
             ResultSet resultado = sentenciaBD.executeQuery();
 
@@ -114,11 +130,13 @@ public class OrganizacionVinculadaDAO {
             String consulta = "SELECT num_organizacion_vinculada, nombre, "
                     + "telefono, correo, tipo FROM "
                     + "vista_organizaciones_activas;";
-            PreparedStatement sentenciaBD = conexionBD.prepareStatement(consulta);
+            PreparedStatement sentenciaBD = conexionBD.prepareStatement(
+                    consulta);
             ResultSet resultado = sentenciaBD.executeQuery();
             
             while (resultado.next()){
-                organizaciones.add(serializarOrganizacionVinculadaListado(resultado));
+                organizaciones.add(serializarOrganizacionVinculadaListado(
+                        resultado));
             }
         }
         return organizaciones;
@@ -140,11 +158,13 @@ public class OrganizacionVinculadaDAO {
                     + "calle, colonia, codigo_postal, telefono, correo,"
                     + "tipo, estado FROM organizacion_vinculada "
                     + "WHERE num_organizacion_vinculada = ?";
-            PreparedStatement sentenciaBD = conexionBD.prepareStatement(consulta);
+            PreparedStatement sentenciaBD = conexionBD.prepareStatement(
+                    consulta);
             sentenciaBD.setInt(1, numeroOrganizacion);
             ResultSet resultado = sentenciaBD.executeQuery();
             if (resultado.next()) {
-                organizacionVinculada = serializarOrganizacionCompleta(resultado);
+                organizacionVinculada = serializarOrganizacionCompleta(
+                        resultado);
                 cargarDatosCompletos(conexionBD, organizacionVinculada);
             }
             
@@ -157,13 +177,16 @@ public class OrganizacionVinculadaDAO {
             throws SQLException, NullPointerException{
         
         if (organizacionVinculada == null) {
-            throw new NullPointerException("No se recibió la organización vinculada");
+            throw new NullPointerException("No se recibió la organización"
+                    + " vinculada");
         }
         
-        int numeroOrganizacion = organizacionVinculada.getNumOrganizacionVinculada();
+        int numeroOrganizacion = organizacionVinculada.
+                getNumOrganizacionVinculada();
     
         List<ResponsableProyecto> responsables =
-                obtenerResponsablesPorOrganizacion(conexionBD, numeroOrganizacion);
+                obtenerResponsablesPorOrganizacion(conexionBD, 
+                        numeroOrganizacion);
 
         List<ProyectoPracticas> proyectos =
                 obtenerProyectosPorOrganizacion(conexionBD, numeroOrganizacion);
@@ -201,15 +224,18 @@ public class OrganizacionVinculadaDAO {
     
         ResponsableProyecto responsable = new ResponsableProyecto();
 
-        responsable.setIdResponsable(resultado.getInt("id_responsable"));
+        responsable.setIdResponsable(resultado.getInt(
+                "id_responsable"));
         responsable.setNombre(resultado.getString("nombre"));
         responsable.setPaterno(resultado.getString("paterno"));
         responsable.setMaterno(resultado.getString("materno"));
-        responsable.setTelefono(resultado.getString("telefono"));
+        responsable.setTelefono(resultado.getString(
+                "telefono"));
         responsable.setCorreo(resultado.getString("correo"));
         responsable.setPuesto(resultado.getString("puesto"));
         responsable.setNumOrganizacionVinculada(
-                resultado.getInt("num_organizacion_vinculada"));
+                resultado.getInt(
+                        "num_organizacion_vinculada"));
 
         return responsable;
     }
@@ -220,7 +246,8 @@ public class OrganizacionVinculadaDAO {
     
         List<ProyectoPracticas> proyectos = new ArrayList<>();
 
-        String consulta = "SELECT num_proyecto, nombre, num_organizacion_vinculada "
+        String consulta = "SELECT num_proyecto, nombre, "
+                + "num_organizacion_vinculada "
                 + "FROM vista_proyectos_organizacion "
                 + "WHERE num_organizacion_vinculada = ?";
 
@@ -241,7 +268,8 @@ public class OrganizacionVinculadaDAO {
     
         ProyectoPracticas proyecto = new ProyectoPracticas();
 
-        proyecto.setNumProyecto(resultado.getInt("num_proyecto"));
+        proyecto.setNumProyecto(resultado.getInt(
+                "num_proyecto"));
         proyecto.setNombre(resultado.getString("nombre"));
 
         return proyecto;
@@ -261,10 +289,13 @@ resultado.getInt("num_organizacion_vinculada"));
                 getString("colonia"));
         organizacionVinculada.setCodigoPostal(resultado.
                 getString("codigo_postal"));
-        organizacionVinculada.setTelefono(resultado.getString("telefono"));
-        organizacionVinculada.setCorreo(resultado.getString("correo"));
+        organizacionVinculada.setTelefono(resultado.getString(
+                "telefono"));
+        organizacionVinculada.setCorreo(resultado.getString(
+                "correo"));
         organizacionVinculada.setTipo(resultado.getString("tipo"));
-        organizacionVinculada.setEstado(resultado.getBoolean("estado"));
+        organizacionVinculada.setEstado(resultado.getBoolean(
+                "estado"));
         
         return organizacionVinculada;
     }
@@ -276,9 +307,12 @@ resultado.getInt("num_organizacion_vinculada"));
         
         organizacionVinculada.setNumOrganizacionVinculada(
 resultado.getInt("num_organizacion_vinculada"));
-        organizacionVinculada.setNombre(resultado.getString("nombre"));
-        organizacionVinculada.setTelefono(resultado.getString("telefono"));
-        organizacionVinculada.setCorreo(resultado.getString("correo"));
+        organizacionVinculada.setNombre(resultado.getString(
+                "nombre"));
+        organizacionVinculada.setTelefono(resultado.getString(
+                "telefono"));
+        organizacionVinculada.setCorreo(resultado.getString(
+                "correo"));
         organizacionVinculada.setTipo(resultado.getString("tipo"));
         
         return organizacionVinculada;
@@ -301,21 +335,32 @@ resultado.getInt("num_organizacion_vinculada"));
                     + "codigo_postal = ?, telefono = ?, correo = ?, "
                     + "tipo = ?, estado = ? "
                     + "WHERE num_organizacion_vinculada = ?;";
-            PreparedStatement sentenciaBD = conexionBD.prepareStatement(consulta);
-            sentenciaBD.setString(1, organizacionVinculada.getNombre());
-            sentenciaBD.setString(2, organizacionVinculada.getCalle());
-            sentenciaBD.setString(3, organizacionVinculada.getColonia());
-            sentenciaBD.setString(4, organizacionVinculada.getCodigoPostal());
-            sentenciaBD.setString(5, organizacionVinculada.getTelefono());
-            sentenciaBD.setString(6, organizacionVinculada.getCorreo());
-            sentenciaBD.setString(7, organizacionVinculada.getTipo());
-            sentenciaBD.setBoolean(8, organizacionVinculada.getEstado());
-            sentenciaBD.setInt(9, organizacionVinculada.getNumOrganizacionVinculada());
+            PreparedStatement sentenciaBD = conexionBD.prepareStatement(
+                    consulta);
+            sentenciaBD.setString(1, organizacionVinculada.
+                    getNombre());
+            sentenciaBD.setString(2, organizacionVinculada.
+                    getCalle());
+            sentenciaBD.setString(3, organizacionVinculada.
+                    getColonia());
+            sentenciaBD.setString(4, organizacionVinculada.
+                    getCodigoPostal());
+            sentenciaBD.setString(5, organizacionVinculada.
+                    getTelefono());
+            sentenciaBD.setString(6, organizacionVinculada.
+                    getCorreo());
+            sentenciaBD.setString(7, organizacionVinculada.
+                    getTipo());
+            sentenciaBD.setBoolean(8, organizacionVinculada.
+                    getEstado());
+            sentenciaBD.setInt(9, organizacionVinculada.
+                    getNumOrganizacionVinculada());
             
             int filasAfectadas = sentenciaBD.executeUpdate();
 
             if (filasAfectadas == 0) {
-                throw new SQLException("No se encontró la organización vinculada a actualizar.");
+                throw new SQLException("No se encontró la organización "
+                        + "vinculada a actualizar.");
             }
             
             respuesta.setError(false);

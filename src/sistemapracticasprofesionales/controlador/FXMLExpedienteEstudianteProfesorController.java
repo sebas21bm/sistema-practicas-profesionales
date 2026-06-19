@@ -26,7 +26,7 @@ import sistemapracticasprofesionales.servicio.DetalleEvaluacionServicio;
 import sistemapracticasprofesionales.servicio.ExpedienteServicio;
 import sistemapracticasprofesionales.utilidades.Utilidades;
 
-/*
+/**
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 17/06/2026
  * Descripción: Controlador de la vista para consultar el expediente de un

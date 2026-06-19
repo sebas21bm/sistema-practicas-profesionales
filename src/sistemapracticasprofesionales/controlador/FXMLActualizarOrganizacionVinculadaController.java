@@ -188,14 +188,16 @@ public class FXMLActualizarOrganizacionVinculadaController implements Initializa
                 
                 OrganizacionVinculada organizacionCompleta =
                     OrganizacionVinculadaServicio.recuperarOrganizacionCompleta(
-                            organizacionVinculada.getNumOrganizacionVinculada()
+                            organizacionVinculada.
+                                    getNumOrganizacionVinculada()
                     );
                 cargarVistaDetalles(organizacionVinculada);
                 
                 
             } else {
                 Utilidades.mostrarAlertaSimple("Datos inválidos", 
-                    "No es posible continuar con la actualización de la organización.\n"
+                    "No es posible continuar con la actualización de la "
+                            + "organización.\n"
                     + "Los datos ingresados son inválidos:\n"
                     + respuesta.getMensaje() + "\nIntente nuevamente", 
                     Alert.AlertType.WARNING);
@@ -211,7 +213,8 @@ public class FXMLActualizarOrganizacionVinculadaController implements Initializa
         } catch (NullPointerException ex) {
            Utilidades.mostrarAlertaSimple(
                    "Error", 
-                   "No fue posible obtener la información de la organización", 
+                   "No fue posible obtener la información de la "
+                           + "organización", 
                    Alert.AlertType.ERROR);
         }
         
@@ -219,15 +222,18 @@ public class FXMLActualizarOrganizacionVinculadaController implements Initializa
     
     private void cargarVistaDetalles(OrganizacionVinculada organizacionVinculada) {
         try {
-            FXMLLoader cargador = Utilidades.cargarFXML("FXMLInfoOrganizacionVinculada");
+            FXMLLoader cargador = Utilidades.cargarFXML(
+                    "FXMLInfoOrganizacionVinculada");
             Parent vista = cargador.load();
-            FXMLInfoOrganizacionVinculadaController controlador = cargador.getController();
+            FXMLInfoOrganizacionVinculadaController controlador = 
+                    cargador.getController();
             
             OrganizacionVinculada organizacionCompleta = 
                     OrganizacionVinculadaServicio.recuperarOrganizacionCompleta(
             organizacionVinculada.getNumOrganizacionVinculada());
             
-            controlador.inicializarInformacionOrganizacion(organizacionCompleta);
+            controlador.inicializarInformacionOrganizacion(
+                    organizacionCompleta);
             Scene escena = new Scene(vista);
 
             Stage escenario = (Stage) txt_calle.getScene().getWindow();
@@ -242,7 +248,8 @@ public class FXMLActualizarOrganizacionVinculadaController implements Initializa
             Utilidades.mostrarAlertaSimple(
                     "Error al recuperar información",
                     "No se puede ver la información de la organización. "
-                    + "Error al recuperar el registro de la organización vinculada. "
+                    + "Error al recuperar el registro de la "
+                    + "organización vinculada. "
                     + "Intente nuevamente",
                     Alert.AlertType.ERROR
             );
@@ -253,11 +260,13 @@ public class FXMLActualizarOrganizacionVinculadaController implements Initializa
         OrganizacionVinculada organizacionCampos = new OrganizacionVinculada();
         
         if (this.organizacionVinculada == null) {
-            throw new NullPointerException("No se recibió la organización vinculada a actualizar.");
+            throw new NullPointerException("No se recibió la "
+                    + "organización vinculada a actualizar.");
         }
         
         organizacionCampos.setNumOrganizacionVinculada(
-                organizacionVinculada.getNumOrganizacionVinculada()
+                organizacionVinculada.
+                        getNumOrganizacionVinculada()
         );
         organizacionCampos.setNombre(txt_nombreOrganizacionVinculada.
                 getText().trim());

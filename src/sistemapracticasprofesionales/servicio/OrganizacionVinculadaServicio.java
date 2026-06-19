@@ -45,14 +45,16 @@ public class OrganizacionVinculadaServicio {
                 organizacionVinculada);
     }
     
-    public static ArrayList<OrganizacionVinculada> recuperarListadoOrganizacionesVinculadas() 
+    public static ArrayList<OrganizacionVinculada> 
+        recuperarListadoOrganizacionesVinculadas() 
            throws SQLException, NullPointerException {
         return OrganizacionVinculadaDAO.obtenerOrganizaciones();
     }
     
     public static OrganizacionVinculada recuperarOrganizacionCompleta(
             int numeroOrganizacion) throws SQLException, NullPointerException {
-        return OrganizacionVinculadaDAO.obtenerOrganizacionCompleta(numeroOrganizacion);
+        return OrganizacionVinculadaDAO.obtenerOrganizacionCompleta(
+                numeroOrganizacion);
     }
     
     public static RespuestaOperacion actualizarOrganizacionVinculada(
@@ -93,7 +95,8 @@ public class OrganizacionVinculadaServicio {
         return respuesta;
     }
     
-    private static void normalizarDatos(OrganizacionVinculada organizacionVinculada) {
+    private static void normalizarDatos(OrganizacionVinculada 
+            organizacionVinculada) {
 
         organizacionVinculada.setNombre(
                 limpiar(organizacionVinculada.getNombre()));
@@ -162,7 +165,8 @@ public class OrganizacionVinculadaServicio {
 
         String tipo = organizacionVinculada.getTipo();
         if (tipo.isEmpty()
-                || (!tipo.equals("Pública") && !tipo.equals("Privada"))) {
+                || (!tipo.equals("Pública") && !tipo.equals(
+                        "Privada"))) {
             agregarError(errores, "El tipo de organización es obligatorio "
                     + "y debe ser Pública o Privada.");
         }

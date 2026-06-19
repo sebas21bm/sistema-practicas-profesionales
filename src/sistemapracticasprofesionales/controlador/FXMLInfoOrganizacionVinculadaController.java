@@ -10,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -51,7 +50,8 @@ public class FXMLInfoOrganizacionVinculadaController implements Initializable {
     @FXML
     private TableColumn<ResponsableProyecto, String> col_correo;
     @FXML
-    private TableColumn<ResponsableProyecto, String> col_nombreCompletoResponsable;
+    private TableColumn<ResponsableProyecto, String> 
+            col_nombreCompletoResponsable;
     
     private OrganizacionVinculada organizacionDetalles;
     
@@ -102,10 +102,13 @@ public class FXMLInfoOrganizacionVinculadaController implements Initializable {
     
     private void cargarVistaActualizacion() {
         try {
-            FXMLLoader cargador = Utilidades.cargarFXML("FXMLActualizarOrganizacionVinculada");
+            FXMLLoader cargador = Utilidades.cargarFXML(
+                    "FXMLActualizarOrganizacionVinculada");
             Parent vista = cargador.load();
-            FXMLActualizarOrganizacionVinculadaController controlador = cargador.getController();
-            controlador.inicializarInformacionOrganizacion(organizacionDetalles);
+            FXMLActualizarOrganizacionVinculadaController controlador = 
+                    cargador.getController();
+            controlador.inicializarInformacionOrganizacion(
+                    organizacionDetalles);
             Scene escena = new Scene(vista);
 
             Stage escenario = (Stage) lb_correo.getScene().getWindow();
