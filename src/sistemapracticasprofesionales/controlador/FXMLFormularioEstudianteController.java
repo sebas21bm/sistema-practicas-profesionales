@@ -118,7 +118,9 @@ public class FXMLFormularioEstudianteController implements Initializable {
             } else {
                 Utilidades.mostrarAlertaSimple(
                         "Datos inválidos",
-                        respuesta.getMensaje(),
+                        "No es posible continuar con el registro.\n"
+                        + respuesta.getMensaje()
+                        + "\nIngrese los datos nuevamente para poder continuar",
                         Alert.AlertType.WARNING);
             }
         } catch (SQLException ex) {
