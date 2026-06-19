@@ -1,9 +1,17 @@
 .idea/
 *.iml
+
 nbproject/private/
 build/
 dist/
 out/
 *.class
+
 src/sistemapracticasprofesionales/recursos/properties/*.properties
+
+# Dependencias locales
+/lib/
 /lib/*.jar
+/lib/*.zip
+/lib/**/*.jar
+/lib/**/*.zip
