@@ -1,6 +1,6 @@
 package sistemapracticasprofesionales.modelo.pojo;
 
-/*
+/**
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 15/06/2026
  * Descripción: POJO que representa un formato de documento del SPP.

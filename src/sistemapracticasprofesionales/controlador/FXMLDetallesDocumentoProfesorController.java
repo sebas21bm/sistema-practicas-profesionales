@@ -19,6 +19,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sistemapracticasprofesionales.modelo.pojo.DetalleEvaluacion;
@@ -27,7 +28,7 @@ import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
 import sistemapracticasprofesionales.servicio.DetalleEvaluacionServicio;
 import sistemapracticasprofesionales.utilidades.Utilidades;
 
-/*
+/**
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 17/06/2026
  * Descripción: Controlador de la vista para validar documentos iniciales y
@@ -52,6 +53,8 @@ public class FXMLDetallesDocumentoProfesorController
 
     private DetalleEvaluacion detalleEvaluacion;
     private ExpedienteEstudiante expedienteEstudiante;
+    @FXML
+    private VBox vb_calificacion;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

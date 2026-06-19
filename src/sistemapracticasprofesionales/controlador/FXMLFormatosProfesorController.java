@@ -30,7 +30,7 @@ import sistemapracticasprofesionales.modelo.pojo.Sesion;
 import sistemapracticasprofesionales.servicio.FormatoDocumentoServicio;
 import sistemapracticasprofesionales.utilidades.Utilidades;
 
-/*
+/**
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 17/06/2026
  * Descripción: Controlador de la vista para subir formatos de documentos.

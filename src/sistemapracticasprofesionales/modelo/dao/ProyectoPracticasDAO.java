@@ -41,17 +41,25 @@ public class ProyectoPracticasDAO {
             CallableStatement sentenciaBD =
                     conexionBD.prepareCall(consulta);
             
-            sentenciaBD.setString(1, proyectoPracticas.getNombre());
-            sentenciaBD.setString(2, proyectoPracticas.getDescripcion());
+            sentenciaBD.setString(1, proyectoPracticas.
+                    getNombre());
+            sentenciaBD.setString(2, proyectoPracticas.
+                    getDescripcion());
             sentenciaBD.setInt(3, proyectoPracticas.getCupo());
             sentenciaBD.setDate(4, new Date(proyectoPracticas
                     .getFechaFinalizacion().getTime()));
-            sentenciaBD.setString(5, responsableProyecto.getNombre());
-            sentenciaBD.setString(6, responsableProyecto.getPaterno());
-            sentenciaBD.setString(7, responsableProyecto.getMaterno());
-            sentenciaBD.setString(8, responsableProyecto.getTelefono());
-            sentenciaBD.setString(9, responsableProyecto.getCorreo());
-            sentenciaBD.setString(10, responsableProyecto.getPuesto());
+            sentenciaBD.setString(5, responsableProyecto.
+                    getNombre());
+            sentenciaBD.setString(6, responsableProyecto.
+                    getPaterno());
+            sentenciaBD.setString(7, responsableProyecto.
+                    getMaterno());
+            sentenciaBD.setString(8, responsableProyecto.
+                    getTelefono());
+            sentenciaBD.setString(9, responsableProyecto.
+                    getCorreo());
+            sentenciaBD.setString(10, responsableProyecto.
+                    getPuesto());
             sentenciaBD.setInt(11, responsableProyecto
                     .getNumOrganizacionVinculada());
             
@@ -84,13 +92,18 @@ public class ProyectoPracticasDAO {
             PreparedStatement sentenciaBD =
                     conexionBD.prepareStatement(consulta);
             
-            sentenciaBD.setString(1, proyectoPracticas.getNombre());
-            sentenciaBD.setString(2, proyectoPracticas.getDescripcion());
-            sentenciaBD.setInt(3, proyectoPracticas.getCupo());
+            sentenciaBD.setString(1, proyectoPracticas.
+                    getNombre());
+            sentenciaBD.setString(2, proyectoPracticas.
+                    getDescripcion());
+            sentenciaBD.setInt(3, proyectoPracticas.
+                    getCupo());
             sentenciaBD.setDate(4, new Date(proyectoPracticas
                     .getFechaFinalizacion().getTime()));
-            sentenciaBD.setInt(5, proyectoPracticas.getIdResponsable());
-            sentenciaBD.setBoolean(6, proyectoPracticas.isDisponible());
+            sentenciaBD.setInt(5, proyectoPracticas.
+                    getIdResponsable());
+            sentenciaBD.setBoolean(6, proyectoPracticas.
+                    isDisponible());
             
             sentenciaBD.executeUpdate();
             
@@ -141,14 +154,21 @@ public class ProyectoPracticasDAO {
         
         responsableProyecto.setIdResponsable(
                 resultado.getInt("id_responsable"));
-        responsableProyecto.setNombre(resultado.getString("nombre"));
-        responsableProyecto.setPaterno(resultado.getString("paterno"));
-        responsableProyecto.setMaterno(resultado.getString("materno"));
-        responsableProyecto.setTelefono(resultado.getString("telefono"));
-        responsableProyecto.setCorreo(resultado.getString("correo"));
-        responsableProyecto.setPuesto(resultado.getString("puesto"));
+        responsableProyecto.setNombre(resultado.getString(
+                "nombre"));
+        responsableProyecto.setPaterno(resultado.getString(
+                "paterno"));
+        responsableProyecto.setMaterno(resultado.getString(
+                "materno"));
+        responsableProyecto.setTelefono(resultado.getString(
+                "telefono"));
+        responsableProyecto.setCorreo(resultado.getString(
+                "correo"));
+        responsableProyecto.setPuesto(resultado.getString(
+                "puesto"));
         responsableProyecto.setNumOrganizacionVinculada(
-                resultado.getInt("num_organizacion_vinculada"));
+                resultado.getInt(
+                        "num_organizacion_vinculada"));
         
         return responsableProyecto;
     }
@@ -184,13 +204,18 @@ public class ProyectoPracticasDAO {
 
         ProyectoPracticas proyectoPracticas = new ProyectoPracticas();
 
-        proyectoPracticas.setNumProyecto(resultado.getInt("num_proyecto"));
-        proyectoPracticas.setNombre(resultado.getString("nombre"));
-        proyectoPracticas.setNombreEstudiante(resultado.getString("estudiante"));
+        proyectoPracticas.setNumProyecto(resultado.getInt(
+                "num_proyecto"));
+        proyectoPracticas.setNombre(resultado.getString(
+                "nombre"));
+        proyectoPracticas.setNombreEstudiante(resultado.getString(
+                "estudiante"));
         proyectoPracticas.setNombreOrganizacionVinculada(
-                resultado.getString("organizacion_vinculada"));
+                resultado.getString(
+                        "organizacion_vinculada"));
         proyectoPracticas.setFechaFinalizacion(
-                resultado.getDate("fecha_finalizacion"));
+                resultado.getDate(
+                        "fecha_finalizacion"));
 
         return proyectoPracticas;
     }
@@ -219,13 +244,20 @@ public class ProyectoPracticasDAO {
                     + "AND LOWER(TRIM(puesto)) = LOWER(TRIM(?)) "
                     + "AND num_organizacion_vinculada = ?;";
 
-            PreparedStatement sentenciaBD = conexionBD.prepareStatement(consulta);
-            sentenciaBD.setString(1, responsableProyecto.getNombre());
-            sentenciaBD.setString(2, responsableProyecto.getPaterno());
-            sentenciaBD.setString(3, responsableProyecto.getMaterno());
-            sentenciaBD.setString(4, responsableProyecto.getTelefono());
-            sentenciaBD.setString(5, responsableProyecto.getCorreo());
-            sentenciaBD.setString(6, responsableProyecto.getPuesto());
+            PreparedStatement sentenciaBD = conexionBD.prepareStatement(
+                    consulta);
+            sentenciaBD.setString(1, responsableProyecto.
+                    getNombre());
+            sentenciaBD.setString(2, responsableProyecto.
+                    getPaterno());
+            sentenciaBD.setString(3, responsableProyecto.
+                    getMaterno());
+            sentenciaBD.setString(4, responsableProyecto.
+                    getTelefono());
+            sentenciaBD.setString(5, responsableProyecto.
+                    getCorreo());
+            sentenciaBD.setString(6, responsableProyecto.
+                    getPuesto());
             sentenciaBD.setInt(7,
                     responsableProyecto.getNumOrganizacionVinculada());
 
@@ -260,13 +292,17 @@ public class ProyectoPracticasDAO {
                     + "AND fecha_finalizacion = ? "
                     + "AND id_responsable = ?;";
 
-            PreparedStatement sentenciaBD = conexionBD.prepareStatement(consulta);
-            sentenciaBD.setString(1, proyectoPracticas.getNombre());
-            sentenciaBD.setString(2, proyectoPracticas.getDescripcion());
+            PreparedStatement sentenciaBD = conexionBD.prepareStatement(
+                    consulta);
+            sentenciaBD.setString(1, proyectoPracticas.
+                    getNombre());
+            sentenciaBD.setString(2, proyectoPracticas.
+                    getDescripcion());
             sentenciaBD.setInt(3, proyectoPracticas.getCupo());
             sentenciaBD.setDate(4, new Date(proyectoPracticas
                     .getFechaFinalizacion().getTime()));
-            sentenciaBD.setInt(5, proyectoPracticas.getIdResponsable());
+            sentenciaBD.setInt(5, proyectoPracticas.
+                    getIdResponsable());
 
             ResultSet resultado = sentenciaBD.executeQuery();
 
@@ -301,9 +337,12 @@ public class ProyectoPracticasDAO {
                     + "AND pp.fecha_finalizacion = ? "
                     + "AND r.num_organizacion_vinculada = ?;";
 
-            PreparedStatement sentenciaBD = conexionBD.prepareStatement(consulta);
-            sentenciaBD.setString(1, proyectoPracticas.getNombre());
-            sentenciaBD.setString(2, proyectoPracticas.getDescripcion());
+            PreparedStatement sentenciaBD = conexionBD.prepareStatement(
+                    consulta);
+            sentenciaBD.setString(1, proyectoPracticas.
+                    getNombre());
+            sentenciaBD.setString(2, proyectoPracticas.
+                    getDescripcion());
             sentenciaBD.setInt(3, proyectoPracticas.getCupo());
             sentenciaBD.setDate(4, new Date(proyectoPracticas
                     .getFechaFinalizacion().getTime()));

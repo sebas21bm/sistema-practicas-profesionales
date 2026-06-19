@@ -17,7 +17,7 @@ import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
 import sistemapracticasprofesionales.servicio.EstudianteServicio;
 import sistemapracticasprofesionales.utilidades.Utilidades;
 
-/*
+/**
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 15/06/2026
  * Descripción: Controlador del formulario para registrar estudiantes.

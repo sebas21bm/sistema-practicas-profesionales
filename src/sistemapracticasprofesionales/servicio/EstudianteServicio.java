@@ -7,7 +7,7 @@ import sistemapracticasprofesionales.modelo.dao.EstudianteDAO;
 import sistemapracticasprofesionales.modelo.pojo.Estudiante;
 import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
 
-/*
+/**
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 15/06/2026
  * Descripción: Servicio encargado de validar reglas de negocio de estudiantes.

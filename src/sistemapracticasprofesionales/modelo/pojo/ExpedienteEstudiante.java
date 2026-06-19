@@ -1,6 +1,6 @@
 package sistemapracticasprofesionales.modelo.pojo;
 
-/*
+/**
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 17/06/2026
  * Descripción: POJO que representa el expediente de un estudiante para

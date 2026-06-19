@@ -6,7 +6,7 @@ import sistemapracticasprofesionales.modelo.dao.EntregaDocumentoDAO;
 import sistemapracticasprofesionales.modelo.pojo.EntregaDocumento;
 import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
 
-/*
+/**
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 17/06/2026
  * Descripción: Servicio encargado de validar las entregas programadas de

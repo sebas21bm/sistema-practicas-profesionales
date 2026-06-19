@@ -9,8 +9,9 @@ import javafx.stage.Stage;
 import sistemapracticasprofesionales.utilidades.Utilidades;
 
 /**
- *
- * @author sebas
+ * Autor: Sebastián Barrera Mora
+ * Fecha de creación: 13/06/2026
+ * Descripción: Punto de arranque de la aplicación
  */
 public class SistemaPracticasProfesionales extends Application {
     

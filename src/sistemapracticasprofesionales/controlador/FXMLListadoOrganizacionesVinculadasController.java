@@ -109,21 +109,24 @@ public class FXMLListadoOrganizacionesVinculadasController implements Initializa
         if (organizacionSeleccionada == null) {
             Utilidades.mostrarAlertaSimple(
                     "Organización no seleccionada",
-                    "Debes seleccionar una organización vinculada para ver sus detalles.",
+                    "Debes seleccionar una organización vinculada "
+                            + "para ver sus detalles.",
                     Alert.AlertType.WARNING
             );
             return;
         }
         
         try {
-            OrganizacionVinculada organizacionCompleta = OrganizacionVinculadaServicio.
+            OrganizacionVinculada organizacionCompleta = 
+                    OrganizacionVinculadaServicio.
                     recuperarOrganizacionCompleta(
                     organizacionSeleccionada.
                                     getNumOrganizacionVinculada());
             if (organizacionCompleta == null) {
                 Utilidades.mostrarAlertaSimple("Error", 
                     "No se puede ver la información de la organización. "
-                    + "Error al recuperar el registro de la OrganizacionVinculada. "
+                    + "Error al recuperar el registro de la "
+                            + "OrganizacionVinculada. "
                     + "Intente nuevamente", Alert.AlertType.ERROR);
             } else {
                 cargarVistaDetalles(organizacionCompleta);
@@ -132,7 +135,8 @@ public class FXMLListadoOrganizacionesVinculadasController implements Initializa
             Utilidades.mostrarAlertaSimple(
                     "Error al recuperar información",
                     "No se puede ver la información de la organización. "
-                    + "Error al recuperar el registro de la organización vinculada. "
+                    + "Error al recuperar el registro de la organización "
+                            + "vinculada. "
                     + "Intente nuevamente",
                     Alert.AlertType.ERROR
             );
@@ -141,9 +145,11 @@ public class FXMLListadoOrganizacionesVinculadasController implements Initializa
     
     private void cargarVistaDetalles(OrganizacionVinculada organizacionVinculada) {
         try {
-            FXMLLoader cargador = Utilidades.cargarFXML("FXMLInfoOrganizacionVinculada");
+            FXMLLoader cargador = Utilidades.cargarFXML(
+                    "FXMLInfoOrganizacionVinculada");
             Parent vista = cargador.load();
-            FXMLInfoOrganizacionVinculadaController controlador = cargador.getController();
+            FXMLInfoOrganizacionVinculadaController controlador = 
+                    cargador.getController();
             controlador.inicializarInformacionOrganizacion(organizacionVinculada);
             Scene escena = new Scene(vista);
 

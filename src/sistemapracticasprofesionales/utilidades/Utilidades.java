@@ -41,7 +41,8 @@ public class Utilidades {
      * @param tipo tipo de la alerta que se va a usar de acuerdo al caso en
      *              donde haya sido llamado.
      */
-    public static void mostrarAlertaSimple(String titulo, String contenido, Alert.AlertType tipo){
+    public static void mostrarAlertaSimple(String titulo, String contenido, 
+            Alert.AlertType tipo){
         Alert alerta = new Alert(tipo);
         alerta.setTitle(titulo);
         alerta.setContentText(contenido);
@@ -76,7 +77,8 @@ public class Utilidades {
      * @throws NoSuchAlgorithmException en caso de que no pueda ejecutar el 
      *          algoritmo de cifrado.
      */
-     public static byte[] cifrarContrasenia(String contrasenia) throws NoSuchAlgorithmException {
+     public static byte[] cifrarContrasenia(String contrasenia) 
+             throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         return md.digest(contrasenia.getBytes(StandardCharsets.UTF_8));
     }

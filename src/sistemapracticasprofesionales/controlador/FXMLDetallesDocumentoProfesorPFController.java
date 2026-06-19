@@ -27,7 +27,7 @@ import sistemapracticasprofesionales.modelo.pojo.RespuestaOperacion;
 import sistemapracticasprofesionales.servicio.DetalleEvaluacionServicio;
 import sistemapracticasprofesionales.utilidades.Utilidades;
 
-/*
+/**
  * Autor: Yarazareth Zacnite Ortiz Olmos
  * Fecha de creación: 17/06/2026
  * Descripción: Controlador de la vista para subir evaluaciones realizadas

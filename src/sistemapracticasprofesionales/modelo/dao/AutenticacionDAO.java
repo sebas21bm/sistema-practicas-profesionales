@@ -13,7 +13,7 @@ import sistemapracticasprofesionales.utilidades.Constantes;
 import sistemapracticasprofesionales.utilidades.Utilidades;
 import sistemapracticasprofesionales.excepciones.UsuarioInactivoException;
 
-/*
+/**
  * Autor: Sebastián Barrera Mora
  * Fecha de creación: 14/06/2026
  * Descripción: Clase creada para la autenticación del usuario dentro del
